@@ -4,6 +4,6 @@ This repository contains the WoundGenius SDK Sample App to demonstrate the avail
 
 If you want to try our SDK, please contact sdk-support@imito.io to get a trial-license-key.
 
-For the SDK integration instructions please check out the WoundGenius SDK repository: https://github.com/imitoag/woundgenius-ios-sdk
+Download this Sample app, follow the WoundGenius SDK integration instructions: https://github.com/imitoag/woundgenius-ios-sdk
 
 
