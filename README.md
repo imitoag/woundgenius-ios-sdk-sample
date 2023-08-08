@@ -12,4 +12,6 @@ To launch the Sample App perform the following actions:
 4. While requesting the license you were providing the Bundle Identifiers to be whitelisted. Change the Sample application Bundle Identifier to one of your whitelisted Bundle Identifiers. As well pick the Apple Development Team - to be able to launch the Sample application on real device.
 <img width="1494" alt="image" src="https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/9f655e7b-4200-431b-8bc1-476fcbd11021">
 5. Run the application on an iPhone or iPad. Using simulator it won't be possible to test the camera-related features.
+6. After you'll launch the application - go to Settings. And paste the license key you've received at Step 1.
+
 
