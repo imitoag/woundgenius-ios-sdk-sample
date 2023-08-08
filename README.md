@@ -13,5 +13,10 @@ To launch the Sample App perform the following actions:
 <img width="1494" alt="image" src="https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/9f655e7b-4200-431b-8bc1-476fcbd11021">
 5. Run the application on an iPhone or iPad. Using simulator it won't be possible to test the camera-related features.
 6. After you'll launch the application - go to Settings. And paste the license key you've received at Step 1.
+   ![image](https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/d6625dc2-4f2c-41f7-b8b6-2aac2041e86d)
+   ![image](https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/74e6411a-8654-4e3c-bcb6-003b649e1099)
+8. Navigate back from Settings Screen. Click Start Capturing. Grant the permission for the app to access the Camera.
+   ![image](https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/89ed20d1-79a7-47e6-9e17-305059a7e2bb)
+
 
 
