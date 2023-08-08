@@ -1,0 +1,78 @@
+/*
+  Localizable.strings
+  Sample
+
+  Created by Eugene Naloiko on 26.11.2022.
+  Copyright (c) 2022 by imito AG, Zurich, Switzerland
+*/
+
+"CANCEL" = "Cancelar";
+"rightBarButtonItemTitle" = "Hecho";
+"MANUAL_MEASUREMENT" = "Regla";
+"MEASUREMENT" = "Marcador de calibración";
+"VIDEO" = "Video";
+"PHOTO" = "Foto";
+"LOOKING_FOR_MARKER_STATUS" = "Buscando un marcador...";
+"PLEASE_DECREASE_THE_TILT_OF_DEVICE" = "Mantenga su dispositivo paralelo al marcador.";
+
+"RETAKE_BUTTON" = "Repetir";
+"MEASURE_BUTTON" = "Medida";
+"PLEASE_START_DRAWING" = "Utiliza el dedo para rodear la zona a medir.";
+"PLEASE_CLOSE_THE_PATH" = "Por favor, cierre la ruta para proceder a la medición.";
+"TAP_MEASURE_TO_COUNTINUE" = "Todo bien. Pulse Medir para continuar con la evaluación.";
+"RESULT_TITLE" = "Resultados de medición";
+"CONTINUE_BUTTON" = "Continuar";
+"ALL_AREAS" = "Todas las áreas";
+"TOTAL_AREA" = "Área total";
+"AREA" = "Área";
+"CIRCUMFERENCE" = "Circunferencia";
+"LENGTH" = "Longitud";
+"WIDTH" = "Anchura";
+"MAX_DEPTH" = "Máx. profundidad";
+
+"DESCRIPTION_MESSAGE_FOR_MANUAL_MEASUREMENT" = "Coloca los marcadores de manera que la distancia entre ellos coincida con el tamaño del mundo real. Toca el marcador verde de arriba para ajustar el valor o las unidades.";
+"TAP_TO_ADD_DEPTH" = "Toque para agregar profundidad";
+"DEPTH_MM" = "Profundidad, mm";
+"SCROLL_DOWN_TO_ADD_DEPTH" = "Desplace hacia abajo para agregar profundidad de herida";
+
+/* TUTORIAL. HELP. */
+"HELP_CALIBRATION_MARKER_BUTTON" = "¿Cómo utilizar este modo?";
+"HELP_RULER_BUTTON" = "¿Cómo utilizar este modo?";
+
+"CALIBRATION_MARKER" = "Marcador de calibración";
+"RULER_MODE" = "Modo de regla";
+
+"CLOSE" = "Cerrar";
+
+"TUTORIAL_place_a_calibration_marker_next_to_the_wound" = "Coloque un marcador de calibración junto a la herida y tome una foto.";
+"TUTORIAL_print_calibration_markers" = "Imprimir marcadores de calibración";
+"TUTORIAL_buy_calibration_markers" = "Comprar marcadores de calibración";
+"TUTORIAL_watch_video_tutorial" = "Ver el video tutorial";
+"TUTORIAL_when_should_I_use_this_mode" = "¿Cuándo debo utilizar este modo?";
+"TUTORIAL_if_you_want_to_measure_planar_wounds_contactless" = "Si quiere medir heridas planas sin contacto, con precisión y rapidez.";
+"TUTORIAL_note_if_you_want_to_document_wounds" = "Nota: Si desea documentar heridas en una zona del cuerpo curvada, puede utilizar nuestro modo manual.";
+"TUTORIAL_how_is_the_wound_size_calculated" = "¿Cómo se calcula el tamaño de la herida?";
+"TUTORIAL_the_app_recognises_the_calibration_marker_as_a_reference_size" = "La aplicación reconoce el marcador de calibración como tamaño de referencia y, a continuación, nuestro software calcula el área y la circunferencia de la herida.";
+"TUTORIAL_several_studies_have_tested_reliability_of_this_method" = "Varios estudios han probado la fiabilidad de este método";
+"TUTORIAL_reliability_of_this_method" = "la fiabilidad de este método";
+"TUTORIAL_BUY_CALIBRATION_MARKER_URL" = "https://forms.zohopublic.eu/imitoag/form/CalibiCalibrationMarkersforimitoWound/formperma/cUvqk4C7DdncZItgOBD_EDBaRXMeEB8l3rqEKDXMBbQ";
+"TUTORIAL_CALIBRATION_MARKER_CALCULATION_METHOD_URL" = "https://imito.io/en/wound-measurement-modes#calibration-marker-mode";
+
+"TUTORIAL_place_ruler_next_to_wound" = "Coloca una regla junto a la herida y haz una foto.";
+"TUTORIAL_if_you_dont_have_our_calibration_marker" = "Si no dispone de nuestros marcadores de calibración, pero aún así quiere utilizar nuestro software de cálculo preciso. Es más preciso que el cálculo del tamaño basado en fórmulas para una forma elíptica. Sólo tarda un poco más que la medición con nuestros marcadores de calibración.";
+"TUTORIAL_the_app_uses_a_set_distance_on_the_ruler_as_a_reference_size" = "La aplicación utiliza una distancia establecida en la regla como tamaño de referencia, y luego nuestro software calcula el área y la circunferencia de la herida.";
+
+"WHOLE_BODY" = "Seleccione todo";
+"CLEAR_SELECTION" = "Borrar";
+"HIDE" = "Esconder";
+"LEFT_SHORT_TEXT" = "I";
+"RIGHT_SHORT_TEXT" = "D";
+"LATERAL" = "Lateral";
+"MEDIAL" = "Medio";
+
+"ENSURE_ACCURATE_DETECTION" = "Ensure accurate detection of wound edges and make adjustments as needed. Tap Measure to finalise measurement.";
+"REVIEW_CONTOURS" = "Revisa";
+"CLEAR_CONTOURS" = "Limpiar todo";
+"EDIT_CONTOURS" = "Editar";
+"AUTO_DETECT_PROCESSING" = "Analyzing ...";
+"AUTO_DETECT" = "Auto-detect";

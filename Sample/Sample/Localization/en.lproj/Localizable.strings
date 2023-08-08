@@ -1,0 +1,77 @@
+/*
+  Localizable.strings
+  Sample
+
+  Created by Eugene Naloiko on 26.11.2022.
+  Copyright (c) 2022 by imito AG, Zurich, Switzerland
+*/
+
+"CANCEL" = "Cancel";
+"rightBarButtonItemTitle" = "Done";
+"MANUAL_MEASUREMENT" = "Ruler";
+"MEASUREMENT" = "Calibration Marker";
+"VIDEO" = "Video";
+"PHOTO" = "Photo";
+"LOOKING_FOR_MARKER_STATUS" = "Looking for marker...";
+"PLEASE_DECREASE_THE_TILT_OF_DEVICE" = "Please hold your device parallel to the marker.";
+"RETAKE_BUTTON" = "Re-take";
+"MEASURE_BUTTON" = "Measure";
+"PLEASE_START_DRAWING" = "Use your finger to encircle the area for measurement.";
+"PLEASE_CLOSE_THE_PATH" = "Please close the path to proceed with measurement.";
+"TAP_MEASURE_TO_COUNTINUE" = "All good. Tap Measure to continue with assessment.";
+"RESULT_TITLE" = "Measurement Results";
+"CONTINUE_BUTTON" = "Continue";
+"ALL_AREAS" = "All Areas";
+"TOTAL_AREA" = "Overall area";
+"AREA" = "Area";
+"CIRCUMFERENCE" = "Circumference";
+"LENGTH" = "Length";
+"WIDTH" = "Width";
+"MAX_DEPTH" = "Max. depth";
+"DESCRIPTION_MESSAGE_FOR_MANUAL_MEASUREMENT" = "Position the markers so that the distance between them match real-world size. Tap green marker above to adjust value or units.";
+"TAP_TO_ADD_DEPTH" = "Tap to Add Depth";
+"DEPTH_MM" = "Depth, mm";
+"SCROLL_DOWN_TO_ADD_DEPTH" = "Scroll down to add wound depth";
+
+/* TUTORIAL. HELP. */
+"HELP_CALIBRATION_MARKER_BUTTON" = "How to use this mode?";
+"HELP_RULER_BUTTON" = "How to use this mode?";
+
+"CALIBRATION_MARKER" = "Calibration Marker";
+"RULER_MODE" = "Ruler";
+
+"CLOSE" = "Close";
+
+"TUTORIAL_place_a_calibration_marker_next_to_the_wound" = "Place a calibration marker next to the wound and take a photo.";
+"TUTORIAL_print_calibration_markers" = "Print Calibration Markers";
+"TUTORIAL_buy_calibration_markers" = "Buy Calibration Markers";
+"TUTORIAL_watch_video_tutorial" = "Watch Video Tutorial";
+"TUTORIAL_when_should_I_use_this_mode" = "When should I use this mode?";
+"TUTORIAL_if_you_want_to_measure_planar_wounds_contactless" = "If you want to measure planar wounds contactless, accurate, and fast.";
+"TUTORIAL_note_if_you_want_to_document_wounds" = "Note: If you want to document wounds on a curved body area, you can use our Manual Mode.";
+"TUTORIAL_how_is_the_wound_size_calculated" = "How is the wound size calculated?";
+"TUTORIAL_the_app_recognises_the_calibration_marker_as_a_reference_size" = "The app recognises the calibration marker as a reference size, and then our software calculates the wound area and circumference.";
+"TUTORIAL_several_studies_have_tested_reliability_of_this_method" = "Several studies have tested thereliability of this method";
+"TUTORIAL_reliability_of_this_method" = "reliability of this method";
+"TUTORIAL_BUY_CALIBRATION_MARKER_URL" = "https://forms.zohopublic.eu/imitoag/form/CalibiCalibrationMarkersforimitoWound/formperma/cUvqk4C7DdncZItgOBD_EDBaRXMeEB8l3rqEKDXMBbQ";
+"TUTORIAL_CALIBRATION_MARKER_CALCULATION_METHOD_URL" = "https://imito.io/en/wound-measurement-modes#calibration-marker-mode";
+
+"TUTORIAL_place_ruler_next_to_wound" = "Place a ruler next to the wound and take a photo.";
+"TUTORIAL_if_you_dont_have_our_calibration_marker" = "If you don’t have our calibration markers, but still want to use our accurate software calculation. It's more precise than calculating the size based on formulas for an elliptical shape. It only takes slightly longer than the measurement with our calibration markers.";
+"TUTORIAL_the_app_uses_a_set_distance_on_the_ruler_as_a_reference_size" = "The app uses a set distance on the ruler as a reference size, and then our software calculates the wound area and circumference.";
+
+
+"WHOLE_BODY" = "Select all";
+"CLEAR_SELECTION" = "Clear";
+"HIDE" = "Hide";
+"LEFT_SHORT_TEXT" = "L";
+"RIGHT_SHORT_TEXT" = "R";
+"LATERAL" = "Lateral";
+"MEDIAL" = "Medial";
+
+"ENSURE_ACCURATE_DETECTION" = "Ensure accurate detection of wound edges and make adjustments as needed. Tap Measure to finalise measurement.";
+"REVIEW_CONTOURS" = "Review";
+"CLEAR_CONTOURS" = "Clear All";
+"EDIT_CONTOURS" = "Edit";
+"AUTO_DETECT_PROCESSING" = "Analyzing ...";
+"AUTO_DETECT" = "Auto-detect";
