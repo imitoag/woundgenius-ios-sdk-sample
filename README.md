@@ -1,4 +1,4 @@
-# WoundGeniusSDK Sample App
+# WoundGenius SDK Sample App
 
 This repository contains the WoundGenius SDK Sample App to demonstrate the available features of WoundGenius SDK.
 And to be used as a reference app for iOS team to integrate the WoundGenius SDK to their project.
