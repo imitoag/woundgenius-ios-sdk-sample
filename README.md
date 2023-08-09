@@ -5,7 +5,7 @@ And to be used as a reference app for iOS team to integrate the WoundGenius SDK 
 
 ## Initial Setup
 To launch the Sample App perform the following actions:
-1. Request the WoundGenius SDK license, request access to the WoundGenius SDK repository for your iOS Developers. Follow the instructions listed here to do that: https://support.imito.io/portal/en/kb/articles/licence-key
+1. Request the WoundGenius SDK license, request access to the WoundGenius SDK repository for your iOS Developers. Follow the instructions listed here to do that: https://support.imito.io/portal/en/kb/articles/licence-key (You'll need to Sign Up and provide the Bundle Ids you are planning to use).
 2. Download/Pull this Sample app to your machine. Run the Sample.xcodeproj file (Xcode should be installed).
 ![image](https://github.com/imitoag/woundgenius-ios-sdk-sample/assets/139131852/9a678bba-924e-4223-b9b5-25ad38987a4b)
 3. Pull the WoundGenius SDK to your machine. Follow the "Initial Setup" Section, integrate the WoundGenius SDK into the Sample app. https://github.com/imitoag/woundgenius-ios-sdk/tree/v0.9.1
