@@ -6,13 +6,7 @@
 //
 
 import UIKit
-#if DEVPODS
-import Charts
-import imitoCamera
-import ImitoMeasureFramework
-#else
 import WoundGenius
-#endif
 
 class ChartView: UIView {
     private lazy var chartView: LineChartView = {

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "7B44EAA3-8410-42A7-BF61-C0184BAEF1B0"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "67FD4E0A-8CD8-4E44-87CB-88B3B8271FFD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/MLContourDetector.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "initializeWoundDetectionModelInMainThread()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "67FD4E0A-8CD8-4E44-87CB-88B3B8271FFD - c5e702185db93d92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.MLContourDetector.initializeWoundDetectionModelInMainThread() -&gt; ()"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/MLContourDetector.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "67FD4E0A-8CD8-4E44-87CB-88B3B8271FFD - c5e702185db93d73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.MLContourDetector.initializeWoundDetectionModelInMainThread() -&gt; ()"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/MLContourDetector.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "272">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -482,7 +482,7 @@
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WoundSDK;
+				INFOPLIST_KEY_CFBundleDisplayName = WoundGenius;
 				INFOPLIST_KEY_NSCameraUsageDescription = "for capturing photos and to calibrate them with a calibration marker";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2022 by imito AG, Zurich, Switzerland";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "to capture video with audio";
@@ -517,7 +517,7 @@
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WoundSDK;
+				INFOPLIST_KEY_CFBundleDisplayName = WoundGenius;
 				INFOPLIST_KEY_NSCameraUsageDescription = "for capturing photos and to calibrate them with a calibration marker";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2022 by imito AG, Zurich, Switzerland";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "to capture video with audio";
