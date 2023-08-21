@@ -9,16 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
-
-#if DEVPODS
-import imitoCamera
-import ImitoMeasureFramework
-import Charts
-import BPPicker
-import uiutilsframework
-#else
 import WoundGenius
-#endif
 
 class HomeViewController: UIViewController {
     private lazy var woundSDKFlow: WoundGeniusFlow = {

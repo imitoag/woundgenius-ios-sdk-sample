@@ -9,16 +9,7 @@
 import UIKit
 import CoreMedia
 import AVFoundation
-
-#if DEVPODS
-import imitoCamera
-import ImitoMeasureFramework
-import ZxingIOS
-import uiutilsframework
-import BPPicker
-#else
 import WoundGenius
-#endif
 
 class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
     
@@ -187,17 +178,9 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
             var vc = UIViewController()
             switch mode {
             case .markerMeasurement:
-#if DEVPODS
-                vc = ImitoMeasureFramework.showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4")
-#else
                 vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4")
-#endif
             case .rulerMeasurement:
-#if DEVPODS
-                vc = ImitoMeasureFramework.showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
-#else
                 vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
-#endif
             case .handyscope, .photo, .video, .scanner, .manualInput:
                 assertionFailure("Not supported")
             }
