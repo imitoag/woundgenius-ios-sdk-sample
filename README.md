@@ -11,5 +11,8 @@ To launch the Sample App, perform the following actions:
 4. While requesting the license, you provided the Bundle Identifiers to be whitelisted. Change the Sample application Bundle Identifier to one of your whitelisted Bundle Identifiers. Also, pick your Apple Development Team in order to be able to launch the Sample application on a real device.
 5. Run the application on an iPhone or iPad. Using a simulator, it won't be possible to test the camera-related features.
 6. After you launch the application, go to Settings and paste the license key you've received at Step 1.
+
+<img src="README/settings_button.jpg" width="200">  <img src="README/license_key.jpg" width="200"> 
+
 7. Navigate back from Settings Screen. Click Start Capturing. Grant permission for the app to access the Camera.
 

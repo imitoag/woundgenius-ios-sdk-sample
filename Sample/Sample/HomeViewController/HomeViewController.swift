@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "WoundSDK"
+        self.title = "WoundGenius"
         self.view.backgroundColor = .white
         
         /* DEFAULT SETTINGS FOR FEATURES */
