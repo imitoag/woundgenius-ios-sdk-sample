@@ -18,6 +18,7 @@
 "RETAKE_BUTTON" = "Capturar";
 "MEASURE_BUTTON" = "Medir";
 "PLEASE_START_DRAWING" = "Use o dedo para circundar a área de medição.";
+"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Use your finger to outline areas or tap Auto-detect for automatic edges detection.";
 "PLEASE_CLOSE_THE_PATH" = "Por favor, feche o caminho para prosseguir com a medição.";
 "TAP_MEASURE_TO_COUNTINUE" = "Tudo bom. Toque em Medir para continuar com a avaliação.";
 "RESULT_TITLE" = "Resultados de medição";
@@ -77,3 +78,9 @@
 "EDIT_CONTOURS" = "Editar";
 "AUTO_DETECT_PROCESSING" = "Analyzing ...";
 "AUTO_DETECT" = "Auto-detect";
+
+"DONE" = "Pronto";
+"EDIT" = "Editar";
+"EDITING" = "Editing";
+"HIDE_ALL" = "Hide All";
+"SHOW_ALL" = "Show All";

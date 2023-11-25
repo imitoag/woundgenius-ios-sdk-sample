@@ -13,6 +13,8 @@ import WoundGenius
 
 class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
     
+    var showTutorialOnViewDidAppear: Bool = false
+    
     var backNavigationBarButtonTitle: String?
     
     // MARK: - BodyPartPickerSettings
@@ -32,6 +34,8 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
             return L.str("LATERAL")
         case .medialSide:
             return L.str("MEDIAL")
+        @unknown default:
+            return "Unknown default"
         }
     }
     
@@ -101,6 +105,26 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
         }
     }
     
+    var enabledOutlineTypes: [WoundGenius.IMOutlineCluster] {
+        switch self.autoDetectionMode {
+        case .none, .woundOnly:
+            return [.wound]
+        case .woundAndTissueTypes:
+            return [.wound,
+                    .granulation,
+                    .necrosis,
+                    .slough,
+                    .fibrin,
+                    .boneAndTendon,
+                    .fascia,
+                    .fat,
+                    .dressing,
+                    .skinGraft]
+        @unknown default:
+            return [.wound]
+        }
+    }
+    
     func captured(sampleBuffer: CMSampleBuffer, previewOrientation: UIInterfaceOrientation, videoOrientation: AVCaptureVideoOrientation, processingResult: @escaping ((MarkerDetectionStatus, [CGPoint]?, CGSize?)?) -> ()) {
         ZXWrapper.shared.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
                                                previewOrientation: previewOrientation,
@@ -115,6 +139,8 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
                     processingResult((.detectedImitoMerkerTiltNotOk, pointsInPrecentage, frameSize))
                 case .stoppedDetecting, .notDetected, .detectedCompletelyWrongTilt:
                     processingResult((.searching, nil, nil))
+                @unknown default:
+                    assertionFailure("Unknown default")
                 }
             }
         }
@@ -125,27 +151,19 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
         case .stoppedCapturingVideoBecauseOfDurationLimit, .capturedHandyscopePhoto, .capturedManualInputPhoto:
             assertionFailure("Unexpected use of this version of WoundSDK.")
             break
-        case .capturedVideo(let vc, let videoCaptureResult), .pickedVideo(let vc, let videoCaptureResult):
+        case .capturedVideo(_, let videoCaptureResult),
+                .pickedVideo(_, let videoCaptureResult):
             capturedItemsToReturn.append(videoCaptureResult)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                    self.completion?(self.capturedItemsToReturn)
-                    vc.dismiss(animated: true) { [weak self] in
-                        self?.capturedItemsToReturn = [Any]()
-                    }
-                }
+            if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                self.completion?(self.capturedItemsToReturn)
+                self.capturedItemsToReturn = [Any]()
             }
         case .capturedPhoto(let vc, let photoResult):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
-            UIUtils.shared.showOKAlert("Captured a Photo", message: "Start Uploading or Cache it. The file is stored in Documents Folder. After you'll use it - manage the removal.")
             capturedItemsToReturn.append(photoResult)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                    self.completion?(self.capturedItemsToReturn)
-                    vc.dismiss(animated: true) { [weak self] in
-                        self?.capturedItemsToReturn = [Any]()
-                    }
-                }
+            if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                self.completion?(self.capturedItemsToReturn)
+                self.capturedItemsToReturn = [Any]()
             }
         case .capturedMarkerMeasurement(let vc, let result):
             showOutlining(captureVC: vc, captureResult: result)
@@ -163,17 +181,33 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
             }
         case .pickedPhoto(vc: let vc, result: let photoResult):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
-            UIUtils.shared.showOKAlert("Picked a Photo", message: "Start Uploading or Cache it. The file is stored in Documents Folder. After you'll use it - manage the removal.")
-            capturedItemsToReturn.append(photoResult)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                    self.completion?(self.capturedItemsToReturn)
-                    vc.dismiss(animated: true) { [weak self] in
-                        self?.capturedItemsToReturn = [Any]()
+            // Search for imito marker on the image. If it will be detected - start measurement.
+            switch vc.currentMode {
+            case .markerMeasurement, .rulerMeasurement:
+                ZXWrapper.shared.searchMarker(image: photoResult.preview) { [weak self] status in
+                    DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        switch status {
+                        case .detected(let pointsPercentage, _):
+                            let captureResultNew = MeasurementCaptureResult(photoName: photoResult.photoName,
+                                                                            photo: photoResult.preview,
+                                                                            codeDetection: CodeDetectionResult(code: "10mm",
+                                                                                                               fromQRCode: false,
+                                                                                                               pointsPercentage: pointsPercentage))
+                            self.showOutlining(captureVC: vc, captureResult: captureResultNew)
+                        default:
+                            // Starting the Ruler Measurement. As there is no marker in the image. You can adjust it to required behaviour.
+                            self.showRulerMeasurementScaleDefinition(captureVC: vc, captureResult: photoResult)
+                        }
                     }
                 }
+            default:
+                self.capturedItemsToReturn.append(photoResult)
+                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                    self.completion?(self.capturedItemsToReturn)
+                    self.capturedItemsToReturn = [Any]()
+                }
             }
-
         case .helpButtonClicked(over: let over, mode: let mode):
             var vc = UIViewController()
             switch mode {
@@ -183,6 +217,8 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
                 vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
             case .handyscope, .photo, .video, .scanner, .manualInput:
                 assertionFailure("Not supported")
+            @unknown default:
+                assertionFailure("Unknown default")
             }
             let navVC = UINavigationController(rootViewController: vc)
             over.present(navVC, animated: true)
@@ -299,7 +335,7 @@ class MyWoundSDKPresenter: NSObject, WoundGeniusPresenterProtocol {
     }
 }
 
-extension MyWoundSDKPresenter {    
+extension MyWoundSDKPresenter {
     func showRulerMeasurementScaleDefinition(captureVC: IMCaptureViewController, captureResult: PhotoCaptureResult) {
         guard let image = captureResult.preview else { return }
         
@@ -384,15 +420,10 @@ extension MyWoundSDKPresenter {
                 }
             }
             
-            UIUtils.shared.showOKAlert("Captured a Ruler Measurement", message: "The Ruler Mode Measurement Result is Ready. Start Uploading or Cache")
             self.capturedItemsToReturn.append(measureResult)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                    self.completion?(self.capturedItemsToReturn)
-                    captureVC.dismiss(animated: true) { [weak self] in
-                        self?.capturedItemsToReturn = [Any]()
-                    }
-                }
+            if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                self.completion?(self.capturedItemsToReturn)
+                self.capturedItemsToReturn = [Any]()
             }
         }, bottomViewCompletion: { _ in })
         
@@ -443,24 +474,30 @@ extension MyWoundSDKPresenter {
                     }
                 }
                 
-                UIUtils.shared.showOKAlert("Captured a measurement", message: "Completed Marker Measurement. Handle results")
                 self.capturedItemsToReturn.append(measureResult)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                        self.completion?(self.capturedItemsToReturn)
-                        captureVC.dismiss(animated: true) { [weak self] in
-                            self?.capturedItemsToReturn = [Any]()
-                        }
-                    }
+                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                    self.completion?(self.capturedItemsToReturn)
+                    self.capturedItemsToReturn = [Any]()
                 }
             }, bottomViewCompletion: { _ in
                 
             })
             
-            imNavController!.modalPresentationStyle = .overFullScreen
+            imNavController!.modalPresentationStyle = .fullScreen
             captureVC.present(imNavController!, animated: true, completion: nil)
         } else {
             UIUtils.shared.showOKAlert("Unsupported marker was detected", message: nil)
         }
+    }
+}
+
+extension MyWoundSDKPresenter {
+    
+    /*
+     Log the events to Firebase, if needed to aggregate some WoundSDK usage statistics.
+     Leave empty if the events are not needed.
+     */
+    func log(event: WoundGenius.WoundSDKLogEvent) {
+        print(event)
     }
 }

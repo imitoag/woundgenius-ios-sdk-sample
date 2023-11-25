@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		181D2F1B2A72E78B0081296C /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181D2F1A2A72E78B0081296C /* SegmentedTableViewCell.swift */; };
+		182FD9652A691A95002D01D6 /* Licensing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182FD9642A691A95002D01D6 /* Licensing.swift */; };
 		1877D9CE2A67B979009E6E82 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1877D9CD2A67B979009E6E82 /* TextFieldTableViewCell.swift */; };
 		18E4C3792A4184140046A20C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C3782A4184140046A20C /* SettingsTableViewController.swift */; };
 		18E4C37C2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C37B2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		181D2F1A2A72E78B0081296C /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		182FD9642A691A95002D01D6 /* Licensing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licensing.swift; sourceTree = "<group>"; };
 		1877D9CD2A67B979009E6E82 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		18E4C3782A4184140046A20C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		18E4C37B2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewControllerPresenter.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		CE0107842930BBE7000804BC /* imitoWoundSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = imitoWoundSDK.xcframework; path = ../imitoWoundSDK/build/imitoWoundSDK.xcframework; sourceTree = "<group>"; };
 		CE010A072931DEED000804BC /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = System/Library/Frameworks/AVFAudio.framework; sourceTree = SDKROOT; };
 		CE38F1A82931E80B0011F976 /* MyWoundSDKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWoundSDKPresenter.swift; sourceTree = "<group>"; };
+		CE38F1C2293238B30011F976 /* WoundGeniusFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoundGeniusFlow.swift; sourceTree = "<group>"; };
 		CE38F1CB293285490011F976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE38F1CE293285750011F976 /* L.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L.swift; sourceTree = "<group>"; };
 		CE3B22F82950A8F50012366B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Sample/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -139,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				CE3B22F82950A8F50012366B /* Info.plist */,
+				CE38F1C2293238B30011F976 /* WoundGeniusFlow.swift */,
+				182FD9642A691A95002D01D6 /* Licensing.swift */,
 			);
 			path = imitoWoundSDKDevPods;
 			sourceTree = "<group>";
@@ -276,6 +281,8 @@
 				es,
 			);
 			mainGroup = CE0107512930B844000804BC;
+			packageReferences = (
+			);
 			productRefGroup = CE01075B2930B844000804BC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -315,6 +322,7 @@
 				181D2F1B2A72E78B0081296C /* SegmentedTableViewCell.swift in Sources */,
 				CE38F1CF293285750011F976 /* L.swift in Sources */,
 				CE01075E2930B844000804BC /* AppDelegate.swift in Sources */,
+				182FD9652A691A95002D01D6 /* Licensing.swift in Sources */,
 				CEE2841D29430FD400CB138E /* CaptureResultTableViewCell.swift in Sources */,
 				CEAE4345297F16630080CECE /* ChartView.swift in Sources */,
 				18E4C3832A418B070046A20C /* SliderTableViewCell.swift in Sources */,
@@ -407,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -462,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -478,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.9.0;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
@@ -493,12 +501,13 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.BoundingPointsDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -513,7 +522,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.9.0;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
@@ -528,12 +537,13 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.BoundingPointsDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
