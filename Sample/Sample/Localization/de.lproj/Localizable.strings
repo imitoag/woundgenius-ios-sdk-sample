@@ -18,6 +18,7 @@
 "RETAKE_BUTTON" = "Wiederholen";
 "MEASURE_BUTTON" = "Messen";
 "PLEASE_START_DRAWING" = "Umranden Sie mit dem Finger die zu messende Fläche.";
+"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Verwenden Sie Ihren Finger, um Bereiche zu umranden, oder tippen Sie auf Auto-Erkennung, um die Ränder automatisch zu erkennen.";
 "PLEASE_CLOSE_THE_PATH" = "Schliessen Sie die Umrandung, damit die Messung durchgeführt werden kann.";
 "TAP_MEASURE_TO_COUNTINUE" = "Perfekt! Tippen Sie auf Messen, um fortzufahren.";
 "RESULT_TITLE" = "Messergebnisse";
@@ -76,4 +77,23 @@
 "AUTO_DETECT_PROCESSING" = "Analysiere ...";
 "AUTO_DETECT" = "Auto-Erkennung";
 
+"DONE" = "Fertig";
+"EDIT" = "Bearbeiten";
+"EDITING" = "Editing";
+"HIDE_ALL" = "Hide All";
+"SHOW_ALL" = "Show All";
 
+"GRANULATION" = "Granulation";
+"SLOUGH" = "Slough";
+"NECROSIS" = "Nekrose";
+"FIBRIN" = "Fibrin";
+"EPITHELIALIZATION" = "Epithelisierung";
+"BONE_AND_TENDON" = "Knochen und Sehnen";
+"FASCIA" = "Fascia";
+"FAT_TISSUE" = "Fat Tissue";
+"DRESSING" = "Dressing";
+"SKIN_GRAFT" = "Skin Graft";
+"OTHER" = "Andere";
+"WOUND" = "Wunde";
+"EDIT_DETECTED_AREAS" = "Edit Detected Areas";
+"ADD_NEW_AREAS" = "Add New Areas";

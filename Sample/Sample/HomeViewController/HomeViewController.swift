@@ -13,14 +13,15 @@ import WoundGenius
 
 class HomeViewController: UIViewController {
     private lazy var woundSDKFlow: WoundGeniusFlow = {
-        let woundSDKFlowPresenter = MyWoundSDKPresenter { [weak self] captureResults in
-            guard let `self` = self else { return }
+        let woundSDKFlowPresenter = MyWoundSDKPresenter(completion: { [weak self] captureResults in
+            guard let self = self else { return }
             self.series.append(Series(captureResults: captureResults))
             (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
             self.tableView.reloadData()
-        }
+            self.woundSDKFlow.stopCapturing()
+        })
         return WoundGeniusFlow(licenseKey: UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) ?? "",
-                            presenter: woundSDKFlowPresenter)
+                               presenter: woundSDKFlowPresenter)
     }()
     
     /** Launch WoundSDK Capturing */
@@ -40,8 +41,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "WoundGenius"
+        
+        self.title = "WoundSDK"
         self.view.backgroundColor = .white
         
         /* DEFAULT SETTINGS FOR FEATURES */
@@ -71,7 +72,7 @@ class HomeViewController: UIViewController {
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(openSettings))
         }
-
+        
         /* TABLE VIEW */
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableHeaderView = ChartView()
@@ -113,7 +114,7 @@ class HomeViewController: UIViewController {
         showBodyPartPicker.layer.cornerRadius = 5
         showBodyPartPicker.layer.masksToBounds = true
         self.view.addSubview(showBodyPartPicker)
-
+        
         NSLayoutConstraint.activate([
             showBodyPartPicker.topAnchor.constraint(equalTo: startCapturing.bottomAnchor, constant: 10),
             showBodyPartPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
