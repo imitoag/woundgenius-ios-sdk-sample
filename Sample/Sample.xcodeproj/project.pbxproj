@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -285,7 +285,6 @@
 			);
 			mainGroup = CE0107512930B844000804BC;
 			packageReferences = (
-				18DBC89A2B2DB3E7007A937A /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */,
 			);
 			productRefGroup = CE01075B2930B844000804BC /* Products */;
 			projectDirPath = "";
@@ -578,13 +577,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		18DBC89A2B2DB3E7007A937A /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../woundgenius-ios-sdk";
-		};
-/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		18DBC89B2B2DB3E7007A937A /* WoundGeniusSDK */ = {
