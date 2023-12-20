@@ -211,8 +211,15 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Define the style for the Measurement Summary, or Measurement Details Table View.
+        var tableViewStyle = UITableView.Style.grouped
+        if #available(iOS 13.0, *) {
+            tableViewStyle = .insetGrouped
+        }
+        
         if let photoCaptureResult = series[indexPath.section].captureResults[indexPath.row] as? PhotoCaptureResult {
-            let measurementViewer = MeasurementOverviewController(style: .grouped,
+            let details = MeasurementDetailsController(style: tableViewStyle,
                                                                   image: photoCaptureResult.preview,
                                                                   mediaManager: ImitoMeasureMediaManager(),
                                                                   isRightButtonShown: false,
@@ -220,8 +227,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                                   isDepthInputEnabled: false,
                                                                   title: "",
                                                                   subtitle: "",
-                                                                  isStoma: false)
-            self.navigationController?.pushViewController(measurementViewer, animated: true)
+                                                                 isStoma: false,
+                                                                 willDisappear: nil)
+            self.navigationController?.pushViewController(details, animated: true)
         }
         else if let measurement = series[indexPath.section].captureResults[indexPath.row] as? MeasurementResult {
             let outlines = measurement.outlines.map {
@@ -241,15 +249,29 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                 parentOutlineOrder: $0.parentOutlineOrder,
                                 parentOutlineCluster: $0.parentOutlineCluster)
             }
-            let measurementViewer = MeasurementOverviewController(style: .grouped,
-                                                                  image: measurement.image, mediaManager: ImitoMeasureMediaManager(),
-                                                                  isRightButtonShown: false,
-                                                                  outlines: outlines,
-                                                                  isDepthInputEnabled: false,
-                                                                  title: "",
-                                                                  subtitle: "",
-                                                                  isStoma: false)
-            self.navigationController?.pushViewController(measurementViewer, animated: true)
+            if outlines.filter({ $0.cluster != .wound }).count > 0 {
+                let summary = MeasurementSummaryController(style: tableViewStyle,
+                                                           image: measurement.image,
+                                                           mediaManager: ImitoMeasureMediaManager(),
+                                                           isRightButtonShown: false,
+                                                           outlines: outlines,
+                                                           isDepthInputEnabled: false,
+                                                           title: "",
+                                                           subtitle: "",
+                                                           isStoma: false)
+                self.navigationController?.pushViewController(summary, animated: true)
+            } else {
+                let details = MeasurementDetailsController(style: tableViewStyle,
+                                                                      image: measurement.image, mediaManager: ImitoMeasureMediaManager(),
+                                                                      isRightButtonShown: false,
+                                                                      outlines: outlines,
+                                                                      isDepthInputEnabled: false,
+                                                                      title: "",
+                                                                      subtitle: "",
+                                                                     isStoma: false,
+                                                                     willDisappear: nil)
+                self.navigationController?.pushViewController(details, animated: true)
+            }
         } else if let video = series[indexPath.section].captureResults[indexPath.row] as? VideoCaptureResult {
             guard let url = ImitoCameraFileManager.documentPathForExistingFile(video.videoNameExt) else { return }
             let player = AVPlayer(url: url)

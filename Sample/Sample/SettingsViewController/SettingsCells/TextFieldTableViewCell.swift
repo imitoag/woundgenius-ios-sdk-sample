@@ -13,6 +13,7 @@ class TextFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var textFieldElement: UITextField! {
         didSet {
             textFieldElement.delegate = self
+            textFieldElement.clearButtonMode = .always
         }
     }
     
