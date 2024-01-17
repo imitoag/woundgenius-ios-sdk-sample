@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WoundGenius
 
 class TextFieldTableViewCell: UITableViewCell {
     
@@ -14,6 +15,13 @@ class TextFieldTableViewCell: UITableViewCell {
         didSet {
             textFieldElement.delegate = self
             textFieldElement.clearButtonMode = .always
+        }
+    }
+    
+    var isEnabled: Bool = false {
+        didSet {
+            self.contentView.backgroundColor = isEnabled ? .clear : IMIConstants.Color.lightSemitransparentBackground
+            self.textFieldElement.isEnabled = isEnabled
         }
     }
     

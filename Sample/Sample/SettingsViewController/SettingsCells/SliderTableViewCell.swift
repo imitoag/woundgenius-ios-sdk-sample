@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import WoundGenius
 
 class SliderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelElement: UILabel!
     @IBOutlet weak var sliderElement: UISlider!
+    
+    var isEnabled: Bool = false {
+        didSet {
+            self.contentView.backgroundColor = isEnabled ? .clear : IMIConstants.Color.lightSemitransparentBackground
+            self.sliderElement.isEnabled = isEnabled
+        }
+    }
     
     var valueChanged: ((Int)->())?
     

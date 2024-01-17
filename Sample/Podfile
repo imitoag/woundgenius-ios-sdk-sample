@@ -1,0 +1,13 @@
+platform :ios, '12.0'
+
+target 'Sample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+  pod 'TensorFlowLiteTaskVision'
+end
+
+target 'SampleSimulator' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+end

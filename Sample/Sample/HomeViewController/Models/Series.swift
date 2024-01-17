@@ -12,10 +12,10 @@ class Series: NSObject {
     var timestamp = Date().timeIntervalSince1970
     
     /** Store the results of capturing */
-    var captureResults = [Any]()
-    
+    var captureResults: [Any]
+        
     init(captureResults: [Any]) {
-        super.init()
         self.captureResults = captureResults
+        super.init()
     }
 }
