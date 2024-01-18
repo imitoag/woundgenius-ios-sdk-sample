@@ -34,9 +34,9 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = presenter.sections[indexPath.section].elements[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: element.cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: element.key.cellId, for: indexPath)
         
-        switch element.cellId {
+        switch element.key.cellId {
         case String(describing: SwitchTableViewCell.self):
             let switchCell = cell as! SwitchTableViewCell
             switchCell.labelElement.text = element.labelText
@@ -48,15 +48,29 @@ class SettingsTableViewController: UITableViewController {
                 UserDefaults.standard.synchronize()
                 if element.key == .stomaCapturing   {
                     if newValue == true {
-                        UserDefaults.standard.setValue(0, forKey: SettingKey.autoDetectionType.rawValue)
-                        UserDefaults.standard.setValue(0, forKey: SettingKey.liveWoundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.woundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.tissueTypesDetection.rawValue)
                     }
                     self.refreshTableView()
                 }
                 if element.key == .multipleOutlinesPerImageEnabled {
                     if newValue == false {
-                        UserDefaults.standard.setValue(0, forKey: SettingKey.autoDetectionType.rawValue)
-                        UserDefaults.standard.setValue(0, forKey: SettingKey.liveWoundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.woundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.tissueTypesDetection.rawValue)
+                    }
+                    self.refreshTableView()
+                }
+                if element.key == .woundDetection {
+                    if newValue == false {
+                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
+                    }
+                    self.refreshTableView()
+                }
+                if element.key == .liveWoundDetection {
+                    if newValue == true {
+                        UserDefaults.standard.setValue(true, forKey: SettingKey.woundDetection.rawValue)
                     }
                     self.refreshTableView()
                 }
@@ -102,16 +116,18 @@ class SettingsTableViewController: UITableViewController {
                             UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.frontalCameraEnabled.rawValue)
                         case .multipleWoundsPerImage:
                             UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue)
-                        case .woundDetection, .tissueTypeDetection:
-                            UserDefaults.standard.setValue(WoundGeniusFlow.isAvailable(feature: .woundDetection) ? 1 : 0, forKey: SettingKey.autoDetectionType.rawValue)
+                        case .woundDetection:
+                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.woundDetection.rawValue)
+                        case .tissueTypeDetection:
+                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.tissueTypesDetection.rawValue)
                         case .liveWoundDetection:
-                            UserDefaults.standard.setValue(WoundGeniusFlow.isAvailable(feature: .liveWoundDetection) ? 1 : 0, forKey: SettingKey.liveWoundDetection.rawValue)
+                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.liveWoundDetection.rawValue)
                         case .bodyPartPicker:
                             UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue)
                         case .localStorageImages, .localStorageVideos:
                             UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.localStorageMediaEnabled.rawValue)
                         case .stomaDocumentation:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.stomaCapturing.rawValue)
+                            UserDefaults.standard.set(false, forKey: SettingKey.stomaCapturing.rawValue)
                         case .barcodeScanning:
                             break
                         case .manualMeasurementInput:
@@ -157,8 +173,13 @@ class SettingsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
         let element = presenter.sections[indexPath.section].elements[indexPath.row]
         if !element.isEnabled {
-            UIUtils.shared.showOKAlert("Update the License Key",
-                                       message: "To access this feature - License Key should have it enabled.")
+            if let feature = element.key.correspondingFeature, WoundGeniusFlow.isAvailable(feature: feature) {
+                UIUtils.shared.showOKAlert("Adjust dependent features",
+                                           message: "There are some other features blocking this one. Review other settings.")
+            } else {
+                UIUtils.shared.showOKAlert("Update the License Key",
+                                           message: "To access this feature - License Key should have it enabled.")
+            }
         }
     }
     

@@ -95,12 +95,11 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
     private var bodyPartPickerResult: BodyPartPickerResult?
     
     var autoDetectionMode: AutoDetectionMode {
-        switch UserDefaults.standard.integer(forKey: SettingKey.autoDetectionType.rawValue) {
-        case 1:
-            return .woundOnly
-        case 2:
+        if UserDefaults.standard.bool(forKey: SettingKey.tissueTypesDetection.rawValue) && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue) {
             return .woundAndTissueTypes
-        default:
+        } else if UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue) {
+            return .woundOnly
+        } else {
             return .none
         }
     }
@@ -108,12 +107,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
     var isLiveWoundDetectionEnabled: Bool {
         guard UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) != true else { return false }
         
-        switch UserDefaults.standard.integer(forKey: SettingKey.liveWoundDetection.rawValue) {
-        case 1:
-            return true
-        default:
-            return false
-        }
+        return UserDefaults.standard.bool(forKey: SettingKey.liveWoundDetection.rawValue)
     }
     
     var enabledOutlineTypes: [WoundGenius.IMOutlineCluster] {

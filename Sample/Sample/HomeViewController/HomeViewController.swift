@@ -107,6 +107,11 @@ class HomeViewController: UIViewController {
             showBodyPartPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+        /* SETUP DEFAULT VALUES */
+        if UserDefaults.standard.value(forKey: SettingKey.maxNumberOfMediaInt.rawValue) == nil {
+            UserDefaults.standard.setValue(1, forKey: SettingKey.maxNumberOfMediaInt.rawValue)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
