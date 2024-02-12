@@ -20,7 +20,7 @@ class TextFieldTableViewCell: UITableViewCell {
     
     var isEnabled: Bool = false {
         didSet {
-            self.contentView.backgroundColor = isEnabled ? .clear : IMIConstants.Color.lightSemitransparentBackground
+            self.contentView.backgroundColor = isEnabled ? .clear : WGConstants.Color.lightSemitransparentBackground
             self.textFieldElement.isEnabled = isEnabled
         }
     }

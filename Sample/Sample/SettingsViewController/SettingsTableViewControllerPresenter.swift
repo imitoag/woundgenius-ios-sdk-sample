@@ -162,16 +162,16 @@ class SettingsTableViewControllerPresenter: NSObject {
                             elements: [
                                 SettingsElement(labelText: "Video",
                                                 key: .videoModeEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .videoCapturing)),
+                                                isEnabled: WG.isAvailable(feature: .videoCapturing)),
                                 SettingsElement(labelText: "Marker Measurement",
                                                 key: .markerModeEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .markerMeasurementCapturing)),
+                                                isEnabled: WG.isAvailable(feature: .markerMeasurementCapturing)),
                                 SettingsElement(labelText: "Photo",
                                                 key: .photoModeEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .photoCapturing)),
+                                                isEnabled: WG.isAvailable(feature: .photoCapturing)),
                                 SettingsElement(labelText: "Ruler",
                                                 key: .rulerModeEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .rulerMeasurementCapturing)),
+                                                isEnabled: WG.isAvailable(feature: .rulerMeasurementCapturing)),
                             ]),
             SettingsSection(labelText: "Max Number of Media",
                             elements: [
@@ -184,10 +184,10 @@ class SettingsTableViewControllerPresenter: NSObject {
             SettingsSection(labelText: "Flow", elements: [
                 SettingsElement(labelText: "Stoma Capturing",
                                 key: .stomaCapturing,
-                                isEnabled: WoundGeniusFlow.isAvailable(feature: .stomaDocumentation)),
+                                isEnabled: WG.isAvailable(feature: .stomaDocumentation)),
                 SettingsElement(labelText: "When Stoma Capturing flow is activated:\n- Wound Auto-detection, Tissue Type Auto-detection will get disabled.\n- Instead of Wound Depth user will be requested to enter Stoma Height.\n- Instead of Wound Width Length - Stoma Diameter is measured.",
                                 key: .stomaCapturingDescription,
-                                isEnabled: WoundGeniusFlow.isAvailable(feature: .stomaDocumentation))
+                                isEnabled: WG.isAvailable(feature: .stomaDocumentation))
             ])
         ]
         
@@ -196,24 +196,24 @@ class SettingsTableViewControllerPresenter: NSObject {
         
         result.append(
             SettingsSection(labelText: "Machine Learning",
-                            elements: [SettingsElement(labelText: "Wound Detection",
+                            elements: [SettingsElement(labelText: Feature.woundDetection.title,
                                                        key: .woundDetection,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .woundDetection) && isMLEnabled),
-                                       SettingsElement(labelText: "iOS 14+. To enable Wound Autodetection - your license should have it enabled.",
+                                                       isEnabled: WG.isAvailable(feature: .woundDetection) && isMLEnabled),
+                                       SettingsElement(labelText: "iOS 14+. To enable Wound Autodetection - your license should have it enabled. (Model: \(WGConstants.woundDetectionModelName))",
                                                        key: .woundDetectionDescription,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .woundDetection) && isMLEnabled),
-                                       SettingsElement(labelText: "Live Wound Detection",
+                                                       isEnabled: WG.isAvailable(feature: .woundDetection) && isMLEnabled),
+                                       SettingsElement(labelText: Feature.liveWoundDetection.title,
                                                        key: .liveWoundDetection,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .liveWoundDetection) && isMLEnabled && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue)),
+                                                       isEnabled: WG.isAvailable(feature: .liveWoundDetection) && isMLEnabled && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue)),
                                        SettingsElement(labelText: "iOS 15+. Highlight wound on live video preview - to guide users though the best device positioning for wound capturing. To activate this feature - your license should have it enabled.",
                                                        key: .liveWoundDetectionDescription,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .liveWoundDetection) && isMLEnabled && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue)),
-                                       SettingsElement(labelText: "Tissue Type Detection",
+                                                       isEnabled: WG.isAvailable(feature: .liveWoundDetection) && isMLEnabled && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue)),
+                                       SettingsElement(labelText: Feature.tissueTypeDetection.title,
                                                        key: .tissueTypesDetection,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .tissueTypeDetection) && isMLEnabled),
-                                       SettingsElement(labelText: "iOS 14+. To enable Tissue Type Detection - your license should have it enabled.",
+                                                       isEnabled: WG.isAvailable(feature: .tissueTypeDetection) && isMLEnabled),
+                                       SettingsElement(labelText: "iOS 14+. To enable Tissue Type Detection - your license should have it enabled. (Model: \(WGConstants.tissueTypeDetectionModelName))",
                                                        key: .tissueTypesDetectionDescription,
-                                                       isEnabled: WoundGeniusFlow.isAvailable(feature: .tissueTypeDetection) && isMLEnabled)])
+                                                       isEnabled: WG.isAvailable(feature: .tissueTypeDetection) && isMLEnabled)])
         )
         
         result.append(
@@ -221,16 +221,16 @@ class SettingsTableViewControllerPresenter: NSObject {
                             elements: [
                                 SettingsElement(labelText: "Import from Camera Roll",
                                                 key: .localStorageMediaEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .localStorageImages) || WoundGeniusFlow.isAvailable(feature: .localStorageVideos)),
+                                                isEnabled: WG.isAvailable(feature: .localStorageImages) || WG.isAvailable(feature: .localStorageVideos)),
                                 SettingsElement(labelText: "Body Part Picker while Capturing",
                                                 key: .bodyPartPickerOnCapturingEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .bodyPartPicker)),
+                                                isEnabled: WG.isAvailable(feature: .bodyPartPicker)),
                                 SettingsElement(labelText: "Frontal Camera Enabled",
                                                 key: .frontalCameraEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .frontalCamera)),
+                                                isEnabled: WG.isAvailable(feature: .frontalCamera)),
                                 SettingsElement(labelText: "Multiple Outlines per Image",
                                                 key: .multipleOutlinesPerImageEnabled,
-                                                isEnabled: WoundGeniusFlow.isAvailable(feature: .multipleWoundsPerImage)),
+                                                isEnabled: WG.isAvailable(feature: .multipleWoundsPerImage)),
                             ])
         )
         

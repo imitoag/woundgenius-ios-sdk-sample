@@ -16,8 +16,8 @@ class HomeViewController: UIViewController {
     // MARK: Properties
     
     /** Initiate the woundGeniusFlow instace with presenter and the license key. */
-    private lazy var woundGeniusFlow: WoundGeniusFlow = {
-        return self.woundGeniusFlowInstance()
+    private lazy var woundGeniusRouter: WGRouter = {
+        return self.woundGeniusRouterInstance()
     }()
     
     /** Core Module: A button to launch WoundGenius Capturing */
@@ -43,11 +43,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            self.title = "WoundGenius (\(appVersion))"
-        } else {
-            self.title = "WoundGenius"
-        }
+        self.title = "WoundGenius (\(WGConstants.sdkVersion))"
 
         self.view.backgroundColor = .white
                 
@@ -117,15 +113,8 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        /*
-         This check is not needed for client apps to implement.
-         It is done to handle the case where the license key is getting modified during single app usage session.
-         For constant license key - initiate woundGeniusFlow once.
-         */
-        if self.lastUsedLicenseKey != UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
-            self.lastUsedLicenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue)
-            self.woundGeniusFlow = self.woundGeniusFlowInstance()
-        }
+        // The settings might have changed. Update the Wound Genius Router Instance. Like the Auto-Detection setup could change.
+        self.woundGeniusRouter = self.woundGeniusRouterInstance()
     }
 }
 
@@ -140,7 +129,7 @@ extension HomeViewController {
             return
         }
         
-        woundGeniusFlow.startBodyPartPicker(over: self, preselect: self.pickedBodyPart) { [weak self] bodyPart in
+        woundGeniusRouter.startBodyPartPicker(over: self, preselect: self.pickedBodyPart) { [weak self] bodyPart in
             DispatchQueue.main.async {
                 self?.pickedBodyPart = bodyPart
                 self?.showBodyPartPicker.setTitle("Pick Body Part (\(bodyPart?.hashtag_en ?? "-"))", for: .normal)
@@ -154,7 +143,7 @@ extension HomeViewController {
             UIUtils.shared.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
             return
         }
-        self.woundGeniusFlow.startCapturing(over: self)
+        self.woundGeniusRouter.startCapturing(over: self)
     }
     
     /* Core Module: Settings */
@@ -167,17 +156,19 @@ extension HomeViewController {
 
 extension HomeViewController {
     
-    private func woundGeniusFlowInstance() -> WoundGeniusFlow {
+    private func woundGeniusRouterInstance() -> WGRouter {
+        if let key = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
+            WG.activate(licenseKey: key)
+        }
         let woundGeniusFlowPresenter = MyWoundGeniusPresenter(completion: { [weak self] captureResults in
             guard let self = self else { return }
             self.series.append(Series(captureResults: captureResults))
             (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
             self.tableView.reloadData()
-            self.woundGeniusFlow.stopCapturing()
+            self.woundGeniusRouter.stopCapturing()
         })
         
-        return WoundGeniusFlow(licenseKey: UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) ?? "",
-                               presenter: woundGeniusFlowPresenter)
+        return WGRouter(presenter: woundGeniusFlowPresenter)
     }
 }
 

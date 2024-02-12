@@ -12,6 +12,10 @@ import WoundGenius
 import TensorFlowLiteTaskVision
 
 class WoundGeniusTFLiteExtension: NSObject, TFLiteExtensionProtocol {
+    static let shared = WoundGeniusTFLiteExtension()
+    
+    private override init() {}
+    
     private var segmenters = [SegmenterType: ImageSegmenter]()
     
     func setupSegmenter(path: String, type: SegmenterType, completion: (Bool)->()) {

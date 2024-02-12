@@ -11,34 +11,12 @@ import CoreMedia
 import AVFoundation
 import WoundGenius
 
-class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
+class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
     
     var showTutorialOnViewDidAppear: Bool = false
     
     var backNavigationBarButtonTitle: String?
-    
-    // MARK: - BodyPartPickerSettings
-    func lokalise(key: BodyPartPickerLocalizationKeys) -> String {
-        switch key {
-        case .selectAll:
-            return L.str("WHOLE_BODY")
-        case .clearSelection:
-            return L.str("CLEAR_SELECTION")
-        case .collapseButtonTitle:
-            return L.str("HIDE")
-        case .leftShortText:
-            return L.str("LEFT_SHORT_TEXT")
-        case .rightShortText:
-            return L.str("RIGHT_SHORT_TEXT")
-        case .lateralSide:
-            return L.str("LATERAL")
-        case .medialSide:
-            return L.str("MEDIAL")
-        @unknown default:
-            return "Unknown default"
-        }
-    }
-    
+        
     // MARK: - WoundGeniusPresenterProtocol
     var isRightNavBarButtonAvailable: Bool = true
     
@@ -158,7 +136,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
         }
     }
     
-    func informAbout(event: IMCaptureVCPresenterInforming) {
+    func handle(event: WGEvent) {
         switch event {
         case .stoppedCapturingVideoBecauseOfDurationLimit, .capturedHandyscopePhoto, .capturedManualInputPhoto:
             assertionFailure("Unexpected use of this version of WoundGenius.")
@@ -242,7 +220,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
-                        item.htmlBody = L.str(item.htmlBodyKey)
+                        item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
                     vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: "marker-mode-tutorial", videoExtension: "mp4")
                 } catch {
@@ -256,7 +234,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
-                        item.htmlBody = L.str(item.htmlBodyKey)
+                        item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
                     vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4")
                 } catch {
@@ -268,6 +246,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
                 assertionFailure("Unknown default")
             }
             let navVC = UINavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
             over.present(navVC, animated: true)
         case .viewWillAppear(let vc):
             if UserDefaults.standard.bool(forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue) {
@@ -293,6 +272,12 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
                 over.updateBodyPartPickerButton(image: image)
             }
             over.present(bodyPartPickerVC, animated: true, completion: nil)
+        case .woundAutoDetectionExecuted(let numberOfWoundOutlines):
+            print("Log woundAutoDetectionExecuted for statistics. \(numberOfWoundOutlines) wound outines detected. No actions needed.")
+        case .autoDetectButtonClicked:
+            print("Log autoDetectButtonClicked event for statistics. No actions needed.")
+        case .autoDetectResultsEdited:
+            print("Log autoDetectResultsEdited event for statistics. No actions needed.")
         @unknown default:
 #if DEBUG
             assertionFailure()
@@ -341,31 +326,34 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
         return UIColor.black
     }
     
-    func lokalise(key: CameraLokalizationKey) -> String? {
+    func lokalize(_ key: WGLokalizableKey) -> String {
         switch key {
         case .captureScreenTitle:
             return "Patient Name"
         case .captureScreenSubtitle:
             return "Patient Date of Birth"
-        default:
-            return L.str(key.rawValue)
-        }
-    }
-    
-    var localizeUIUtils: (LocalizeKeyUIUtils) -> (String) = { key in
-        return L.str(key.rawValue)
-    }
-    
-    func localise(key: IMLocalisation) -> String? {
-        switch key {
+        case .selectAll:
+            return L.str("WHOLE_BODY")
+        case .clearSelection:
+            return L.str("CLEAR_SELECTION")
+        case .collapseButtonTitle:
+            return L.str("HIDE")
+        case .leftShortText:
+            return L.str("LEFT_SHORT_TEXT")
+        case .rightShortText:
+            return L.str("RIGHT_SHORT_TEXT")
+        case .lateralSide:
+            return L.str("LATERAL")
+        case .medialSide:
+            return L.str("MEDIAL")
         case .pinsScreenTitle:
-            return nil
+            return ""
         default:
             return L.str(key.rawValue)
         }
     }
     
-    var completionButtonTitle: IMLocalisation {
+    var completionButtonTitle: WGLokalizableKey {
         return .CONTINUE_BUTTON
     }
     
@@ -381,7 +369,7 @@ class MyWoundGeniusPresenter: NSObject, WoundGeniusPresenterProtocol {
 #if targetEnvironment(simulator)
         return nil
 #else
-        return WoundGeniusTFLiteExtension()
+        return WoundGeniusTFLiteExtension.shared
 #endif
     }()
     
@@ -565,16 +553,5 @@ extension MyWoundGeniusPresenter {
         } else {
             UIUtils.shared.showOKAlert("Unsupported marker was detected", message: nil)
         }
-    }
-}
-
-extension MyWoundGeniusPresenter {
-    
-    /*
-     Log the events to Firebase, if needed to aggregate some WoundGenius usage statistics.
-     Leave empty if the events are not needed.
-     */
-    func log(event: WoundGenius.WoundGeniusLogEvent) {
-        print("MyWoundGeniusPresenter event logging: \(event)")
     }
 }

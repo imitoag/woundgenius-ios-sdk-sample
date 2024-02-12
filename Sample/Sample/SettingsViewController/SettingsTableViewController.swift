@@ -100,32 +100,32 @@ class SettingsTableViewController: UITableViewController {
                 UserDefaults.standard.set(newValue, forKey: element.key.rawValue)
                 UserDefaults.standard.synchronize()
                 if element.key == .licenseKey {
-                    _ = WoundGeniusFlow(licenseKey: newValue ?? "", presenter: MyWoundGeniusPresenter(completion: { _ in }))
+                    WG.activate(licenseKey: newValue ?? "")
                     self.refreshTableView()
                     for feature in Feature.allCases {
                         switch feature {
                         case .photoCapturing:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.photoModeEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.photoModeEnabled.rawValue)
                         case .videoCapturing:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.videoModeEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.videoModeEnabled.rawValue)
                         case .rulerMeasurementCapturing:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.rulerModeEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.rulerModeEnabled.rawValue)
                         case .markerMeasurementCapturing:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.markerModeEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.markerModeEnabled.rawValue)
                         case .frontalCamera:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.frontalCameraEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.frontalCameraEnabled.rawValue)
                         case .multipleWoundsPerImage:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue)
                         case .woundDetection:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.woundDetection.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.woundDetection.rawValue)
                         case .tissueTypeDetection:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.tissueTypesDetection.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.tissueTypesDetection.rawValue)
                         case .liveWoundDetection:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.liveWoundDetection.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.liveWoundDetection.rawValue)
                         case .bodyPartPicker:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue)
                         case .localStorageImages, .localStorageVideos:
-                            UserDefaults.standard.set(WoundGeniusFlow.isAvailable(feature: feature), forKey: SettingKey.localStorageMediaEnabled.rawValue)
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.localStorageMediaEnabled.rawValue)
                         case .stomaDocumentation:
                             UserDefaults.standard.set(false, forKey: SettingKey.stomaCapturing.rawValue)
                         case .barcodeScanning:
@@ -173,7 +173,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
         let element = presenter.sections[indexPath.section].elements[indexPath.row]
         if !element.isEnabled {
-            if let feature = element.key.correspondingFeature, WoundGeniusFlow.isAvailable(feature: feature) {
+            if let feature = element.key.correspondingFeature, WG.isAvailable(feature: feature) {
                 UIUtils.shared.showOKAlert("Adjust dependent features",
                                            message: "There are some other features blocking this one. Review other settings.")
             } else {
