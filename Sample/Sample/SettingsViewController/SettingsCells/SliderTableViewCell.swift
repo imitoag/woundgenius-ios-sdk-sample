@@ -16,6 +16,7 @@ class SliderTableViewCell: UITableViewCell {
     var isEnabled: Bool = false {
         didSet {
             self.contentView.backgroundColor = isEnabled ? .clear : WGConstants.Color.lightSemitransparentBackground
+            self.sliderElement.tintColor = WGConstants.Color.red
             self.sliderElement.isEnabled = isEnabled
         }
     }

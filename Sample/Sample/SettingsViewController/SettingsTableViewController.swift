@@ -79,10 +79,10 @@ class SettingsTableViewController: UITableViewController {
         case String(describing: SliderTableViewCell.self):
             let sliderCell = cell as! SliderTableViewCell
             sliderCell.labelElement.text = "\(element.labelText): \(UserDefaults.standard.integer(forKey: element.key.rawValue))"
-            sliderCell.sliderElement.value = Float(UserDefaults.standard.integer(forKey: element.key.rawValue))
             sliderCell.sliderElement.minimumValue = Float(element.minValue ?? 0)
             sliderCell.sliderElement.maximumValue = Float(element.maxValue ?? 100)
             sliderCell.isEnabled = element.isEnabled
+            sliderCell.sliderElement.value = Float(UserDefaults.standard.integer(forKey: element.key.rawValue))
             
             sliderCell.valueChanged = { [weak sliderCell] newValue in
                 sliderCell?.labelElement.text = "\(element.labelText): \(UserDefaults.standard.integer(forKey: element.key.rawValue))"

@@ -49,7 +49,9 @@ enum SettingKey: String {
     case tissueTypesDetectionDescription
     
     /// Bool
+    case minNumberOfMediaInt
     case maxNumberOfMediaInt
+    case minMaxNumberOfMediaDescription
     case multipleOutlinesPerImageEnabled
     
     /// Bool
@@ -78,9 +80,9 @@ enum SettingKey: String {
                 .multipleOutlinesPerImageEnabled,
                 .stomaCapturing:
             return String(describing: SwitchTableViewCell.self)
-        case .woundDetectionDescription, .liveWoundDetectionDescription, .tissueTypesDetectionDescription, .stomaCapturingDescription:
+        case .woundDetectionDescription, .liveWoundDetectionDescription, .tissueTypesDetectionDescription, .stomaCapturingDescription, .minMaxNumberOfMediaDescription:
             return String(describing: DescriptionTableViewCell.self)
-        case .maxNumberOfMediaInt:
+        case .minNumberOfMediaInt, .maxNumberOfMediaInt:
             return String(describing: SliderTableViewCell.self)
         case .primaryButtonColor, .lightBackgroundColor:
             return String(describing: SegmentedTableViewCell.self)
@@ -89,7 +91,7 @@ enum SettingKey: String {
     
     var correspondingFeature: Feature? {
         switch self {
-        case .licenseKey, .woundDetectionDescription, .liveWoundDetectionDescription, .tissueTypesDetectionDescription, .maxNumberOfMediaInt, .stomaCapturingDescription, .primaryButtonColor, .lightBackgroundColor:
+        case .licenseKey, .woundDetectionDescription, .liveWoundDetectionDescription, .tissueTypesDetectionDescription, .minNumberOfMediaInt, .maxNumberOfMediaInt, .stomaCapturingDescription, .primaryButtonColor, .lightBackgroundColor, .minMaxNumberOfMediaDescription:
             return nil
         case .videoModeEnabled:
             return .videoCapturing
@@ -173,13 +175,22 @@ class SettingsTableViewControllerPresenter: NSObject {
                                                 key: .rulerModeEnabled,
                                                 isEnabled: WG.isAvailable(feature: .rulerMeasurementCapturing)),
                             ]),
-            SettingsSection(labelText: "Max Number of Media",
+            SettingsSection(labelText: "Number of media per series/assessment",
                             elements: [
-                                SettingsElement(labelText: "Max Number of Media",
+                                SettingsElement(labelText: "Min number of media items",
+                                                key: .minNumberOfMediaInt,
+                                                isEnabled: true,
+                                                minValue: 0,
+                                                maxValue: 1),
+                                SettingsElement(labelText: "Max number of media items",
                                                 key: .maxNumberOfMediaInt,
                                                 isEnabled: true,
                                                 minValue: 1,
-                                                maxValue: 99)
+                                                maxValue: 100),
+                                SettingsElement(labelText: "When minimal number of media is 0 - on capture screen Done button will be always enabled (except video capturing process). This is done to enable possibility to create empty series/assessments with some additional metadata (Like Status/Therapy data collection).\nWhen min and max number of items is 1 - Done button won't be shown, instead - Capture Screen will complete operating just after single media capturing.",
+                                                key: .minMaxNumberOfMediaDescription,
+                                                isEnabled: true)
+
                             ]),
             SettingsSection(labelText: "Flow", elements: [
                 SettingsElement(labelText: "Stoma Capturing",

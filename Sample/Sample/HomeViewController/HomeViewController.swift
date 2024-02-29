@@ -105,6 +105,10 @@ class HomeViewController: UIViewController {
         ])
         
         /* SETUP DEFAULT VALUES */
+        if UserDefaults.standard.value(forKey: SettingKey.minNumberOfMediaInt.rawValue) == nil {
+            UserDefaults.standard.setValue(1, forKey: SettingKey.minNumberOfMediaInt.rawValue)
+        }
+        
         if UserDefaults.standard.value(forKey: SettingKey.maxNumberOfMediaInt.rawValue) == nil {
             UserDefaults.standard.setValue(1, forKey: SettingKey.maxNumberOfMediaInt.rawValue)
         }

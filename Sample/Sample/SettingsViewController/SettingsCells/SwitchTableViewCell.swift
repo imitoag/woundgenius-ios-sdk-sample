@@ -17,6 +17,7 @@ class SwitchTableViewCell: UITableViewCell {
         didSet {
             self.switchElement.isEnabled = isEnabled
             self.contentView.backgroundColor = isEnabled ? .clear : WGConstants.Color.lightSemitransparentBackground
+            self.switchElement.onTintColor = WGConstants.Color.red
         }
     }
     

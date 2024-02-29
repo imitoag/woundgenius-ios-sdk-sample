@@ -19,6 +19,11 @@ class WoundGeniusTFLiteExtension: NSObject, TFLiteExtensionProtocol {
     private var segmenters = [SegmenterType: ImageSegmenter]()
     
     func setupSegmenter(path: String, type: SegmenterType, completion: (Bool)->()) {
+        guard segmenters[type] == nil else {
+            completion(true)
+            return
+        }
+        
         let options = ImageSegmenterOptions(modelPath: path)
         do {
             let segmenter = try ImageSegmenter.segmenter(options: options)
@@ -36,6 +41,7 @@ class WoundGeniusTFLiteExtension: NSObject, TFLiteExtensionProtocol {
             completion(.failure(.segmenterNotInitialized))
             return
         }
+        
         let segmentationResult: SegmentationResult
         var inferenceTime: TimeInterval = 0
         do {

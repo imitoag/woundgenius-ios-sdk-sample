@@ -66,8 +66,20 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
     
     var isCancelBarButtonItemVisible: Bool = true
     
-    func lastImage(icon: @escaping (UIImage?) -> ()) {
-        icon(nil)
+    func lastMediaIcon(icon: @escaping (UIImage?) -> ()) {
+        guard let lastMedia = self.capturedItemsToReturn.last else {
+            icon(nil)
+            return
+        }
+        if let measurement = lastMedia as? MeasurementResult {
+            icon(measurement.image)
+        } else if let video = lastMedia as? VideoCaptureResult {
+            icon(video.preview)
+        } else if let photo = lastMedia as? PhotoCaptureResult {
+            icon(photo.preview)
+        } else if let image = lastMedia as? ImageCaptureResult {
+            icon(image.image)
+        }
     }
     
     private var bodyPartPickerResult: BodyPartPickerResult?
@@ -156,9 +168,9 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
                 self.capturedItemsToReturn = [Any]()
             }
         case .capturedMarkerMeasurement(let vc, let result):
-            showOutlining(captureVC: vc, captureResult: result)
+            self.showOutlining(captureVC: vc, captureResult: result)
         case .capturedRulerMeasurementImage(vc: let vc, let result):
-            showRulerMeasurementScaleDefinition(captureVC: vc, captureResult: result)
+            self.showRulerMeasurementScaleDefinition(captureVC: vc, captureResult: result)
         case .cancelButtonTapped(vc: let vc):
             UIUtils.shared.showConfirmationAlert(title: "Confirmation Popup", message: "Are you sure you want to cancel capturing?", confirmButton: "Cancel", cancelButton: "Dismiss") {
                 vc.dismiss(animated: true)
@@ -214,7 +226,8 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             switch mode {
             case .markerMeasurement:
                 do {
-                    guard let data = L.str("CALIBRATION_MARKER_HELP_JSON").data(using: .utf8) else {
+                    let jsonHelpConfig = (self.autoDetectionMode == .none) ? "CALIBRATION_MARKER_HELP_JSON" : "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON"
+                    guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
                         vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4")
                         break
                     }
@@ -228,7 +241,8 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
                 }
             case .rulerMeasurement:
                 do {
-                    guard let data = L.str("RULER_HELP_JSON").data(using: .utf8) else {
+                    let jsonHelpConfig = (self.autoDetectionMode == .none) ? "RULER_HELP_JSON" : "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON"
+                    guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
                         vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
                         break
                     }
@@ -283,6 +297,10 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             assertionFailure()
 #endif
         }
+    }
+    
+    var minNumberOfMedia: Int {
+        return UserDefaults.standard.integer(forKey: SettingKey.minNumberOfMediaInt.rawValue)
     }
     
     var maxNumberOfMedia: Int {
@@ -406,7 +424,7 @@ extension MyWoundGeniusPresenter {
         DispatchQueue.main.async {
             guard let pinsViewController = pinsViewController else { return }
             let navigationController = UINavigationController(rootViewController: pinsViewController)
-            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.modalPresentationStyle = .fullScreen // Use full screen, as there is some logic in viewDidAppear.
             navigationController.view.backgroundColor = .black
             captureVC.present(navigationController, animated: false, completion: nil)
         }
@@ -488,7 +506,7 @@ extension MyWoundGeniusPresenter {
         
         DispatchQueue.main.async {
             guard let imNavController = imNavController else { return }
-            imNavController.modalPresentationStyle = .overFullScreen//.fullScreen
+            imNavController.modalPresentationStyle = .fullScreen // Use full screen, as there is some logic in viewDidAppear.
             captureVC.present(imNavController, animated: false, completion: nil)
         }
     }
@@ -548,7 +566,7 @@ extension MyWoundGeniusPresenter {
                 
             })
             
-            imNavController!.modalPresentationStyle = .fullScreen
+            imNavController!.modalPresentationStyle = .fullScreen // Use full screen, as there is some logic in viewDidAppear.
             captureVC.present(imNavController!, animated: true, completion: nil)
         } else {
             UIUtils.shared.showOKAlert("Unsupported marker was detected", message: nil)
