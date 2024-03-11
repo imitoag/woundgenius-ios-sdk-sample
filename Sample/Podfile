@@ -1,0 +1,16 @@
+#Public github specs.
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '12.1'
+
+target 'Sample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+  pod 'TensorFlowLiteTaskVision', '0.4.1' # Latest versions don't support iOS 12. To support iOS 12 - 0.4.1 version should be used. 0.4.2, 0.4.3 are launchable on iOS 13+.
+end
+
+target 'SampleSimulator' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+end

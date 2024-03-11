@@ -6,11 +6,20 @@
 //
 
 import UIKit
+import WoundGenius
 
 class SwitchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelElement: UILabel!
     @IBOutlet weak var switchElement: UISwitch!
+    
+    var isEnabled: Bool = false {
+        didSet {
+            self.switchElement.isEnabled = isEnabled
+            self.contentView.backgroundColor = isEnabled ? .clear : WGConstants.Color.lightSemitransparentBackground
+            self.switchElement.onTintColor = WGConstants.Color.red
+        }
+    }
     
     var valueChanged: ((Bool)->())?
     

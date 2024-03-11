@@ -12,60 +12,41 @@ import AVKit
 import WoundGenius
 
 class HomeViewController: UIViewController {
-    private lazy var woundSDKFlow: WoundGeniusFlow = {
-        let woundSDKFlowPresenter = MyWoundSDKPresenter(completion: { [weak self] captureResults in
-            guard let self = self else { return }
-            self.series.append(Series(captureResults: captureResults))
-            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
-            self.tableView.reloadData()
-            self.woundSDKFlow.stopCapturing()
-        })
-        return WoundGeniusFlow(licenseKey: UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) ?? "",
-                               presenter: woundSDKFlowPresenter)
+    
+    // MARK: Properties
+    
+    /** Initiate the woundGeniusFlow instace with presenter and the license key. */
+    private lazy var woundGeniusRouter: WGRouter = {
+        return self.woundGeniusRouterInstance()
     }()
     
-    /** Launch WoundSDK Capturing */
+    /** Core Module: A button to launch WoundGenius Capturing */
     private let startCapturing = UIButton(frame: .zero)
     
-    /** Show Body Part Picker */
+    /** Core Module: A button to show Body Part Picker */
     private let showBodyPartPicker = UIButton(frame: .zero)
     
-    /** TableView is showing the captured results. And provides the showcase - how to show the measurement results with available viewers. */
+    /** Core Module: TableView is showing the captured results. And provides the showcase - how to show the measurement results with available viewers. */
     private let tableView = UITableView(frame: .zero)
     
-    /** Store the captured data */
+    /** Core Module: Store the Series - set of Capture Results captured by WoundGenius. */
     private var series = [Series]()
     
-    /** Body Part Picked from Core Module */
+    /** Body Part Picked, while picker is initiated by Core Module */
     private var pickedBodyPart: BodyPartPickerResult?
+    
+    /** No need to integrate this in client apps. Integrated to handle the case when the license key is modified during single app session. Relevant only for Sample app. */
+    private var lastUsedLicenseKey: String?
+    
+    // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "WoundSDK"
+        self.title = "WoundGenius (\(WGConstants.sdkVersion))"
+
         self.view.backgroundColor = .white
-        
-        /* DEFAULT SETTINGS FOR FEATURES */
-        if UserDefaults.standard.bool(forKey: SettingKey.photoModeEnabled.rawValue) == false &&
-            UserDefaults.standard.bool(forKey: SettingKey.videoModeEnabled.rawValue) == false &&
-            UserDefaults.standard.bool(forKey: SettingKey.markerModeEnabled.rawValue) == false &&
-            UserDefaults.standard.bool(forKey: SettingKey.rulerModeEnabled.rawValue) == false {
-            UserDefaults.standard.set(true, forKey: SettingKey.markerModeEnabled.rawValue)
-            UserDefaults.standard.set(true, forKey: SettingKey.rulerModeEnabled.rawValue)
-        }
-        
-        if UserDefaults.standard.value(forKey: SettingKey.maxNumberOfMediaInt.rawValue) == nil {
-            UserDefaults.standard.set(1, forKey: SettingKey.maxNumberOfMediaInt.rawValue)
-        }
-        
-        if UserDefaults.standard.value(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue) == nil {
-            UserDefaults.standard.set(true, forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue)
-        }
-        
-        UserDefaults.standard.set(true, forKey: SettingKey.localStorageMediaEnabled.rawValue)
-        UserDefaults.standard.set(true, forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue)
-        UserDefaults.standard.set(true, forKey: SettingKey.frontalCameraEnabled.rawValue) // False by default
-        
+                
         /* RIGHT BAR BUTTON ITEM */
         if #available(iOS 16.0, *) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "gear"), target: self, action: #selector(openSettings))
@@ -122,14 +103,37 @@ class HomeViewController: UIViewController {
             showBodyPartPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+        /* SETUP DEFAULT VALUES */
+        if UserDefaults.standard.value(forKey: SettingKey.minNumberOfMediaInt.rawValue) == nil {
+            UserDefaults.standard.setValue(1, forKey: SettingKey.minNumberOfMediaInt.rawValue)
+        }
+        
+        if UserDefaults.standard.value(forKey: SettingKey.maxNumberOfMediaInt.rawValue) == nil {
+            UserDefaults.standard.setValue(1, forKey: SettingKey.maxNumberOfMediaInt.rawValue)
+        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // The settings might have changed. Update the Wound Genius Router Instance. Like the Auto-Detection setup could change.
+        self.woundGeniusRouter = self.woundGeniusRouterInstance()
+    }
+}
+
+// MARK: - Button Actions
+
+extension HomeViewController {
+    
+    /* WoundGenius: To use only body part picker feature. */
     @objc func startBodyPartPicker() {
         guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
             UIUtils.shared.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
             return
         }
-        woundSDKFlow.startBodyPartPicker(over: self, preselect: self.pickedBodyPart) { [weak self] bodyPart in
+        
+        woundGeniusRouter.startBodyPartPicker(over: self, preselect: self.pickedBodyPart) { [weak self] bodyPart in
             DispatchQueue.main.async {
                 self?.pickedBodyPart = bodyPart
                 self?.showBodyPartPicker.setTitle("Pick Body Part (\(bodyPart?.hashtag_en ?? "-"))", for: .normal)
@@ -137,20 +141,45 @@ class HomeViewController: UIViewController {
         }
     }
     
+    /* WundGenius: To launch the Camera */
     @objc func launchCamera() {
         guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
             UIUtils.shared.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
             return
         }
-        self.woundSDKFlow.startCapturing(over: self)
+        self.woundGeniusRouter.startCapturing(over: self)
     }
     
+    /* Core Module: Settings */
     @objc func openSettings() {
         performSegue(withIdentifier: "showSettings", sender: nil)
     }
 }
 
+// MARK: - WoundGeniusFlow instance generator
+
+extension HomeViewController {
+    
+    private func woundGeniusRouterInstance() -> WGRouter {
+        if let key = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
+            WG.activate(licenseKey: key)
+        }
+        let woundGeniusFlowPresenter = MyWoundGeniusPresenter(completion: { [weak self] captureResults in
+            guard let self = self else { return }
+            self.series.append(Series(captureResults: captureResults))
+            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
+            self.tableView.reloadData()
+            self.woundGeniusRouter.stopCapturing()
+        })
+        
+        return WGRouter(presenter: woundGeniusFlowPresenter)
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
         label.textColor = UIColor.black
@@ -186,10 +215,23 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 // Fallback on earlier versions
             }
+        } else if let imageCaptureResult = captureResult as? ImageCaptureResult {
+            if #available(iOS 14.0, *) {
+                var config = cell.defaultContentConfiguration()
+                config.image = imageCaptureResult.image
+                config.text = "Mask"
+                cell.contentConfiguration = config
+            } else {
+                // Fallback on earlier versions
+            }
         } else if let measurementCaptureResult = captureResult as? MeasurementResult {
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
-                config.image = measurementCaptureResult.image.outlineAndDrawWidthLength(result: measurementCaptureResult)
+                if measurementCaptureResult.outlines.contains(where: { $0.cluster == .stoma }) {
+                    config.image = measurementCaptureResult.image.draw(outlines: measurementCaptureResult.outlines, drawFullAreaLabel: false, drawWidthLength: false, drawDiameter: true, displayedIndexes: nil)
+                } else {
+                    config.image = measurementCaptureResult.image.outlineAndDrawWidthLength(result: measurementCaptureResult)
+                }
                 config.text = "Measurement"
                 cell.contentConfiguration = config
             } else {
@@ -218,20 +260,31 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             tableViewStyle = .insetGrouped
         }
         
-        if let photoCaptureResult = series[indexPath.section].captureResults[indexPath.row] as? PhotoCaptureResult {
+        let series = series[indexPath.section]
+        
+        if let photoCaptureResult = series.captureResults[indexPath.row] as? PhotoCaptureResult {
             let details = MeasurementDetailsController(style: tableViewStyle,
-                                                                  image: photoCaptureResult.preview,
-                                                                  mediaManager: ImitoMeasureMediaManager(),
-                                                                  isRightButtonShown: false,
-                                                                  outlines: nil,
-                                                                  isDepthInputEnabled: false,
-                                                                  title: "",
-                                                                  subtitle: "",
-                                                                 isStoma: false,
-                                                                 willDisappear: nil)
+                                                       image: photoCaptureResult.preview,
+                                                       mediaManager: ImitoMeasureMediaManager(),
+                                                       isRightButtonShown: false,
+                                                       outlines: nil,
+                                                       isDepthOrHeightInputEnabled: false,
+                                                       title: "",
+                                                       subtitle: "",
+                                                       willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
-        }
-        else if let measurement = series[indexPath.section].captureResults[indexPath.row] as? MeasurementResult {
+        } else if let imageCaptureResult = series.captureResults[indexPath.row] as? ImageCaptureResult {
+            let details = MeasurementDetailsController(style: tableViewStyle,
+                                                       image: imageCaptureResult.image,
+                                                       mediaManager: ImitoMeasureMediaManager(),
+                                                       isRightButtonShown: false,
+                                                       outlines: nil,
+                                                       isDepthOrHeightInputEnabled: false,
+                                                       title: "",
+                                                       subtitle: "",
+                                                       willDisappear: nil)
+            self.navigationController?.pushViewController(details, animated: true)
+        } else if let measurement = series.captureResults[indexPath.row] as? MeasurementResult {
             let outlines = measurement.outlines.map {
                 MeasuredOutline(points: $0.points,
                                 areaInCM: $0.areaInCM,
@@ -249,30 +302,29 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                 parentOutlineOrder: $0.parentOutlineOrder,
                                 parentOutlineCluster: $0.parentOutlineCluster)
             }
-            if outlines.filter({ $0.cluster != .wound }).count > 0 {
+            if outlines.filter({ $0.cluster.isSecondaryType }).count > 0 {
                 let summary = MeasurementSummaryController(style: tableViewStyle,
                                                            image: measurement.image,
                                                            mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
-                                                           isDepthInputEnabled: false,
+                                                           isDepthOrHeightInputEnabled: false,
                                                            title: "",
-                                                           subtitle: "",
-                                                           isStoma: false)
+                                                           subtitle: "")
                 self.navigationController?.pushViewController(summary, animated: true)
             } else {
                 let details = MeasurementDetailsController(style: tableViewStyle,
-                                                                      image: measurement.image, mediaManager: ImitoMeasureMediaManager(),
-                                                                      isRightButtonShown: false,
-                                                                      outlines: outlines,
-                                                                      isDepthInputEnabled: false,
-                                                                      title: "",
-                                                                      subtitle: "",
-                                                                     isStoma: false,
-                                                                     willDisappear: nil)
+                                                           image: measurement.image,
+                                                           mediaManager: ImitoMeasureMediaManager(),
+                                                           isRightButtonShown: false,
+                                                           outlines: outlines,
+                                                           isDepthOrHeightInputEnabled: false,
+                                                           title: "",
+                                                           subtitle: "",
+                                                           willDisappear: nil)
                 self.navigationController?.pushViewController(details, animated: true)
             }
-        } else if let video = series[indexPath.section].captureResults[indexPath.row] as? VideoCaptureResult {
+        } else if let video = series.captureResults[indexPath.row] as? VideoCaptureResult {
             guard let url = ImitoCameraFileManager.documentPathForExistingFile(video.videoNameExt) else { return }
             let player = AVPlayer(url: url)
             let playerViewController = AVPlayerViewController()
@@ -283,4 +335,3 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
-
