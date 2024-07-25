@@ -15,6 +15,8 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.backgroundColor = .imiSystemGroupedBackground()
+        
         self.title = "Settings"
     }
     
@@ -174,10 +176,10 @@ class SettingsTableViewController: UITableViewController {
         let element = presenter.sections[indexPath.section].elements[indexPath.row]
         if !element.isEnabled {
             if let feature = element.key.correspondingFeature, WG.isAvailable(feature: feature) {
-                UIUtils.shared.showOKAlert("Adjust dependent features",
+                UIUtils.showOKAlert("Adjust dependent features",
                                            message: "There are some other features blocking this one. Review other settings.")
             } else {
-                UIUtils.shared.showOKAlert("Update the License Key",
+                UIUtils.showOKAlert("Update the License Key",
                                            message: "To access this feature - License Key should have it enabled.")
             }
         }

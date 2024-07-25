@@ -13,7 +13,6 @@
 		1889B9112BA1754500B584CE /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9102BA1754500B584CE /* L.swift */; };
 		1889B9132BA1768100B584CE /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9122BA1768100B584CE /* Series.swift */; };
 		1889B9152BA1937B00B584CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1889B9142BA1937B00B584CE /* Localizable.strings */; };
-		1889B91C2BA1A23000B584CE /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1889B91B2BA1A23000B584CE /* WoundGeniusSDK */; };
 		18CBB4DF2B9EF665009765E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBB4DE2B9EF665009765E3 /* AppDelegate.m */; };
 		18CBB4E22B9EF665009765E3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBB4E12B9EF665009765E3 /* SceneDelegate.m */; };
 		18CBB4E52B9EF665009765E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBB4E42B9EF665009765E3 /* ViewController.m */; };
@@ -57,6 +56,8 @@
 		18CBB4EF2B9EF666009765E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18CBB5022B9F2FEC009765E3 /* SampleObjc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SampleObjc-Bridging-Header.h"; sourceTree = "<group>"; };
 		18CBB5032B9F2FEC009765E3 /* WoundGeniusWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoundGeniusWrapper.swift; sourceTree = "<group>"; };
+		4204D0A3370097808B231C75 /* Pods-SampleObjc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleObjc.release.xcconfig"; path = "Target Support Files/Pods-SampleObjc/Pods-SampleObjc.release.xcconfig"; sourceTree = "<group>"; };
+		4FD7DDE28796D5C9F5333069 /* Pods-SampleObjc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleObjc.debug.xcconfig"; path = "Target Support Files/Pods-SampleObjc/Pods-SampleObjc.debug.xcconfig"; sourceTree = "<group>"; };
 		C1FC4D10CF08E12EBC76B094 /* Pods_SampleObjc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleObjc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -65,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1889B91C2BA1A23000B584CE /* WoundGeniusSDK in Frameworks */,
 				0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +112,7 @@
 			children = (
 				18CBB4DC2B9EF665009765E3 /* SampleObjc */,
 				18CBB4DB2B9EF665009765E3 /* Products */,
+				3E17E3DF70C16FAA1F8CA55D /* Pods */,
 				6614E3E3190D0D1E834CB5CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -147,6 +148,15 @@
 			path = SampleObjc;
 			sourceTree = "<group>";
 		};
+		3E17E3DF70C16FAA1F8CA55D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4FD7DDE28796D5C9F5333069 /* Pods-SampleObjc.debug.xcconfig */,
+				4204D0A3370097808B231C75 /* Pods-SampleObjc.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6614E3E3190D0D1E834CB5CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,9 +183,6 @@
 			dependencies = (
 			);
 			name = SampleObjc;
-			packageProductDependencies = (
-				1889B91B2BA1A23000B584CE /* WoundGeniusSDK */,
-			);
 			productName = SampleObjc;
 			productReference = 18CBB4DA2B9EF665009765E3 /* SampleObjc.app */;
 			productType = "com.apple.product-type.application";
@@ -204,8 +211,6 @@
 				Base,
 			);
 			mainGroup = 18CBB4D12B9EF665009765E3;
-			packageReferences = (
-			);
 			productRefGroup = 18CBB4DB2B9EF665009765E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -411,6 +416,7 @@
 		};
 		18CBB4F42B9EF666009765E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD7DDE28796D5C9F5333069 /* Pods-SampleObjc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -445,6 +451,7 @@
 		};
 		18CBB4F52B9EF666009765E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4204D0A3370097808B231C75 /* Pods-SampleObjc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -498,13 +505,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1889B91B2BA1A23000B584CE /* WoundGeniusSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WoundGeniusSDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CBB4D22B9EF665009765E3 /* Project object */;
 }
