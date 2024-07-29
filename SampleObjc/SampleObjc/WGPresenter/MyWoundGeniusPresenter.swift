@@ -2,8 +2,7 @@
 //  MyWoundGeniusPresenter.swift
 //  SampleObjc
 //
-//  Created by Eugene Naloiko on 13.03.2024.
-//  Copyright (c) 2022 by imito AG, Zurich, Switzerland
+//  Created by apple on 13.03.2024.
 //
 
 import UIKit
@@ -11,7 +10,40 @@ import CoreMedia
 import AVFoundation
 import WoundGenius
 
+class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
+    func lokalize(_ key: WGLokalizableKey) -> String {
+        switch key {
+        case .captureScreenTitle:
+            return "Patient Name"
+        case .captureScreenSubtitle:
+            return "Patient Date of Birth"
+        case .selectAll:
+            return L.str("WHOLE_BODY")
+        case .clearSelection:
+            return L.str("CLEAR_SELECTION")
+        case .collapseButtonTitle:
+            return L.str("HIDE")
+        case .leftShortText:
+            return L.str("LEFT_SHORT_TEXT")
+        case .rightShortText:
+            return L.str("RIGHT_SHORT_TEXT")
+        case .lateralSide:
+            return L.str("LATERAL")
+        case .medialSide:
+            return L.str("MEDIAL")
+        case .pinsScreenTitle:
+            return ""
+        default:
+            return L.str(key.rawValue)
+        }
+    }
+}
+
 class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
+    var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
+    
+    var userId: String?
+    
     var availableModes: [WoundGenius.ImitoCameraMode] = [.video, .photo, .markerMeasurement, .rulerMeasurement]
     
     var defaultMode: WoundGenius.ImitoCameraMode = .markerMeasurement
@@ -44,6 +76,8 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
     
     var operatingMode: WoundGenius.OperatingMode = .SDK
     
+    private let markerDetector = ZXWrapper()
+
     func lastMediaIcon(icon: @escaping (UIImage?) -> ()) {
         guard let lastMedia = self.capturedItemsToReturn.last else {
             icon(nil)
@@ -61,11 +95,11 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
     }
     
     func captured(sampleBuffer: CMSampleBuffer, previewOrientation: UIInterfaceOrientation, videoOrientation: AVCaptureVideoOrientation, processingResult: @escaping ((WoundGenius.MarkerDetectionStatus, [CGPoint]?, CGSize?)) -> ()) {
-        ZXWrapper.shared.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
+        self.markerDetector.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
                                                previewOrientation: previewOrientation,
                                                videoOrientation: videoOrientation)
         
-        ZXWrapper.shared.detectionStatus = { status in
+        self.markerDetector.detectionStatus = { status in
             DispatchQueue.main.async {
                 switch status {
                 case .detected(let pointsInPrecentage, let frameSize):
@@ -145,7 +179,7 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
         case .stoppedCapturingVideoBecauseOfDurationLimit(let vc):
             print("Show here the explanation that video capturing stopped automatically, as the video duration limit was reached.")
         case .cancelButtonTapped(let vc):
-            UIUtils.shared.showConfirmationAlert(title: "Confirmation Popup", message: "Are you sure you want to cancel capturing?", confirmButton: "Cancel", cancelButton: "Dismiss") {
+            UIUtils.showConfirmationAlert(title: "Confirmation Popup", message: "Are you sure you want to cancel capturing?", confirmButton: "Cancel", cancelButton: "Dismiss") {
                 vc.dismiss(animated: true)
             }
         case .rightBarButtonTapped(let vc):
@@ -168,7 +202,7 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             // Search for imito marker on the image. If it will be detected - start measurement.
             switch vc.currentMode {
             case .markerMeasurement, .rulerMeasurement:
-                ZXWrapper.shared.searchMarker(image: photoResult.preview) { [weak self] status in
+                self.markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
                     DispatchQueue.main.async {
                         guard let self = self else { return }
                         switch status {
@@ -215,31 +249,31 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "CALIBRATION_MARKER_HELP_JSON" : "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4")
+                        vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: "marker-mode-tutorial", videoExtension: "mp4")
+                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                 } catch {
-                    vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4")
+                    vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .rulerMeasurement:
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "RULER_HELP_JSON" : "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
+                        vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4")
+                    vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 } catch {
-                    vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4")
+                    vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .handyscope, .photo, .video, .scanner, .manualInput:
                 assertionFailure("Not supported")
@@ -313,7 +347,8 @@ extension MyWoundGeniusPresenter {
                                                  sideSize: sideSize,
                                                  resultScreenBottomView: nil,
                                                  linePoints: linePoints,
-                                                 config: config,
+                                                 navConfig: config,
+                                                 config: self,
                                                  willPresentResults: {
             
         }, completion: { [weak self] measureResult in
@@ -367,8 +402,9 @@ extension MyWoundGeniusPresenter {
             imNavController = IMNavigationController(image: captureResult.photo!,
                                                      mediaManager: ImitoMeasureMediaManager(),
                                                      qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()), resultScreenBottomView: nil,
-                                                     markerPointsPercentage: captureResult.codeDetection.pointsPercentage,
-                                                     config: config,
+                                                     markerPointsPercentage: captureResult.codeDetection.pointsPercentage, 
+                                                     navConfig: config,
+                                                     config: self,
                                                      willPresentResults: {
                 
             }, completion: { [weak self] measureResult in
@@ -402,7 +438,7 @@ extension MyWoundGeniusPresenter {
             imNavController!.modalPresentationStyle = .fullScreen // Use full screen, as there is some logic in viewDidAppear.
             captureVC.present(imNavController!, animated: true, completion: nil)
         } else {
-            UIUtils.shared.showOKAlert("Unsupported marker was detected", message: nil)
+            UIUtils.showOKAlert("Unsupported marker was detected", message: nil)
         }
     }
     
@@ -410,7 +446,7 @@ extension MyWoundGeniusPresenter {
         guard let image = captureResult.preview else { return }
         
         var pinsViewController: PinsViewController?
-        pinsViewController = PinsViewController(image: image) { [weak self] size, pointViews in
+        pinsViewController = PinsViewController(image: image, config: self) { [weak self] size, pointViews in
             guard let `self` = self else {return}
             pinsViewController?.dismiss(animated: false, completion: { [weak self] in
                 guard let `self` = self else { return }

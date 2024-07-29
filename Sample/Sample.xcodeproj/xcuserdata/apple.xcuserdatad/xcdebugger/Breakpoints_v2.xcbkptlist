@@ -49,6 +49,21 @@
                   endingLineNumber = "1049"
                   offsetFromSymbolStart = "5112">
                </Location>
+               <Location
+                  uuid = "A50553A4-71F3-417B-963E-B069634589A4 - 927a74b2ea2a59ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.OutlinerView.updateBezierPath(outline: WoundGenius.OutlineViewsAndState) -&gt; ()"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1049"
+                  endingLineNumber = "1049"
+                  offsetFromSymbolStart = "872">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -97,6 +112,21 @@
                   endingLineNumber = "1129"
                   offsetFromSymbolStart = "408">
                </Location>
+               <Location
+                  uuid = "2233DF65-0FF4-4169-9D45-AE03FF16B9BA - f75bf5e015e472a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.OutlinerView.scrollViewDidZoom(__C.UIScrollView) -&gt; ()"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1129"
+                  endingLineNumber = "1129"
+                  offsetFromSymbolStart = "476">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,6 +174,21 @@
                   startingLineNumber = "1138"
                   endingLineNumber = "1138"
                   offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  uuid = "0F04404A-2EFB-4985-971E-A1551E297857 - f75bf5e015e47d8f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.OutlinerView.scrollViewDidZoom(__C.UIScrollView) -&gt; ()"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1138"
+                  endingLineNumber = "1138"
+                  offsetFromSymbolStart = "1252">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -300,6 +345,21 @@
                   startingLineNumber = "58"
                   endingLineNumber = "58"
                   offsetFromSymbolStart = "1156">
+               </Location>
+               <Location
+                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4f39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
+                  moduleName = "WoundGenius"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "600">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -3,7 +3,6 @@
 //  SampleObjc
 //
 //  Created by Eugene Naloiko on 11.03.2024.
-//  Copyright (c) 2022 by imito AG, Zurich, Switzerland
 //
 
 import UIKit
@@ -36,7 +35,7 @@ class WoundGeniusWrapper: NSObject {
     }()
         
     override init() {
-        WG.activate(licenseKey: "YOUR LICENSE KEY HERE HERE FOR YOUR BUNDLE ID")
+        WG.activate(licenseKey: "eyJzaWciOiJRc0FQMVJoSUNIUWEwWTRLc3R0NmhRT3Z1dFlFSVwvYTlqUHJnM01xcGVEcFFtY1ZHNnh0K0o0TklRTnBHbFNXY2xINnQ1S0JBbXdSeUFEemwxK1lWd0dsVmZhRHR5VVdtUEN5KzNpWjdXdlVnbTE4eFNHTXV4YWFwM0dSaHNteWE3MzJpQ053V3dhakRNbmQwd001VUhrek9jRTJobXNEbDdTdHk5MFNnTDJON1BkNHMxcURsM0diS3BHdXFSSnFJNk1EZzQ3Z0h1ME1BN1BHVmRtelZ4NjZxcm1YRUx4R2l5UVhrdEtaSE01eHFTMVZud3JUMno3ZDFuVnprTitzdGduZ3Y0UzFnU3dkNUI3MFJKTlRvM2ltVW1qcFpkWEY3c3h1ZzAwT211U1VFR3BnWE5qb2pMVlIrVEIxWCtoXC9FZlZOMGxJK0F2SHdYd0djMlZGK3JxczZIa3E4a1ZydENFaEt5RWZSUkxLcWRBS0FibytvQWlYQjQ3ZlNhMWszeTB0RzdxOU1HWEljSXlUUEJjaUpiV0JncDRzbUp3UndWXC9qN3RsWGNtRzNqb1ZMaVd1Vzg0OUtGNml5NUo0Y2hHMHBWWUJBU3dGVXFJVXpyVk0yWGpWc0RuQ0VKQVRpT3g1SUZ5OVdQT1U5OWduSjBqdnc2dEFUdVRaZXZoTm5CWTQ4UzRmYjZyWkNoeUI3XC9YTDFUemV4Vks0bUlmVCtMSVorZjlkTkpXeXYxaFJRanA0MW1lUkpjNDhyUjcweEhGSW91YlAxaUdmWml1TkdadUZEdnd5Z2cxVzRMbm1ZbkZHeUZUK0FKTjZVNTd4RGl5UkJ4MkpRWkxXQkhxYUVkNnFxWE56ZG9lTHlXKzUwRUNWZ1U1cWMwNEtNWVFkNnhWcUJHRlVDYm9helE9IiwiYWxnIjoiMSIsImVuYyI6ImV5SmtZWFJoSWpwN2ZTd2lhVzVqYkhWa1pXUWlPbHQ3SW1sa0lqb2lhVzh1YVcxcGRHOHVkMjkxYm1SblpXNXBkWE11YzJGdGNHeGxJaXdpZEhsd1pTSTZJbUZ3Y0d4cFkyRjBhVzl1U1dRaWZTeDdJbWxrSWpvaWNHaHZkRzlEWVhCMGRYSnBibWNpTENKMGVYQmxJam9pWm1WaGRIVnlaVWxrSW4wc2V5SjBlWEJsSWpvaVptVmhkSFZ5WlVsa0lpd2lhV1FpT2lKMmFXUmxiME5oY0hSMWNtbHVaeUo5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pY25Wc1pYSk5aV0Z6ZFhKbGJXVnVkRU5oY0hSMWNtbHVaeUo5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pYldGeWEyVnlUV1ZoYzNWeVpXMWxiblJEWVhCMGRYSnBibWNpZlN4N0ltbGtJam9pWm5KdmJuUmhiRU5oYldWeVlTSXNJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlmU3g3SW5SNWNHVWlPaUptWldGMGRYSmxTV1FpTENKcFpDSTZJbTExYkhScGNHeGxWMjkxYm1SelVHVnlTVzFoWjJVaWZTeDdJbWxrSWpvaWQyOTFibVJFWlhSbFkzUnBiMjRpTENKMGVYQmxJam9pWm1WaGRIVnlaVWxrSW4wc2V5SnBaQ0k2SW14cGRtVlhiM1Z1WkVSbGRHVmpkR2x2YmlJc0luUjVjR1VpT2lKbVpXRjBkWEpsU1dRaWZTeDdJbWxrSWpvaVltOWtlVkJoY25SUWFXTnJaWElpTENKMGVYQmxJam9pWm1WaGRIVnlaVWxrSW4wc2V5SnBaQ0k2SW14dlkyRnNVM1J2Y21GblpVbHRZV2RsY3lJc0luUjVjR1VpT2lKbVpXRjBkWEpsU1dRaWZTeDdJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlMQ0pwWkNJNklteHZZMkZzVTNSdmNtRm5aVlpwWkdWdmN5SjlYU3dpYldWMFlTSTZleUpwYzNOMVpXUWlPaUl5TURJMExUQTNMVEkxSURFeE9qTTVPakkzSWl3aVpYaHdhWEo1SWpvaU1qQXlOQzB3T0Mwek1TQXhNVG96T1Rvd01DSjlmUT09In0=") // The license for a month.
         
         UINavigationBar.appearance().tintColor = WGConstants.Color.red // This should be configured in AppDelegate by your app.
     }
@@ -73,6 +72,7 @@ class WoundGeniusWrapper: NSObject {
                           drawFullAreaLabel: false,
                           drawWidthLength: false,
                           drawDiameter: true,
+                          config: MyWoundGeniusLokalizable(),
                           displayedIndexes: nil)
             } else {
                 return measurementCaptureResult.image.outlineAndDrawWidthLength(result: measurementCaptureResult)
@@ -121,6 +121,9 @@ class WoundGeniusWrapper: NSObject {
                                                        isDepthOrHeightInputEnabled: false,
                                                        title: "",
                                                        subtitle: "",
+                                                       config: MyWoundGeniusPresenter(completion: { _ in
+                
+            }),
                                                        willDisappear: nil)
             over.navigationController?.pushViewController(details, animated: true)
         } else if let imageCaptureResult = series.captureResults[row] as? ImageCaptureResult {
@@ -132,6 +135,9 @@ class WoundGeniusWrapper: NSObject {
                                                        isDepthOrHeightInputEnabled: false,
                                                        title: "",
                                                        subtitle: "",
+                                                       config: MyWoundGeniusPresenter(completion: { _ in
+                
+            }),
                                                        willDisappear: nil)
             over.navigationController?.pushViewController(details, animated: true)
         } else if let measurement = series.captureResults[row] as? MeasurementResult {
@@ -159,6 +165,9 @@ class WoundGeniusWrapper: NSObject {
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
                                                            isDepthOrHeightInputEnabled: false,
+                                                           config: MyWoundGeniusPresenter(completion: { _ in
+                    
+                }),
                                                            title: "",
                                                            subtitle: "")
                 over.navigationController?.pushViewController(summary, animated: true)
@@ -171,6 +180,9 @@ class WoundGeniusWrapper: NSObject {
                                                            isDepthOrHeightInputEnabled: false,
                                                            title: "",
                                                            subtitle: "",
+                                                           config: MyWoundGeniusPresenter(completion: { _ in
+                    
+                }),
                                                            willDisappear: nil)
                 over.navigationController?.pushViewController(details, animated: true)
             }

@@ -14,62 +14,70 @@ import TensorFlowLiteTaskVision
 class WoundGeniusTFLiteExtension: NSObject, TFLiteExtensionProtocol {
     static let shared = WoundGeniusTFLiteExtension()
     
+    private let segmentationQueue = DispatchQueue(label: "WoundGeniusTFLiteExtension", qos: .userInitiated)
+        
+    private var segmenters = [SegmenterType: ImageSegmenter]()
+        
     private override init() {}
     
-    private var segmenters = [SegmenterType: ImageSegmenter]()
-    
-    func setupSegmenter(path: String, type: SegmenterType, completion: (Bool)->()) {
+    /** Optionally you can release memory used for Segmenters. */
+    public func cleanup() {
+        self.segmenters = [SegmenterType: ImageSegmenter]()
+    }
+        
+    func setupSegmenter(path: String, type: SegmenterType) -> Bool {
         guard segmenters[type] == nil else {
-            completion(true)
-            return
+            return true
         }
         
         let options = ImageSegmenterOptions(modelPath: path)
         do {
             let segmenter = try ImageSegmenter.segmenter(options: options)
             segmenters[type] = segmenter
-            completion(true)
+            return true
         } catch {
-            completion(false)
+            return false
         }
     }
     
     func runSegmentation(type: WoundGenius.SegmenterType,
                          image: UIImage,
                          completion: @escaping ((Result<WoundGenius.ImageSegmentationResult, WoundGenius.SegmentationError>) -> Void)) {
-        guard let segmenter = self.segmenters[type] else {
-            completion(.failure(.segmenterNotInitialized))
-            return
-        }
-        
-        let segmentationResult: SegmentationResult
-        var inferenceTime: TimeInterval = 0
-        do {
-            let startTime = Date()
-            guard let mlImage = MLImage(image: image) else {
-                completion(.failure(SegmentationError.invalidImage))
+        self.segmentationQueue.async {
+            guard let segmenter = self.segmenters[type] else {
+                completion(.failure(.segmenterNotInitialized))
                 return
             }
-            segmentationResult = try segmenter.segment(mlImage: mlImage)
-            inferenceTime = Date().timeIntervalSince(startTime)
-        } catch {
-            completion(.failure(SegmentationError.internalError(error)))
-            return
+            
+            let segmentationResult: SegmentationResult
+            var inferenceTime: TimeInterval = 0
+            do {
+                let startTime = Date()
+                guard let mlImage = MLImage(image: image) else {
+                    completion(.failure(SegmentationError.invalidImage))
+                    return
+                }
+                segmentationResult = try segmenter.segment(mlImage: mlImage)
+                inferenceTime = Date().timeIntervalSince(startTime)
+            } catch {
+                completion(.failure(SegmentationError.internalError(error)))
+                return
+            }
+            let startTime = Date()
+            
+            guard let (resultImage, colorLegend) = self.parseOutput(segmentationResult: segmentationResult) else {
+                completion(.failure(SegmentationError.postProcessingError))
+                return
+            }
+            let postprocessingTime = Date().timeIntervalSince(startTime)
+            let result = ImageSegmentationResult(
+                resultImage: resultImage,
+                colorLegend: colorLegend,
+                inferenceTime: inferenceTime,
+                postProcessingTime: postprocessingTime
+            )
+            completion(.success(result))
         }
-        let startTime = Date()
-        
-        guard let (resultImage, colorLegend) = self.parseOutput(segmentationResult: segmentationResult) else {
-            completion(.failure(SegmentationError.postProcessingError))
-            return
-        }
-        let postprocessingTime = Date().timeIntervalSince(startTime)
-        let result = ImageSegmentationResult(
-            resultImage: resultImage,
-            colorLegend: colorLegend,
-            inferenceTime: inferenceTime,
-            postProcessingTime: postprocessingTime
-        )
-        completion(.success(result))
     }
     
     private func parseOutput(segmentationResult: SegmentationResult) -> (UIImage, [String: UIColor])? {

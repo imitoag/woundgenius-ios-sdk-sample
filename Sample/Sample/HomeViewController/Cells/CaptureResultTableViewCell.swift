@@ -11,6 +11,8 @@ import UIKit
 class CaptureResultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = .imiCellBackground()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
