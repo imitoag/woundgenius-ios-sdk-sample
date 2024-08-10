@@ -43,7 +43,8 @@ To launch the SampleRN App, perform the following actions:
 9. Navigate out of ios folder in terminal, to the SampleRN folder. Run the ```npx react-native start``` command in terminal. This should start the dev server usually on port 8081.
 10. Switch back to Xcode. Run the iOS app from ```ios``` folder on your device.
 11. Allow access to local Network. Click "Start Capturing". Allow access to Camera.
-12. Capture a photo or marker/ruler measurement. The results will be displayed as a JSON in React Native Text View, process them according to your needs in your React Native app.
-
+<img src="README/rn_local_network.PNG" width="200">  <img src="README/rn_camera.PNG" width="200"> 
+12. Capture a photo or marker/ruler measurement. The resulting image and the photo/measuremnet metadata will be displayed as a JSON in React Native Text View, process them according to your needs in your React Native app.
+<img src="README/rn_result.PNG" width="200">
 
 
