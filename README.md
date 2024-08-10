@@ -23,7 +23,7 @@ To launch the Sample App, perform the following actions:
 
 # WoundGenius SDK Objective-C Sample App
 
-This repository contains the Objective-C Sample App (SampleObjc folder). The Initial Setup process is equivalent to the Inital Setup process of the Swift Sample App.
+This repository contains the Objective-C Sample App (SampleObjc folder). The Initial Setup process is similar to the Inital Setup process of the Swift Sample App.
 
 # WoundGenius SDK React Native Sample App
 
@@ -43,8 +43,11 @@ To launch the SampleRN App, perform the following actions:
 9. Navigate out of ios folder in terminal, to the SampleRN folder. Run the ```npx react-native start``` command in terminal. This should start the dev server usually on port 8081.
 10. Switch back to Xcode. Run the iOS app from ```ios``` folder on your device.
 11. Allow access to local Network. Click "Start Capturing". Allow access to Camera.
+
 <img src="README/rn_local_network.PNG" width="200">  <img src="README/rn_camera.PNG" width="200"> 
-12. Capture a photo or marker/ruler measurement. The resulting image and the photo/measuremnet metadata will be displayed as a JSON in React Native Text View, process them according to your needs in your React Native app.
+
+13. Capture a photo or marker/ruler measurement. The resulting image and the photo/measuremnet metadata will be displayed as a JSON in React Native Text View, process them according to your needs in your React Native app.
+
 <img src="README/rn_result.PNG" width="200">
 
 
