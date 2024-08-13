@@ -38,7 +38,7 @@ To launch the SampleRN App, perform the following actions:
 4. In terminal navigate to the ios folder. And call ```pod install```. This should create the Pods folder, SampleRN.xcworkspace file.
 5. Open the ```SampleRN.xcworkspace``` from the ios folder using Xcode.
 6. Pull the WoundGenius SDK to your machine. Follow the **"Import WoundGenius SDK as a Swift Package"** Section, integrate the WoundGenius SDK into the Sample app. https://github.com/imitoag/woundgenius-ios-sdk/ (Make sure the branch/version matches the Sample App version; Make sure that Package is imported to the single Active Xcode project.).
-7. While requesting the license, you provided the Bundle Identifiers to be whitelisted. Change the Sample application Bundle Identifier to one of your whitelisted Bundle Identifiers. Also, pick your Apple Development Team in order to be able to launch the Sample application on a real device.
+7. When requesting the license for WoundGenius SDK and the Sample App, you provided your Bundle Identifiers for whitelisting. Change the Sample application Bundle Identifier to one of your whitelisted Bundle Identifiers. Also, pick your Apple Development Team in order to be able to launch the Sample application on a real device.
 8. Update the license key in Xcode in the ```SampleRN -> WoundGeniusBridge -> WoundGeniusPresenter.swift``` file.
 9. Navigate out of ios folder in terminal, to the SampleRN folder. Run the ```npx react-native start``` command in terminal. This should start the dev server usually on port 8081.
 10. Switch back to Xcode. Run the iOS app from ```ios``` folder on your device.
