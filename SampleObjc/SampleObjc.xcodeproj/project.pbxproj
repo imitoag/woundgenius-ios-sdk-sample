@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FC4D10CF08E12EBC76B094 /* Pods_SampleObjc.framework */; };
+		1811B98C2DB051A100512A46 /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1811B98B2DB051A100512A46 /* WoundGeniusSDK */; };
 		1889B9092BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9082BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift */; };
 		1889B90E2BA1731400B584CE /* MyWoundGeniusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B90D2BA1731400B584CE /* MyWoundGeniusPresenter.swift */; };
 		1889B9112BA1754500B584CE /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9102BA1754500B584CE /* L.swift */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1811B98C2DB051A100512A46 /* WoundGeniusSDK in Frameworks */,
 				0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +179,6 @@
 				18CBB4D72B9EF665009765E3 /* Frameworks */,
 				18CBB4D82B9EF665009765E3 /* Resources */,
 				18CBB4FE2B9EF6D7009765E3 /* Embed Frameworks */,
-				F346FAD567A4CF55A3126428 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +213,9 @@
 				Base,
 			);
 			mainGroup = 18CBB4D12B9EF665009765E3;
+			packageReferences = (
+				1811B98A2DB051A100512A46 /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */,
+			);
 			productRefGroup = 18CBB4DB2B9EF665009765E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -256,23 +260,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F346FAD567A4CF55A3126428 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -525,6 +512,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1811B98A2DB051A100512A46 /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../woundgenius-ios-sdk";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1811B98B2DB051A100512A46 /* WoundGeniusSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WoundGeniusSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CBB4D22B9EF665009765E3 /* Project object */;
 }
