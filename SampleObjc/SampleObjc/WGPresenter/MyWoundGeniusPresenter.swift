@@ -11,6 +11,10 @@ import AVFoundation
 import WoundGenius
 
 class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
+    func lokalize(_ key: String) -> String {
+        return L.str(key)
+    }
+    
     func lokalize(_ key: WGLokalizableKey) -> String {
         switch key {
         case .captureScreenTitle:
@@ -40,6 +44,10 @@ class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
 }
 
 class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
+    var isEmergencyModeEnabled: Bool = false
+    
+    var showMarkerMeasurementTutorialAutomatically: Bool = false
+    
     var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
     
     var userId: String?
@@ -166,6 +174,10 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
         default:
             return L.str(key.rawValue)
         }
+    }
+    
+    func lokalize(_ key: String) -> String {
+        L.str(key)
     }
     
     func handle(event: WoundGenius.WGEvent) {
