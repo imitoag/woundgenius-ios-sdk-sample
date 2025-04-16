@@ -12,6 +12,10 @@ import AVFoundation
 import WoundGenius
 
 class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
+    func lokalize(_ key: String) -> String {
+        return L.str(key)
+    }
+    
     func lokalize(_ key: WGLokalizableKey) -> String {
         switch key {
         case .captureScreenTitle:
@@ -41,10 +45,12 @@ class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
 }
 
 class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
-    
+
+    var isEmergencyModeEnabled: Bool = false
+
     var userId: String? = "user5"
 
-    var showTutorialOnViewDidAppear: Bool = false
+    var showMarkerMeasurementTutorialAutomatically: Bool = true
     
     var backNavigationBarButtonTitle: String?
     
@@ -65,6 +71,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         if UserDefaults.standard.bool(forKey: SettingKey.rulerModeEnabled.rawValue) {
             modes.append(.rulerMeasurement)
         }
+        
         return modes
     }
     
@@ -104,18 +111,19 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             icon(nil)
             return
         }
-        if let measurement = lastMedia as? MeasurementResult {
-            icon(measurement.image)
-        } else if let video = lastMedia as? VideoCaptureResult {
+        switch lastMedia {
+        case .video(let video):
             icon(video.preview)
-        } else if let photo = lastMedia as? PhotoCaptureResult {
-            icon(photo.preview)
-        } else if let image = lastMedia as? ImageCaptureResult {
+        case .image(let image):
             icon(image.image)
+        case .photo(let photo):
+            icon(photo.preview)
+        case .measurement(let measurement):
+            icon(measurement.image)
         }
     }
     
-    private var bodyPartPickerResult: BodyPartPickerResult?
+    private var selectedBodyParts: [String]?
     
     var autoDetectionMode: AutoDetectionMode {
         if UserDefaults.standard.bool(forKey: SettingKey.tissueTypesDetection.rawValue) && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue) {
@@ -165,8 +173,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                                                   previewOrientation: previewOrientation,
                                                   videoOrientation: videoOrientation)
         
-        self.markerDetector.detectionStatus = { [weak self] status in
-            guard let self = self  else { return }
+        self.markerDetector.detectionStatus = { status in
             DispatchQueue.main.async {
                 switch status {
                 case .detected(let pointsInPrecentage, let frameSize):
@@ -189,17 +196,17 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             break
         case .capturedVideo(_, let videoCaptureResult),
                 .pickedVideo(_, let videoCaptureResult):
-            capturedItemsToReturn.append(videoCaptureResult)
+            capturedItemsToReturn.append(.video(videoCaptureResult))
             if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
                 self.completion?(self.capturedItemsToReturn)
-                self.capturedItemsToReturn = [Any]()
+                self.capturedItemsToReturn = [CaptureResult]()
             }
         case .capturedPhoto(let vc, let photoResult):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
-            capturedItemsToReturn.append(photoResult)
+            capturedItemsToReturn.append(.photo(photoResult))
             if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
                 self.completion?(self.capturedItemsToReturn)
-                self.capturedItemsToReturn = [Any]()
+                self.capturedItemsToReturn = [CaptureResult]()
             }
         case .capturedMarkerMeasurement(let vc, let result):
             self.showOutlining(captureVC: vc, captureResult: result)
@@ -208,6 +215,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         case .cancelButtonTapped(vc: let vc):
             if self.capturedItemsToReturn.count > 0 {
                 UIUtils.showConfirmationAlert(title: L.str("CONFIRM_CANCEL_CAPTURING"), message: nil, confirmButton: L.str("CONFIRM"), cancelButton: L.str("DISMISS_BUTTON")) {
+                    self.capturedItemsToReturn = [CaptureResult]()
                     vc.dismiss(animated: true)
                 }
             } else {
@@ -217,7 +225,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             print("case .rightBarButtonTapped")
             self.completion?(self.capturedItemsToReturn)
             vc.dismiss(animated: true) { [weak self] in
-                self?.capturedItemsToReturn = [Any]()
+                self?.capturedItemsToReturn = [CaptureResult]()
             }
         case .pickedPhoto(vc: let vc, result: let photoResult):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
@@ -242,10 +250,10 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                     }
                 }
             default:
-                self.capturedItemsToReturn.append(photoResult)
+                self.capturedItemsToReturn.append(.photo(photoResult))
                 if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
                     self.completion?(self.capturedItemsToReturn)
-                    self.capturedItemsToReturn = [Any]()
+                    self.capturedItemsToReturn = [CaptureResult]()
                 }
             }
         case .helpButtonClicked(over: let over, mode: let mode):
@@ -273,7 +281,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
+                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
                 } catch {
                     vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                 }
@@ -300,30 +308,20 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             let navVC = UINavigationController(rootViewController: vc)
             navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
             over.present(navVC, animated: true)
-        case .viewWillAppear(let vc):
-            if UserDefaults.standard.bool(forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue) {
-                guard let image = BodyPartsManager.shared.imageFor(id: "0", frontBack: BPPFrontBack.front, leftRight: BPPLeftRight.undefined) else { return }
-                vc.updateBodyPartPickerButton(image: image)
-            }
+        case .viewWillAppear:
+            break
         case .viewWillDisappear:
             break
         case .launchBodyPartPickerClicked(let over):
             guard UserDefaults.standard.bool(forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue) else { return }
             
-            self.router?.startBodyPartPicker(over: over,
-                                             preselect: self.bodyPartPickerResult,
-                                             language: BPPickerLanguage(rawValue: L.str("LANGUAGE_CODE")) ?? BPPickerLanguage.en,
-                                             completion: { [weak self] bodyPart in
-                guard let sSelf = self else { return }
-                guard let bodyPart = bodyPart, let _ = bodyPart.htGroupId, let _ = bodyPart.hashtag_en, let _ = bodyPart.hashtag_de, let _ = bodyPart.hashtag_fr else {
-                    sSelf.bodyPartPickerResult = nil
-                    return
-                }
-                sSelf.bodyPartPickerResult = bodyPart
-                guard let image = BodyPartsManager.shared.imageFor(id: bodyPart.id,
-                                                         frontBack: bodyPart.frontBack,
-                                                         leftRight: bodyPart.leftRight) else { return }
-                over.updateBodyPartPickerButton(image: image)
+            self.router?.startBodyPartPickerV2(over: over,
+                                               preselect: self.selectedBodyParts,
+                                               languageISO2Alpha: L.str("LANGUAGE_CODE"),
+                                               gender: nil,
+                                               language: BPPickerLanguage(rawValue: L.str("LANGUAGE_CODE")) ?? BPPickerLanguage.en,
+                                               completion: { [weak self] newSelectedBodyParts in
+                self?.selectedBodyParts = newSelectedBodyParts
             })
         case .woundAutoDetectionExecuted(let numberOfWoundOutlines):
             print("Log woundAutoDetectionExecuted for statistics. \(numberOfWoundOutlines) wound outines detected. No actions needed.")
@@ -331,6 +329,8 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             print("Log autoDetectButtonClicked event for statistics. No actions needed.")
         case .autoDetectResultsEdited:
             print("Log autoDetectResultsEdited event for statistics. No actions needed.")
+        case .devLogs(_):
+            break
         @unknown default:
 #if DEBUG
             assertionFailure()
@@ -409,18 +409,19 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     }
     
     // MARK: - Non-Protocol. Custom Methods
-    private var capturedItemsToReturn = [Any]()
-    private var completion: (([Any])->())!
+    private var capturedItemsToReturn = [CaptureResult]()
+    private var completion: (([CaptureResult])->())!
     internal weak var router: WGRouter?
     private let markerDetector = ZXWrapper()
     
-    init(completion: @escaping (([Any])->())) {
+    init(completion: @escaping (([CaptureResult])->())) {
         super.init()
         self.completion = completion
     }
 }
 
 extension MyWoundGeniusPresenter {
+    
     func showRulerMeasurementScaleDefinition(captureVC: IMCaptureViewController, captureResult: PhotoCaptureResult) {
         guard let image = captureResult.preview else { return }
         
@@ -512,11 +513,11 @@ extension MyWoundGeniusPresenter {
                 }
             }
             
-            self.capturedItemsToReturn.append(measureResult)
+            self.capturedItemsToReturn.append(.measurement(measureResult))
             
             if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
                 self.completion?(self.capturedItemsToReturn)
-                self.capturedItemsToReturn = [Any]()
+                self.capturedItemsToReturn = [CaptureResult]()
             }
         }, bottomViewCompletion: { _ in })
         
@@ -552,7 +553,7 @@ extension MyWoundGeniusPresenter {
                                                      config: self,
                                                      willPresentResults: {
                 
-            }, completion: { [weak self] measureResult in
+            }, completion: { [weak self] measurementResult in
                 guard let `self` = self else { return }
                 
                 /*
@@ -564,19 +565,13 @@ extension MyWoundGeniusPresenter {
                 }
                 
                 /* Now as we've generated the MeasurementResult (Which contains the UIImage - we can clean-up the file in Documents folder which is available in context of MeasurementCaptureResult */
-                if let pathURL = ImitoCameraFileManager.documentPathForExistingFile(captureResult.photoNameExt) {
-                    do {
-                        try FileManager.default.removeItem(atPath: pathURL.path)
-                    } catch {
-                        print("Failed to remove \(error)")
-                    }
-                }
+                captureResult.deleteRelatedFiles()
                 
-                self.capturedItemsToReturn.append(measureResult)
+                self.capturedItemsToReturn.append(.measurement(measurementResult))
                 
                 if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
                     self.completion?(self.capturedItemsToReturn)
-                    self.capturedItemsToReturn = [Any]()
+                    self.capturedItemsToReturn = [CaptureResult]()
                 }
             }, bottomViewCompletion: { _ in
                 
@@ -588,5 +583,4 @@ extension MyWoundGeniusPresenter {
             UIUtils.showOKAlert("Unsupported marker was detected", message: nil)
         }
     }
-    
 }

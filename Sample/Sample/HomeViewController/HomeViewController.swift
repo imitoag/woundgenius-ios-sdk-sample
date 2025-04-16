@@ -10,8 +10,19 @@ import UIKit
 import AVFoundation
 import AVKit
 import WoundGenius
+import FileBrowser
 
 class HomeViewController: UIViewController {
+    
+    private lazy var woundGeniusFlowPresenter: MyWoundGeniusPresenter = {
+        MyWoundGeniusPresenter(completion: { [weak self] captureResults in
+            guard let self = self else { return }
+            self.series.append(Series(captureResults: captureResults))
+            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
+            self.tableView.reloadData()
+            self.woundGeniusRouter?.stopCapturing()
+        })
+    }()
     
     // MARK: Properties
     
@@ -25,16 +36,13 @@ class HomeViewController: UIViewController {
     private let showBodyPartPicker = UIButton(frame: .zero)
     
     /** Core Module: A button to show Body Part Picker */
-    private let showUniversalBodyPartPicker = UIButton(frame: .zero)
+    private let showV1BodyPartPicker = UIButton(frame: .zero)
     
     /** Core Module: TableView is showing the captured results. And provides the showcase - how to show the measurement results with available viewers. */
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
     /** Core Module: Store the Series - set of Capture Results captured by WoundGenius. */
     private var series = [Series]()
-    
-    /** Body Part Picked, while picker is initiated by Core Module */
-    private var pickedBodyPart: BodyPartPickerResult?
     
     /** Universal Body Part Picker Results */
     private var pickedUBodyParts: [UBPPSection]?
@@ -104,32 +112,13 @@ class HomeViewController: UIViewController {
         showBodyPartPicker.layer.cornerRadius = 5
         showBodyPartPicker.layer.masksToBounds = true
         self.view.addSubview(showBodyPartPicker)
-
         
         NSLayoutConstraint.activate([
             showBodyPartPicker.topAnchor.constraint(equalTo: startCapturing.bottomAnchor, constant: 10),
             showBodyPartPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             showBodyPartPicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            showBodyPartPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
-        ])
-
-        
-        /* SHOW Universal PART PICKER */
-        showUniversalBodyPartPicker.translatesAutoresizingMaskIntoConstraints = false
-        showUniversalBodyPartPicker.addTarget(self, action: #selector(startUniversalBodyPartPicker), for: .touchUpInside)
-        showUniversalBodyPartPicker.backgroundColor = startCapturing.backgroundColor
-        showUniversalBodyPartPicker.setTitle("Universal Body Part Picker", for: .normal)
-        showUniversalBodyPartPicker.tintColor = UINavigationBar.appearance().tintColor
-        showUniversalBodyPartPicker.layer.cornerRadius = 5
-        showUniversalBodyPartPicker.layer.masksToBounds = true
-        self.view.addSubview(showUniversalBodyPartPicker)
-
-        NSLayoutConstraint.activate([
-            showUniversalBodyPartPicker.topAnchor.constraint(equalTo: showBodyPartPicker.bottomAnchor, constant: 10),
-            showUniversalBodyPartPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            showUniversalBodyPartPicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            showUniversalBodyPartPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            showUniversalBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         /* SETUP DEFAULT VALUES */
@@ -148,8 +137,6 @@ class HomeViewController: UIViewController {
         if self.woundGeniusRouter == nil {
             self.woundGeniusRouter = self.woundGeniusRouterInstance()
         }
-
-        self.showUniversalBodyPartPicker.isHidden = !WG.isAvailable(feature: .debugMode)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -179,29 +166,16 @@ extension HomeViewController {
             return
         }
         
-        self.woundGeniusRouter?.startBodyPartPicker(over: self,
-                                                    preselect: self.pickedBodyPart,
-                                                    language: BPPickerLanguage(rawValue: L.str("LANGUAGE_CODE")) ?? BPPickerLanguage.en) { [weak self] bodyPart in
-            DispatchQueue.main.async {
-                self?.pickedBodyPart = bodyPart
-                self?.showBodyPartPicker.setTitle("Pick Body Part (\(bodyPart?.hashtag_en ?? "-"))", for: .normal)
-            }
-        }
-    }
-    
-    @objc func startUniversalBodyPartPicker() {
-        if self.woundGeniusRouter == nil {
-            self.woundGeniusRouter = self.woundGeniusRouterInstance()
-        }
-        
-        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
-            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
-            return
-        }
-                
-        let bpPickerVC = UBPPickerViewController(preselect: self.pickedUBodyParts?.flatMap({ $0.items }).map({ $0.itemId }), completion: { [weak self] result in
+        let bpPickerVC = UBPPickerViewController(preselect: self.pickedUBodyParts?
+            .flatMap({ $0.items })
+            .map({ $0.itemId }),
+                                                 languageISO2Alpha: L.str("LANGUAGE_CODE"),
+                                                 gender: .female,
+                                                 localization: self.woundGeniusFlowPresenter, devLogs: { log in
+            print(log)
+        }) { [weak self] result in
             self?.pickedUBodyParts = result
-        })
+        }
         self.present(bpPickerVC, animated: true)
     }
     
@@ -233,13 +207,6 @@ extension HomeViewController {
             WG.activate(licenseKey: key)
         }
         
-        let woundGeniusFlowPresenter = MyWoundGeniusPresenter(completion: { [weak self] captureResults in
-            guard let self = self else { return }
-            self.series.append(Series(captureResults: captureResults))
-            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
-            self.tableView.reloadData()
-            self.woundGeniusRouter?.stopCapturing()
-        })
         let router = WGRouter(presenter: woundGeniusFlowPresenter)
         woundGeniusFlowPresenter.router = router
         
@@ -277,42 +244,43 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let captureResult = series[indexPath.section].captureResults[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CaptureResultTableViewCell.self), for: indexPath)
-        if let photoCaptureResult = captureResult as? PhotoCaptureResult {
+        switch captureResult {
+        case .video(let video):
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
-                config.image = photoCaptureResult.preview
-                config.text = "Photo"
+                config.image = video.preview
+                config.text = "Video"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
             }
-        } else if let imageCaptureResult = captureResult as? ImageCaptureResult {
+        case .image(let image):
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
-                config.image = imageCaptureResult.image
+                config.image = image.image
                 config.text = "Mask"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
             }
-        } else if let measurementCaptureResult = captureResult as? MeasurementResult {
+        case .photo(let photo):
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
-                if measurementCaptureResult.outlines.contains(where: { $0.cluster == .stoma }) {
-                    config.image = measurementCaptureResult.image.draw(outlines: measurementCaptureResult.outlines, drawFullAreaLabel: false, drawWidthLength: false, drawDiameter: true, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
-                } else {
-                    config.image = measurementCaptureResult.image.outlineAndDrawWidthLength(result: measurementCaptureResult)
-                }
-                config.text = "Measurement"
+                config.image = photo.preview
+                config.text = "Photo"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
             }
-        } else if let videoCaptureResult = captureResult as? VideoCaptureResult {
+        case .measurement(let measurement):
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
-                config.image = videoCaptureResult.preview
-                config.text = "Video"
+                if measurement.outlines.contains(where: { $0.cluster == .stoma }) {
+                    config.image = measurement.image.draw(outlines: measurement.outlines, drawFullAreaLabel: false, drawWidthLength: false, drawDiameter: true, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
+                } else {
+                    config.image = measurement.image.outlineAndDrawWidthLength(result: measurement)
+                }
+                config.text = "Measurement"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
@@ -333,9 +301,18 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         let series = series[indexPath.section]
         
-        if let photoCaptureResult = series.captureResults[indexPath.row] as? PhotoCaptureResult {
+        switch series.captureResults[indexPath.row] {
+        case .video(let video):
+            guard let url = ImitoCameraFileManager.documentPathForExistingFile(video.videoNameExt) else { return }
+            let player = AVPlayer(url: url)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player?.play()
+            }
+        case .image(let image):
             let details = MeasurementDetailsController(style: tableViewStyle,
-                                                       image: photoCaptureResult.preview,
+                                                       image: image.image,
                                                        mediaManager: ImitoMeasureMediaManager(),
                                                        isRightButtonShown: false,
                                                        outlines: nil,
@@ -345,9 +322,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                        config: MyWoundGeniusPresenter(completion: {_ in }),
                                                        willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
-        } else if let imageCaptureResult = series.captureResults[indexPath.row] as? ImageCaptureResult {
+        case .photo(let photo):
             let details = MeasurementDetailsController(style: tableViewStyle,
-                                                       image: imageCaptureResult.image,
+                                                       image: photo.preview,
                                                        mediaManager: ImitoMeasureMediaManager(),
                                                        isRightButtonShown: false,
                                                        outlines: nil,
@@ -357,7 +334,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                        config: MyWoundGeniusPresenter(completion: {_ in }),
                                                        willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
-        } else if let measurement = series.captureResults[indexPath.row] as? MeasurementResult {
+        case .measurement(let measurement):
             let outlines = measurement.outlines.map {
                 MeasuredOutline(points: $0.points,
                                 areaInCM: $0.areaInCM,
@@ -390,6 +367,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                            mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
+                                                           mlOutlines: nil,
                                                            isDepthOrHeightInputEnabled: false,
                                                            config: MyWoundGeniusPresenter(completion: {_ in }),
                                                            title: "",
@@ -408,14 +386,18 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                            willDisappear: nil)
                 self.navigationController?.pushViewController(details, animated: true)
             }
-        } else if let video = series.captureResults[indexPath.row] as? VideoCaptureResult {
-            guard let url = ImitoCameraFileManager.documentPathForExistingFile(video.videoNameExt) else { return }
-            let player = AVPlayer(url: url)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            self.present(playerViewController, animated: true) {
-                playerViewController.player?.play()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.series[indexPath.section].captureResults[indexPath.row].value.deleteRelatedFiles()
+            self.series[indexPath.section].captureResults.remove(at: indexPath.row)
+            if series[indexPath.section].captureResults.count == 0 {
+                self.series.remove(at: indexPath.section)
             }
+            self.tableView.reloadData()
+            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
         }
     }
 }
@@ -451,6 +433,16 @@ extension HomeViewController {
             return // If there is iOS specific What's new defined. "WHATS_NEW_\(appVersion)_iOS_HTML" - try to show it, if not shown before.
         } else if present(key: universalKey, userId: config.userId) {
             return // If there is the value in localisation for "WHATS_NEW_\(appVersion)_HTML" - try to show it, if not shown before.
+        }
+    }
+}
+
+extension HomeViewController {
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            let fileBrowser = FileBrowser()
+            self.present(fileBrowser, animated: true, completion: nil)
         }
     }
 }

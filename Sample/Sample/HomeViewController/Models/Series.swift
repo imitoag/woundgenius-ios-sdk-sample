@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import WoundGenius
 
 class Series: NSObject {
     /** Date of Creation */
     var timestamp = Date().timeIntervalSince1970
     
     /** Store the results of capturing */
-    var captureResults: [Any]
+    var captureResults: [CaptureResult]
         
-    init(captureResults: [Any]) {
+    init(captureResults: [CaptureResult]) {
         self.captureResults = captureResults
         super.init()
     }

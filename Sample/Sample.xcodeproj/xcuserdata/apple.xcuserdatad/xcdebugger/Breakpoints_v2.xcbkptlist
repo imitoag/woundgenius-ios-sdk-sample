@@ -18,53 +18,6 @@
             endingLineNumber = "1049"
             landmarkName = "calculateClearBtnCenterAndShow()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A50553A4-71F3-417B-963E-B069634589A4 - dd8d8f6ab3ff4a2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.calculateClearBtnCenterAndShow() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1049"
-                  endingLineNumber = "1049"
-                  offsetFromSymbolStart = "5200">
-               </Location>
-               <Location
-                  uuid = "A50553A4-71F3-417B-963E-B069634589A4 - dd8d8f6ab3ff4a2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.calculateClearBtnCenterAndShow() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1049"
-                  endingLineNumber = "1049"
-                  offsetFromSymbolStart = "5112">
-               </Location>
-               <Location
-                  uuid = "A50553A4-71F3-417B-963E-B069634589A4 - 927a74b2ea2a59ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.updateBezierPath(outline: WoundGenius.OutlineViewsAndState) -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1049"
-                  endingLineNumber = "1049"
-                  offsetFromSymbolStart = "872">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -81,53 +34,6 @@
             endingLineNumber = "1129"
             landmarkName = "hideControls()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2233DF65-0FF4-4169-9D45-AE03FF16B9BA - 93c50c3b46157dac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.hideControls() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1129"
-                  endingLineNumber = "1129"
-                  offsetFromSymbolStart = "496">
-               </Location>
-               <Location
-                  uuid = "2233DF65-0FF4-4169-9D45-AE03FF16B9BA - 93c50c3b46157dac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.hideControls() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1129"
-                  endingLineNumber = "1129"
-                  offsetFromSymbolStart = "408">
-               </Location>
-               <Location
-                  uuid = "2233DF65-0FF4-4169-9D45-AE03FF16B9BA - f75bf5e015e472a6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.scrollViewDidZoom(__C.UIScrollView) -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1129"
-                  endingLineNumber = "1129"
-                  offsetFromSymbolStart = "476">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -144,53 +50,6 @@
             endingLineNumber = "1138"
             landmarkName = "showControls()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0F04404A-2EFB-4985-971E-A1551E297857 - 4d19516db2e5f4fc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.showControls() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1138"
-                  endingLineNumber = "1138"
-                  offsetFromSymbolStart = "496">
-               </Location>
-               <Location
-                  uuid = "0F04404A-2EFB-4985-971E-A1551E297857 - 4d19516db2e5f4fc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.showControls() -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1138"
-                  endingLineNumber = "1138"
-                  offsetFromSymbolStart = "408">
-               </Location>
-               <Location
-                  uuid = "0F04404A-2EFB-4985-971E-A1551E297857 - f75bf5e015e47d8f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlinerView.scrollViewDidZoom(__C.UIScrollView) -&gt; ()"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/OutlinerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1138"
-                  endingLineNumber = "1138"
-                  offsetFromSymbolStart = "1252">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -207,38 +66,6 @@
             endingLineNumber = "45"
             landmarkName = "state"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "D0CF2B08-E6F0-436D-900F-C14B4DB71604 - e30ce61c09953a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlineViewsAndState.state.didset : WoundGenius.IMOutlineUIState"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/ViewModels/OutlineViewsAndState.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "584">
-               </Location>
-               <Location
-                  uuid = "D0CF2B08-E6F0-436D-900F-C14B4DB71604 - e30ce61c09953a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.OutlineViewsAndState.state.didset : WoundGenius.IMOutlineUIState"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Views/ViewModels/OutlineViewsAndState.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "2656">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -255,113 +82,6 @@
             endingLineNumber = "58"
             landmarkName = "pointsOutlined"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4ca5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4fda"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4fda"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "1192">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4ffb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4f18"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4f18"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "1156">
-               </Location>
-               <Location
-                  uuid = "6164B430-6326-4372-9745-802F17B6DA23 - f810a6fbe72a4f39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WoundGenius.ImitoMeasureMediaManager.pointsOutlined.didset : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
-                  moduleName = "WoundGenius"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/projects/woundgenius_ios/WoundGenius/WoundGenius/ImitoMeasureFramework/Classes/Utils/ImitoMeasureMediaManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "600">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
