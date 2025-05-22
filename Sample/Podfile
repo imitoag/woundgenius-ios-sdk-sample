@@ -4,19 +4,30 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '12.1'
 
 def woundgenius
-	# Internally @ imito distributed as a Pod. For external users - use xcframework/SPM.
-  # pod 'WoundGenius', '0.0.9'
-  # pod 'WoundGenius', :path => '..'
+#  pod 'WoundGenius', :path => '..'
 end
 
+def devPods
+  pod 'FileBrowser'
+end
 
 target 'Sample' do
   use_frameworks!
   woundgenius
-  pod 'TensorFlowLiteTaskVision', '0.4.1' # Latest versions don't support iOS 12. To support iOS 12 - 0.4.1 version should be used. 0.4.2, 0.4.3 are launchable on iOS 13+.
+  devPods
+  pod 'TensorFlowLiteTaskVision', '0.4.1' # Latest versions doesn't support iOS 12. To support iOS 12 - 0.4.1 version should be used. 0.4.2, 0.4.3 are launchable on iOS 13+.
 end
 
 target 'SampleSimulator' do
   use_frameworks!
   woundgenius
+  devPods
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.1'
+    end
+  end
 end

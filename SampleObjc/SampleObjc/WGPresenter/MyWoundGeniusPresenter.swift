@@ -11,6 +11,10 @@ import AVFoundation
 import WoundGenius
 
 class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
+    func lokalize(_ key: String) -> String {
+        return L.str(key)
+    }
+    
     func lokalize(_ key: WGLokalizableKey) -> String {
         switch key {
         case .captureScreenTitle:
@@ -40,6 +44,10 @@ class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
 }
 
 class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
+    var isEmergencyModeEnabled: Bool = false
+    
+    var showMarkerMeasurementTutorialAutomatically: Bool = false
+    
     var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
     
     var userId: String?
@@ -168,6 +176,10 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
         }
     }
     
+    func lokalize(_ key: String) -> String {
+        L.str(key)
+    }
+    
     func handle(event: WoundGenius.WGEvent) {
         switch event {
         case .woundAutoDetectionExecuted(let int):
@@ -242,7 +254,7 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             break
         case .capturedHandyscopePhoto(let vc, let result, let widthOfScreen, let percentageOfScreen1mm):
             break
-        case .helpButtonClicked(let over, let mode):
+        case .helpButtonClicked(let over, let mode, let sourceView, let isTopViewTapped):
             var vc = UIViewController()
             switch mode {
             case .markerMeasurement:
@@ -344,8 +356,8 @@ extension MyWoundGeniusPresenter {
         
         imNavController = IMNavigationController(image: image,
                                                  mediaManager: ImitoMeasureMediaManager(),
-                                                 sideSize: sideSize,
                                                  resultScreenBottomView: nil,
+                                                 sideSize: sideSize,
                                                  linePoints: linePoints,
                                                  navConfig: config,
                                                  config: self,
