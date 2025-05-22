@@ -36,6 +36,7 @@ class WoundGeniusTFLiteExtension: NSObject, TFLiteExtensionProtocol {
             segmenters[type] = segmenter
             return true
         } catch {
+            print("func setupSegmenter(path: String, type: SegmenterType) -> Bool: \(error)")
             return false
         }
     }

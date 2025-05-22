@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FC4D10CF08E12EBC76B094 /* Pods_SampleObjc.framework */; };
+		18142A792DDF5C3700492DCB /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18142A782DDF5C3700492DCB /* WoundGeniusSDK */; };
 		1889B9092BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9082BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift */; };
 		1889B90E2BA1731400B584CE /* MyWoundGeniusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B90D2BA1731400B584CE /* MyWoundGeniusPresenter.swift */; };
 		1889B9112BA1754500B584CE /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9102BA1754500B584CE /* L.swift */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18142A792DDF5C3700492DCB /* WoundGeniusSDK in Frameworks */,
 				0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +213,8 @@
 				Base,
 			);
 			mainGroup = 18CBB4D12B9EF665009765E3;
+			packageReferences = (
+			);
 			productRefGroup = 18CBB4DB2B9EF665009765E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -424,6 +428,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TNNH6FD49C;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SampleObjc/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "for capturing photos and to calibrate them with a calibration marker";
@@ -459,6 +464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TNNH6FD49C;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SampleObjc/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "for capturing photos and to calibrate them with a calibration marker";
@@ -505,6 +511,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18142A782DDF5C3700492DCB /* WoundGeniusSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WoundGeniusSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CBB4D22B9EF665009765E3 /* Project object */;
 }

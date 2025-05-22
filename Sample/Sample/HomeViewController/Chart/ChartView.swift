@@ -9,6 +9,7 @@ import UIKit
 import WoundGenius
 
 class ChartView: UIView {
+    
     private lazy var chartView: LineChartView = {
         let chartView = LineChartView()
         chartView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +40,12 @@ class ChartView: UIView {
         /* We are going to display in the chart only the series, which have single measurement. To show single point at a time. */
         let seriesWithSingleMeasurement = series.filter {
             return $0.captureResults.compactMap {
-                return $0 as? MeasurementResult
+                switch $0 {
+                case .measurement(let measurement):
+                    return measurement
+                default:
+                    return nil
+                }
             }.count == 1
         }
         
@@ -53,7 +59,12 @@ class ChartView: UIView {
         let values = (0..<seriesWithSingleMeasurement.count).map { (index) -> ChartDataEntry in
             let series = seriesWithSingleMeasurement[index]
             let measurement = series.captureResults.compactMap {
-                $0 as? MeasurementResult
+                switch $0 {
+                case .measurement(let measurement):
+                    return measurement
+                default:
+                    return nil
+                }
             }.first!
             
             return ChartDataEntry(x: series.timestamp, y: Double(Int(measurement.outlines.compactMap({
