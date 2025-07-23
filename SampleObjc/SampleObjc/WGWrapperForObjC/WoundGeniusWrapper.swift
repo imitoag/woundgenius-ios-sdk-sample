@@ -47,7 +47,7 @@ class WoundGeniusWrapper: NSObject {
     }
     
     @objc func startCapturing(over: UIViewController) {
-        self.router.startCapturing(over: over)
+        self.router.startCapturing(over: over, completion: { _ in })
     }
     
     @objc func numberOfSections() -> Int {
