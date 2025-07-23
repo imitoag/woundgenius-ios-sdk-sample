@@ -189,7 +189,7 @@ extension HomeViewController {
             UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
             return
         }
-        self.woundGeniusRouter?.startCapturing(over: self)
+        self.woundGeniusRouter?.startCapturing(over: self, completion: { _ in })
     }
     
     /* Core Module: Settings */
