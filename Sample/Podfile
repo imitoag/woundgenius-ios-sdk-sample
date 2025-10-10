@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '12.1'
 
 def woundgenius
-#  pod 'WoundGenius', :path => '..'
+  # pod 'WoundGenius', :path => '../../woundgenius_ios'
 end
 
 def devPods

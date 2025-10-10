@@ -1,0 +1,18 @@
+current directory: /Users/apple/projects/woundgenius_ios/TurboModuleExample/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+/Users/apple/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/apple/projects/woundgenius_ios/TurboModuleExample/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20251003-25799-e40xko sitelibdir\=./.gem.20251003-25799-e40xko clean
+
+current directory: /Users/apple/projects/woundgenius_ios/TurboModuleExample/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20251003-25799-e40xko sitelibdir\=./.gem.20251003-25799-e40xko
+compiling nkf.c
+linking shared-object nkf.bundle
+
+current directory: /Users/apple/projects/woundgenius_ios/TurboModuleExample/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20251003-25799-e40xko sitelibdir\=./.gem.20251003-25799-e40xko install
+/opt/homebrew/bin/ginstall -c -m 0755 nkf.bundle ./.gem.20251003-25799-e40xko
+
+current directory: /Users/apple/projects/woundgenius_ios/TurboModuleExample/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20251003-25799-e40xko sitelibdir\=./.gem.20251003-25799-e40xko clean
