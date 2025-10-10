@@ -28,6 +28,7 @@ This repository contains the Objective-C Sample App (SampleObjc folder). The Ini
 # WoundGenius SDK React Native Sample App
 
 This repository contains the React Native Sample (SampleRN folder).
+
 SampleRN26 folder contains a newer sample app, extending the latest sample from Native Modules https://reactnative.dev/docs/turbo-native-modules-introduction with WoundGenius SDK.
 
 ## Initial Setup
