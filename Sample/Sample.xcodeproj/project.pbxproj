@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18142A762DDF5B8400492DCB /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18142A752DDF5B8400492DCB /* WoundGeniusSDK */; };
 		1814920C0D60288C490A70F7 /* Pods_SampleSimulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC77F8480B2B30BD7D7C1B3B /* Pods_SampleSimulator.framework */; };
 		181D2F1B2A72E78B0081296C /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181D2F1A2A72E78B0081296C /* SegmentedTableViewCell.swift */; };
 		1877D9CE2A67B979009E6E82 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1877D9CD2A67B979009E6E82 /* TextFieldTableViewCell.swift */; };
@@ -34,12 +33,13 @@
 		1877FFCD2B36A3D600D50188 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0107632930B844000804BC /* Main.storyboard */; };
 		1877FFD82B36A6DE00D50188 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1877FFD72B36A6DE00D50188 /* DescriptionTableViewCell.swift */; };
 		1877FFD92B36A6DE00D50188 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1877FFD72B36A6DE00D50188 /* DescriptionTableViewCell.swift */; };
+		18C483E62E9918D500222E57 /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18C483E52E9918D500222E57 /* WoundGeniusSDK */; };
 		18DBD2F22B2F271F007A937A /* WoundGeniusTFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DBD2F12B2F271F007A937A /* WoundGeniusTFLiteExtension.swift */; };
 		18E4C3792A4184140046A20C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C3782A4184140046A20C /* SettingsTableViewController.swift */; };
 		18E4C37C2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C37B2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift */; };
 		18E4C3802A4187650046A20C /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C37F2A4187650046A20C /* SwitchTableViewCell.swift */; };
 		18E4C3832A418B070046A20C /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4C3822A418B070046A20C /* SliderTableViewCell.swift */; };
-		A5E9763C57094E26F91738DB /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A0FF1D43B3E7FD8830134C /* Pods_Sample.framework */; };
+		6902D0C0770D47F88B653C2A /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A0FF1D43B3E7FD8830134C /* Pods_Sample.framework */; };
 		CE01075E2930B844000804BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01075D2930B844000804BC /* AppDelegate.swift */; };
 		CE0107622930B844000804BC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0107612930B844000804BC /* HomeViewController.swift */; };
 		CE0107652930B844000804BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0107632930B844000804BC /* Main.storyboard */; };
@@ -86,9 +86,6 @@
 		1877D9CD2A67B979009E6E82 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		1877FFD32B36A3D600D50188 /* SampleSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1877FFD72B36A6DE00D50188 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
-		1895D0082B4E796900CA5562 /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
-		1895D0092B4E796900CA5562 /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
-		1895D00A2B4E796900CA5562 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		18CAD7DF2BE1018000356554 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		18DBD2F12B2F271F007A937A /* WoundGeniusTFLiteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoundGeniusTFLiteExtension.swift; sourceTree = "<group>"; };
 		18E4C3782A4184140046A20C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -137,25 +134,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18142A762DDF5B8400492DCB /* WoundGeniusSDK in Frameworks */,
+				18C483E62E9918D500222E57 /* WoundGeniusSDK in Frameworks */,
 				CEF2B4702931E219001ADDE9 /* AVFAudio.framework in Frameworks */,
-				A5E9763C57094E26F91738DB /* Pods_Sample.framework in Frameworks */,
+				6902D0C0770D47F88B653C2A /* Pods_Sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1895D0042B4E796900CA5562 /* ci_scripts */ = {
-			isa = PBXGroup;
-			children = (
-				1895D0082B4E796900CA5562 /* ci_post_xcodebuild.sh */,
-				1895D0092B4E796900CA5562 /* ci_pre_xcodebuild.sh */,
-				1895D00A2B4E796900CA5562 /* ci_post_clone.sh */,
-			);
-			path = ci_scripts;
-			sourceTree = "<group>";
-		};
 		18DBD2F02B2F2671007A937A /* WoundGeniusTFLiteExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +177,6 @@
 		CE0107512930B844000804BC = {
 			isa = PBXGroup;
 			children = (
-				1895D0042B4E796900CA5562 /* ci_scripts */,
 				CE01075C2930B844000804BC /* Sample */,
 				CE01075B2930B844000804BC /* Products */,
 				CE0107832930BBE7000804BC /* Frameworks */,
@@ -604,7 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Application/SimulatorInfo.plist;
@@ -625,7 +611,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.woundgenius.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -641,7 +627,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Application/SimulatorInfo.plist;
@@ -662,7 +648,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.woundgenius.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -794,7 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Application/Info.plist;
@@ -815,7 +801,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.woundgenius.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -831,7 +817,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 578UT85CG6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sample/Application/Info.plist;
@@ -852,7 +838,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.imito.woundgenius.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -894,7 +880,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		18142A752DDF5B8400492DCB /* WoundGeniusSDK */ = {
+		18C483E52E9918D500222E57 /* WoundGeniusSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WoundGeniusSDK;
 		};

@@ -106,6 +106,8 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     
     var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
     
+    private var helpViewController = UIViewController()
+
     func lastMediaIcon(icon: @escaping (UIImage?) -> ()) {
         guard let lastMedia = self.capturedItemsToReturn.last else {
             icon(nil)
@@ -271,61 +273,65 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
              RULER_HOW_WOUND_SIZE_CALCULATED_HTML
              */
             
-            var vc = UIViewController()
             switch mode {
             case .markerMeasurement:
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "CALIBRATION_MARKER_HELP_JSON" : "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
+                        self.helpViewController = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
+                    self.helpViewController = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
                 } catch {
-                    vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
+                    self.helpViewController = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .rulerMeasurement:
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "RULER_HELP_JSON" : "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                        self.helpViewController = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                    self.helpViewController = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 } catch {
-                    vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                    self.helpViewController = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .handyscope, .photo, .video, .scanner, .manualInput:
                 assertionFailure("Not supported")
                 return
             }
-            if UIDevice.current.isPad {
-                vc.modalPresentationStyle = .popover
-                vc.preferredContentSize = self.sizeForPopoverController
-                
-                let topPaddingForPopoverController = isTopViewTapped ? self.topPaddingForPopoverController : -self.topPaddingForPopoverController
-                
-                if let popoverController = vc.popoverPresentationController {
-                    popoverController.delegate = over
-                    popoverController.sourceView = sourceView
-                    popoverController.sourceRect = CGRect(origin: CGPoint(x: sourceView.bounds.origin.x,
-                                                                          y: sourceView.bounds.origin.y + topPaddingForPopoverController),
-                                                          size: sourceView.bounds.size)
-                    popoverController.permittedArrowDirections = isTopViewTapped ? .up : .down
-                }
-                over.present(vc, animated: true)
+            if #available(iOS 26, *) {
+                let nav = UINavigationController(rootViewController: self.helpViewController)
+                over.present(nav, animated: true)
             } else {
-                let navVC = UINavigationController(rootViewController: vc)
-                navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
-                over.present(navVC, animated: true)
+                if UIDevice.current.isPad {
+                    self.helpViewController.modalPresentationStyle = .popover
+                    self.helpViewController.preferredContentSize = self.sizeForPopoverController
+                    
+                    let topPaddingForPopoverController = isTopViewTapped ? self.topPaddingForPopoverController : -self.topPaddingForPopoverController
+                    
+                    if let popoverController = self.helpViewController.popoverPresentationController {
+                        popoverController.delegate = over
+                        popoverController.sourceView = sourceView
+                        popoverController.sourceRect = CGRect(origin: CGPoint(x: sourceView.bounds.origin.x,
+                                                                              y: sourceView.bounds.origin.y + topPaddingForPopoverController),
+                                                              size: sourceView.bounds.size)
+                        popoverController.permittedArrowDirections = isTopViewTapped ? .up : .down
+                    }
+                    over.present(self.helpViewController, animated: true)
+                } else {
+                    let navVC = UINavigationController(rootViewController: self.helpViewController)
+                    navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
+                    over.present(navVC, animated: true)
+                }
             }
         case .viewWillAppear:
             break
