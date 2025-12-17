@@ -11,41 +11,13 @@ import CoreMedia
 import AVFoundation
 import WoundGenius
 
-class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
-    func lokalize(_ key: String) -> String {
-        return L.str(key)
-    }
-    
-    func lokalize(_ key: WGLokalizableKey) -> String {
-        switch key {
-        case .captureScreenTitle:
-            return "Patient Name"
-        case .captureScreenSubtitle:
-            return "Patient Date of Birth"
-        case .selectAll:
-            return L.str("WHOLE_BODY")
-        case .clearSelection:
-            return L.str("CLEAR_SELECTION")
-        case .collapseButtonTitle:
-            return L.str("HIDE")
-        case .leftShortText:
-            return L.str("LEFT_SHORT_TEXT")
-        case .rightShortText:
-            return L.str("RIGHT_SHORT_TEXT")
-        case .lateralSide:
-            return L.str("LATERAL")
-        case .medialSide:
-            return L.str("MEDIAL")
-        case .pinsScreenTitle:
-            return ""
-        default:
-            return L.str(key.rawValue)
-        }
-    }
-}
-
 class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
+    var rulerScaleAutoDetectionEnabled: Bool = false
     
+    var isSingleAreaModeEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: SettingKey.isSingleAreaModeEnabled.rawValue)
+    }
+        
     var isEmergencyModeEnabled: Bool = false
     
     var userId: String? = "user5"
@@ -74,7 +46,6 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         
         return modes
     }
-    
     
     var isVideoWithAudioEnabled: Bool = true
     
@@ -106,8 +77,6 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     
     var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
     
-    private var helpViewController = UIViewController()
-
     func lastMediaIcon(icon: @escaping (UIImage?) -> ()) {
         guard let lastMedia = self.capturedItemsToReturn.last else {
             icon(nil)
@@ -142,29 +111,39 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         
         return UserDefaults.standard.bool(forKey: SettingKey.liveWoundDetection.rawValue)
     }
-    
+        
     var enabledOutlineTypes: [WoundGenius.IMOutlineCluster] {
+        var enabledTypes = [WoundGenius.IMOutlineCluster]()
+        
         if UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) {
-            return [.stoma]
+            enabledTypes.append(.stoma)
         } else {
             switch self.autoDetectionMode {
             case .none, .woundOnly:
-                return [.wound]
+                enabledTypes.append(.wound)
             case .woundAndTissueTypes:
-                return [.wound,
-                        .granulation,
-                        .necrosis,
-                        .slough,
-                        .fibrin,
-                        .boneAndTendon,
-                        .fascia,
-                        .fat,
-                        .dressing,
-                        .skinGraft]
+                enabledTypes.append(contentsOf: [.wound,
+                                                 .granulation,
+                                                 .necrosis,
+                                                 .slough,
+                                                 .fibrin,
+                                                 .boneAndTendon,
+                                                 .fascia,
+                                                 .fat,
+                                                 .dressing,
+                                                 .skinGraft])
+                
             @unknown default:
-                return [.wound]
+                enabledTypes.append(.wound)
             }
         }
+        
+        // Add Lines Measurement, if enabled
+        if UserDefaults.standard.bool(forKey: SettingKey.localStorageLineMeasurementEnabled.rawValue) {
+            enabledTypes.append(.line)
+        }
+        
+        return enabledTypes
     }
     
     let sizeForPopoverController = CGSize(width: 375, height: 580)
@@ -174,24 +153,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                   previewOrientation: UIInterfaceOrientation,
                   videoOrientation: AVCaptureVideoOrientation,
                   processingResult: @escaping ((MarkerDetectionStatus, [CGPoint]?, CGSize?)) -> ()) {
-        self.markerDetector.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
-                                                  previewOrientation: previewOrientation,
-                                                  videoOrientation: videoOrientation)
         
-        self.markerDetector.detectionStatus = { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .detected(let pointsInPrecentage, let frameSize):
-                    processingResult((.detectedImitoMarkerTiltOk, pointsInPrecentage, frameSize))
-                case .detectedWrongTilt(let pointsInPrecentage, let frameSize):
-                    processingResult((.detectedImitoMerkerTiltNotOk, pointsInPrecentage, frameSize))
-                case .stoppedDetecting, .notDetected, .detectedCompletelyWrongTilt:
-                    processingResult((.searching, nil, nil))
-                @unknown default:
-                    assertionFailure("Unknown default")
-                }
-            }
-        }
     }
     
     func handle(event: WGEvent) {
@@ -232,34 +194,40 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             vc.dismiss(animated: true) { [weak self] in
                 self?.capturedItemsToReturn = [CaptureResult]()
             }
-        case .pickedPhoto(vc: let vc, result: let photoResult):
+        case .pickedPhoto(vc: let vc, result: let photoResult, let markerDetector):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
             // Search for imito marker on the image. If it will be detected - start measurement.
+            func addPickedPhoto() {
+                self.capturedItemsToReturn.append(.photo(photoResult))
+                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
+                    self.completion?(self.capturedItemsToReturn)
+                    self.capturedItemsToReturn = [CaptureResult]()
+                }
+                self.refreshLastMediaIconAndRightBarButtonState?()
+            }
             switch vc.currentMode {
             case .markerMeasurement, .rulerMeasurement:
-                self.markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
-                    DispatchQueue.main.async {
-                        guard let self = self else { return }
-                        switch status {
-                        case .detected(let pointsPercentage, _):
+                markerDetector.searchMarker(image: photoResult.preview) { result in
+                    switch result {
+                    case .detected(let pointsPercentage, _):
+                        DispatchQueue.main.async {
+                            // Start Marker Measurement Flow, as the marker was detected.
                             let captureResultNew = MeasurementCaptureResult(photoName: photoResult.photoName,
                                                                             photo: photoResult.preview,
                                                                             codeDetection: CodeDetectionResult(code: "10mm",
                                                                                                                fromQRCode: false,
                                                                                                                pointsPercentage: pointsPercentage))
                             self.showOutlining(captureVC: vc, captureResult: captureResultNew)
-                        default:
+                        }
+                    case .detectedWrongTilt, .detectedCompletelyWrongTilt, .stoppedDetecting, .notDetected:
+                        DispatchQueue.main.async {
                             // Starting the Ruler Measurement. As there is no marker in the image. You can adjust it to required behaviour.
                             self.presentMeasurementFlow(overCaptureVC: vc, captureResult: photoResult, pointViews: nil, sideSize: nil)
                         }
                     }
                 }
             default:
-                self.capturedItemsToReturn.append(.photo(photoResult))
-                if self.maxNumberOfMedia == self.capturedItemsToReturn.count {
-                    self.completion?(self.capturedItemsToReturn)
-                    self.capturedItemsToReturn = [CaptureResult]()
-                }
+                addPickedPhoto()
             }
         case .helpButtonClicked(let over, let mode, let sourceView, let isTopViewTapped):
             /*
@@ -273,65 +241,61 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
              RULER_HOW_WOUND_SIZE_CALCULATED_HTML
              */
             
+            var vc = UIViewController()
             switch mode {
             case .markerMeasurement:
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "CALIBRATION_MARKER_HELP_JSON" : "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        self.helpViewController = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
+                        vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    self.helpViewController = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
+                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
                 } catch {
-                    self.helpViewController = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
+                    vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .rulerMeasurement:
                 do {
                     let jsonHelpConfig = (self.autoDetectionMode == .none) ? "RULER_HELP_JSON" : "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        self.helpViewController = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                        vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                         break
                     }
                     let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
                     for item in tutorialData {
                         item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
                     }
-                    self.helpViewController = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                    vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 } catch {
-                    self.helpViewController = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
+                    vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                 }
             case .handyscope, .photo, .video, .scanner, .manualInput:
                 assertionFailure("Not supported")
                 return
             }
-            if #available(iOS 26, *) {
-                let nav = UINavigationController(rootViewController: self.helpViewController)
-                over.present(nav, animated: true)
-            } else {
-                if UIDevice.current.isPad {
-                    self.helpViewController.modalPresentationStyle = .popover
-                    self.helpViewController.preferredContentSize = self.sizeForPopoverController
-                    
-                    let topPaddingForPopoverController = isTopViewTapped ? self.topPaddingForPopoverController : -self.topPaddingForPopoverController
-                    
-                    if let popoverController = self.helpViewController.popoverPresentationController {
-                        popoverController.delegate = over
-                        popoverController.sourceView = sourceView
-                        popoverController.sourceRect = CGRect(origin: CGPoint(x: sourceView.bounds.origin.x,
-                                                                              y: sourceView.bounds.origin.y + topPaddingForPopoverController),
-                                                              size: sourceView.bounds.size)
-                        popoverController.permittedArrowDirections = isTopViewTapped ? .up : .down
-                    }
-                    over.present(self.helpViewController, animated: true)
-                } else {
-                    let navVC = UINavigationController(rootViewController: self.helpViewController)
-                    navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
-                    over.present(navVC, animated: true)
+            if UIDevice.current.isPad {
+                vc.modalPresentationStyle = .popover
+                vc.preferredContentSize = self.sizeForPopoverController
+                
+                let topPaddingForPopoverController = isTopViewTapped ? self.topPaddingForPopoverController : -self.topPaddingForPopoverController
+                
+                if let popoverController = vc.popoverPresentationController {
+                    popoverController.delegate = over
+                    popoverController.sourceView = sourceView
+                    popoverController.sourceRect = CGRect(origin: CGPoint(x: sourceView.bounds.origin.x,
+                                                                          y: sourceView.bounds.origin.y + topPaddingForPopoverController),
+                                                          size: sourceView.bounds.size)
+                    popoverController.permittedArrowDirections = isTopViewTapped ? .up : .down
                 }
+                over.present(vc, animated: true)
+            } else {
+                let navVC = UINavigationController(rootViewController: vc)
+                navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
+                over.present(navVC, animated: true)
             }
         case .viewWillAppear:
             break
@@ -430,11 +394,10 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     
     // MARK: - Non-Protocol. Custom Methods
     private var capturedItemsToReturn = [CaptureResult]()
-    private var completion: (([CaptureResult])->())!
+    private var completion: (([CaptureResult]) -> Void)!
     internal weak var router: WGRouter?
-    private let markerDetector = ZXWrapper()
     
-    init(completion: @escaping (([CaptureResult])->())) {
+    init(completion: @escaping (([CaptureResult]) -> Void)) {
         super.init()
         self.completion = completion
     }
@@ -465,11 +428,12 @@ extension MyWoundGeniusPresenter {
         
         let woundStomaConfig: WoundStomaConfig = UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) ?
             .stoma :
-            .wound(config: WoundConfig(isMultipleOutlinesEnabled: UserDefaults.standard.bool(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue),
-                                       autoDetectionMode: self.autoDetectionMode))
-        
+            .wound(config: WoundConfig(
+                isMultipleOutlinesEnabled: UserDefaults.standard.bool(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue) && !isSingleAreaModeEnabled,
+                autoDetectionMode: self.autoDetectionMode)
+            )
         let navConfig = IMNavigationControllerConfig(showActivityIndicatorOnCompletion: false,
-                                                     outlineScreenTitle: "Outline",
+                                                     outlineScreenTitle: L.str("OUTLINE"),
                                                      outlineScreenSubtitle: nil,
                                                      summaryScreenTitle: L.str("RESULT_TITLE"),
                                                      summaryScreenSubtitle: nil,
@@ -478,7 +442,6 @@ extension MyWoundGeniusPresenter {
                                                      woundStomaConfig: woundStomaConfig)
         
         imNavController = IMNavigationController(image: image,
-                                                 mediaManager: ImitoMeasureMediaManager(),
                                                  resultScreenBottomView: nil,
                                                  sideSize: sideSize,
                                                  linePoints: linePoints,
@@ -522,22 +485,27 @@ extension MyWoundGeniusPresenter {
             
             let woundStomaConfig: WoundStomaConfig = UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) ?
                 .stoma :
-                .wound(config: WoundConfig(isMultipleOutlinesEnabled: UserDefaults.standard.bool(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue),
-                                           autoDetectionMode: self.autoDetectionMode))
+                .wound(config: WoundConfig(
+                    isMultipleOutlinesEnabled: UserDefaults.standard.bool(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue) && !isSingleAreaModeEnabled,
+                    autoDetectionMode: self.autoDetectionMode)
+                )
             
             let navConfig = IMNavigationControllerConfig(showActivityIndicatorOnCompletion: false,
-                                                         outlineScreenTitle: L.str("REVIEW_OUTLINES"),
+                                                         outlineScreenTitle: self.autoDetectionMode != .none ? L.str("REVIEW_OUTLINES") : L.str("OUTLINE"),
                                                          outlineScreenSubtitle: nil,
                                                          summaryScreenTitle: L.str("RESULT_TITLE"),
                                                          summaryScreenSubtitle: nil,
                                                          resultsScreenTitle: L.str("WOUND_SIZE"),
                                                          resultsScreenSubtitle: nil,
                                                          woundStomaConfig: woundStomaConfig)
+            print("NavigationController state: \(imNavController)")
+            print("Current view controller: \(self)")
             
             imNavController = IMNavigationController(image: captureResult.photo!,
-                                                     mediaManager: ImitoMeasureMediaManager(),
-                                                     qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()), resultScreenBottomView: nil,
-                                                     markerPointsPercentage: captureResult.codeDetection.pointsPercentage, navConfig: navConfig,
+                                                     qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()),
+                                                     resultScreenBottomView: nil,
+                                                     markerPointsPercentage: captureResult.codeDetection.pointsPercentage,
+                                                     navConfig: navConfig,
                                                      config: self,
                                                      willPresentResults: {
                 

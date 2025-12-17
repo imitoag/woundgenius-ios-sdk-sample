@@ -46,36 +46,45 @@ class SettingsTableViewController: UITableViewController {
             switchCell.isEnabled = element.isEnabled
             
             switchCell.valueChanged = { newValue in
-                UserDefaults.standard.set(newValue, forKey: element.key.rawValue)
+                let key = element.key.rawValue
+                UserDefaults.standard.set(newValue, forKey: key)
+
+
+                let conflictMap: [SettingKey: [SettingKey]] = [
+                    .stomaCapturing: [
+                            .woundDetection,
+                            .liveWoundDetection,
+                            .tissueTypesDetection,
+                            .localStorageLineMeasurementEnabled
+                        ],
+                    .multipleOutlinesPerImageEnabled: [
+                        .woundDetection,
+                        .liveWoundDetection,
+                        .tissueTypesDetection
+                    ],
+                    .woundDetection: [
+                        .liveWoundDetection
+                    ],
+                    .isSingleAreaModeEnabled: [
+                        .localStorageLineMeasurementEnabled,
+                        .tissueTypesDetection
+                    ]
+                ]
+
+                if let conflicts = conflictMap[element.key], newValue == (element.key == .multipleOutlinesPerImageEnabled ? false : true) {
+                    conflicts.forEach { conflictKey in
+                        UserDefaults.standard.set(false, forKey: conflictKey.rawValue)
+                    }
+                }
+
+                // Special rule: enabling liveWoundDetection forces woundDetection on
+                if element.key == .liveWoundDetection, newValue {
+                    UserDefaults.standard.set(true, forKey: SettingKey.woundDetection.rawValue)
+                }
+
                 UserDefaults.standard.synchronize()
-                if element.key == .stomaCapturing   {
-                    if newValue == true {
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.woundDetection.rawValue)
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.tissueTypesDetection.rawValue)
-                    }
-                    self.refreshTableView()
-                }
-                if element.key == .multipleOutlinesPerImageEnabled {
-                    if newValue == false {
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.woundDetection.rawValue)
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.tissueTypesDetection.rawValue)
-                    }
-                    self.refreshTableView()
-                }
-                if element.key == .woundDetection {
-                    if newValue == false {
-                        UserDefaults.standard.setValue(false, forKey: SettingKey.liveWoundDetection.rawValue)
-                    }
-                    self.refreshTableView()
-                }
-                if element.key == .liveWoundDetection {
-                    if newValue == true {
-                        UserDefaults.standard.setValue(true, forKey: SettingKey.woundDetection.rawValue)
-                    }
-                    self.refreshTableView()
-                }
+                self.refreshTableView()
+
             }
             return switchCell
         case String(describing: SliderTableViewCell.self):
