@@ -401,7 +401,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                        willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
         case .measurement(let measurement):
-            let filteredOutlines = measurement.outlines.filter {$0.points.count > 2}
+            let filteredOutlines = measurement.outlines.filter {
+                if $0.cluster == .line {
+                    return $0.points.count >= 2
+                } else {
+                    return $0.points.count >= 3
+                }
+            }
             let outlines = filteredOutlines.map {
                 MeasuredOutline(
                     id: $0.id,

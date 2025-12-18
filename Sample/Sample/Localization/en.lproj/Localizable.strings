@@ -306,3 +306,4 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "THREE_D" = "3D";
 "SELECT_ALL_DIALOG_title" = "Select all";
 "SELECT_ALL_DIALOG_description" = "Use this menu to select an entire body part currently displayed on the screen.";
+"CAPTURE_STOMA_AND_RULER_STATUS" = "Capture Stoma & Ruler";

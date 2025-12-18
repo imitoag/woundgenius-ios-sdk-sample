@@ -83,7 +83,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0888DFA8CEA900004F07DB67 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		180F51A82B58057300FF0EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180F51A92B58057400FF0EFF /* SimulatorInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SimulatorInfo.plist; sourceTree = "<group>"; };
 		181D2F1A2A72E78B0081296C /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,9 +95,7 @@
 		18E4C37B2A4184CE0046A20C /* SettingsTableViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewControllerPresenter.swift; sourceTree = "<group>"; };
 		18E4C37F2A4187650046A20C /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		18E4C3822A418B070046A20C /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
-		1A905B76FEF35B00B044D42B /* Pods-SampleSimulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleSimulator.release.xcconfig"; path = "Target Support Files/Pods-SampleSimulator/Pods-SampleSimulator.release.xcconfig"; sourceTree = "<group>"; };
 		27174D8861E6B05849DEF4B4 /* Pods_Sample_3D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample_3D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		28970300C3D2A01D952A5F16 /* Pods-SampleSimulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleSimulator.debug.xcconfig"; path = "Target Support Files/Pods-SampleSimulator/Pods-SampleSimulator.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2871B52D8B63AE0083375F /* response_17422242760641.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_17422242760641.json; sourceTree = "<group>"; };
 		6A2871DB2D8C1BF30083375F /* Sample3DInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Sample3DInfo.plist; path = /Users/pdev/Projects/Imito/PODs/woundgenius_ios/Sample/Sample/Application/Sample3DInfo.plist; sourceTree = "<absolute>"; };
 		6A2871E32D90C2A30083375F /* model_18_ManuMachine_146_int8.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_18_ManuMachine_146_int8.tflite; sourceTree = "<group>"; };
@@ -106,17 +103,13 @@
 		6A4225952D91A68700EC8FF8 /* response_1742224276064.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_1742224276064.json; sourceTree = "<group>"; };
 		6AC2E03B2D917A1C0088A8F2 /* WoundGenius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WoundGenius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F2501B2B87593CF82BEC069 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F3CAAB872B7D64ABA01D621 /* Pods-Sample 3D.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample 3D.release.xcconfig"; path = "Target Support Files/Pods-Sample 3D/Pods-Sample 3D.release.xcconfig"; sourceTree = "<group>"; };
-		803DB85C20FC3D62FB85A5B3 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
 		91DDF201B0EDEB3C114368B6 /* Pods_SampleSimulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleSimulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2E24CFC08A7220FD8EFBD5D /* Pods-Sample 3D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample 3D.debug.xcconfig"; path = "Target Support Files/Pods-Sample 3D/Pods-Sample 3D.debug.xcconfig"; sourceTree = "<group>"; };
 		CE01075A2930B844000804BC /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE01075D2930B844000804BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE0107612930B844000804BC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CE0107642930B844000804BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE0107662930B846000804BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0107692930B846000804BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CE0107842930BBE7000804BC /* imitoWoundSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = imitoWoundSDK.xcframework; path = ../imitoWoundSDK/build/imitoWoundSDK.xcframework; sourceTree = "<group>"; };
 		CE010A072931DEED000804BC /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = System/Library/Frameworks/AVFAudio.framework; sourceTree = SDKROOT; };
 		CE38F1A82931E80B0011F976 /* MyWoundGeniusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWoundGeniusPresenter.swift; sourceTree = "<group>"; };
 		CE38F1CB293285490011F976 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -174,26 +167,12 @@
 			path = SettingsCells;
 			sourceTree = "<group>";
 		};
-		909F89D1CA3F4894C979E9D0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				803DB85C20FC3D62FB85A5B3 /* Pods-Sample.debug.xcconfig */,
-				0888DFA8CEA900004F07DB67 /* Pods-Sample.release.xcconfig */,
-				A2E24CFC08A7220FD8EFBD5D /* Pods-Sample 3D.debug.xcconfig */,
-				6F3CAAB872B7D64ABA01D621 /* Pods-Sample 3D.release.xcconfig */,
-				28970300C3D2A01D952A5F16 /* Pods-SampleSimulator.debug.xcconfig */,
-				1A905B76FEF35B00B044D42B /* Pods-SampleSimulator.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CE0107512930B844000804BC = {
 			isa = PBXGroup;
 			children = (
 				CE01075C2930B844000804BC /* Sample */,
 				CE01075B2930B844000804BC /* Products */,
 				CE0107832930BBE7000804BC /* Frameworks */,
-				909F89D1CA3F4894C979E9D0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,7 +208,6 @@
 			children = (
 				6AC2E03B2D917A1C0088A8F2 /* WoundGenius.framework */,
 				CE010A072931DEED000804BC /* AVFAudio.framework */,
-				CE0107842930BBE7000804BC /* imitoWoundSDK.xcframework */,
 				6F2501B2B87593CF82BEC069 /* Pods_Sample.framework */,
 				27174D8861E6B05849DEF4B4 /* Pods_Sample_3D.framework */,
 				91DDF201B0EDEB3C114368B6 /* Pods_SampleSimulator.framework */,
@@ -607,7 +585,6 @@
 /* Begin XCBuildConfiguration section */
 		1877FFD12B36A3D600D50188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28970300C3D2A01D952A5F16 /* Pods-SampleSimulator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -644,7 +621,6 @@
 		};
 		1877FFD22B36A3D600D50188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A905B76FEF35B00B044D42B /* Pods-SampleSimulator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -797,7 +773,6 @@
 		};
 		CE01076F2930B846000804BC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 803DB85C20FC3D62FB85A5B3 /* Pods-Sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -818,7 +793,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -834,7 +809,6 @@
 		};
 		CE0107702930B846000804BC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0888DFA8CEA900004F07DB67 /* Pods-Sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -855,7 +829,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

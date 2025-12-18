@@ -292,3 +292,4 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "THREE_D" = "3D";
 "SELECT_ALL_DIALOG_title" = "Seleccionar todo";
 "SELECT_ALL_DIALOG_description" = "";
+"CAPTURE_STOMA_AND_RULER_STATUS" = "Captura de Estoma y Regla";
