@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FC4D10CF08E12EBC76B094 /* Pods_SampleObjc.framework */; };
-		18142A792DDF5C3700492DCB /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18142A782DDF5C3700492DCB /* WoundGeniusSDK */; };
 		1889B9092BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9082BA172AD00B584CE /* WoundGeniusTFLiteExtension.swift */; };
 		1889B90E2BA1731400B584CE /* MyWoundGeniusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B90D2BA1731400B584CE /* MyWoundGeniusPresenter.swift */; };
 		1889B9112BA1754500B584CE /* L.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B9102BA1754500B584CE /* L.swift */; };
@@ -67,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18142A792DDF5C3700492DCB /* WoundGeniusSDK in Frameworks */,
 				0E01E356A2608A4EBAC11B08 /* Pods_SampleObjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +177,7 @@
 				18CBB4D72B9EF665009765E3 /* Frameworks */,
 				18CBB4D82B9EF665009765E3 /* Resources */,
 				18CBB4FE2B9EF6D7009765E3 /* Embed Frameworks */,
+				02CF6906DBD5E739053A4D95 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,8 +212,6 @@
 				Base,
 			);
 			mainGroup = 18CBB4D12B9EF665009765E3;
-			packageReferences = (
-			);
 			productRefGroup = 18CBB4DB2B9EF665009765E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,6 +236,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02CF6906DBD5E739053A4D95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleObjc/Pods-SampleObjc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8EEB14141871962E6C498F5B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,7 +445,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TNNH6FD49C;
+				DEVELOPMENT_TEAM = 578UT85CG6;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SampleObjc/Info.plist;
@@ -438,7 +456,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,7 +481,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TNNH6FD49C;
+				DEVELOPMENT_TEAM = 578UT85CG6;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SampleObjc/Info.plist;
@@ -474,7 +492,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,13 +529,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		18142A782DDF5C3700492DCB /* WoundGeniusSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WoundGeniusSDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CBB4D22B9EF665009765E3 /* Project object */;
 }

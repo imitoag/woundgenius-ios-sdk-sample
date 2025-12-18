@@ -44,6 +44,16 @@ class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
 }
 
 class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
+    var availablePoseModes: [WoundGenius.PoseMode]?
+    
+    var defaultPoseMode: WoundGenius.PoseMode?
+    
+    var isFacialSurgeryEnabled: Bool = false
+    
+    var isSingleAreaModeEnabled: Bool = false
+    
+    var rulerScaleAutoDetectionEnabled: Bool = false
+    
     var isEmergencyModeEnabled: Bool = false
     
     var showMarkerMeasurementTutorialAutomatically: Bool = false
@@ -84,8 +94,6 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
     
     var operatingMode: WoundGenius.OperatingMode = .SDK
     
-    private let markerDetector = ZXWrapper()
-
     func lastMediaIcon(icon: @escaping (UIImage?) -> ()) {
         guard let lastMedia = self.capturedItemsToReturn.last else {
             icon(nil)
@@ -101,28 +109,7 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             icon(image.image)
         }
     }
-    
-    func captured(sampleBuffer: CMSampleBuffer, previewOrientation: UIInterfaceOrientation, videoOrientation: AVCaptureVideoOrientation, processingResult: @escaping ((WoundGenius.MarkerDetectionStatus, [CGPoint]?, CGSize?)) -> ()) {
-        self.markerDetector.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
-                                               previewOrientation: previewOrientation,
-                                               videoOrientation: videoOrientation)
         
-        self.markerDetector.detectionStatus = { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .detected(let pointsInPrecentage, let frameSize):
-                    processingResult((.detectedImitoMarkerTiltOk, pointsInPrecentage, frameSize))
-                case .detectedWrongTilt(let pointsInPrecentage, let frameSize):
-                    processingResult((.detectedImitoMerkerTiltNotOk, pointsInPrecentage, frameSize))
-                case .stoppedDetecting, .notDetected, .detectedCompletelyWrongTilt:
-                    processingResult((.searching, nil, nil))
-                @unknown default:
-                    assertionFailure("Unknown default")
-                }
-            }
-        }
-    }
-    
     var headerTextColorUIUtils: UIColor = .black
     
     var customBlackColorUIUtils: UIColor = .black
@@ -209,12 +196,12 @@ class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
             }
         case .capturedRulerMeasurementImage(let vc, let result):
             self.showRulerMeasurementScaleDefinition(captureVC: vc, captureResult: result)
-        case .pickedPhoto(vc: let vc, result: let photoResult):
+        case .pickedPhoto(vc: let vc, result: let photoResult, let markerDetector):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
             // Search for imito marker on the image. If it will be detected - start measurement.
             switch vc.currentMode {
             case .markerMeasurement, .rulerMeasurement:
-                self.markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
+                markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
                     DispatchQueue.main.async {
                         guard let self = self else { return }
                         switch status {
@@ -355,7 +342,6 @@ extension MyWoundGeniusPresenter {
                                                   woundStomaConfig: woundStomaConfig)
         
         imNavController = IMNavigationController(image: image,
-                                                 mediaManager: ImitoMeasureMediaManager(),
                                                  resultScreenBottomView: nil,
                                                  sideSize: sideSize,
                                                  linePoints: linePoints,
@@ -412,7 +398,6 @@ extension MyWoundGeniusPresenter {
                                                       woundStomaConfig: woundStomaConfig)
             
             imNavController = IMNavigationController(image: captureResult.photo!,
-                                                     mediaManager: ImitoMeasureMediaManager(),
                                                      qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()), resultScreenBottomView: nil,
                                                      markerPointsPercentage: captureResult.codeDetection.pointsPercentage, 
                                                      navConfig: config,

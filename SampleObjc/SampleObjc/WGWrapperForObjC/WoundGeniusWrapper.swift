@@ -47,7 +47,9 @@ class WoundGeniusWrapper: NSObject {
     }
     
     @objc func startCapturing(over: UIViewController) {
-        self.router.startCapturing(over: over, completion: { _ in })
+        self.router.startCapturing(over: over, completion: { success in
+            
+        })
     }
     
     @objc func numberOfSections() -> Int {
@@ -75,7 +77,7 @@ class WoundGeniusWrapper: NSObject {
                           config: MyWoundGeniusLokalizable(),
                           displayedIndexes: nil)
             } else {
-                return measurementCaptureResult.image.outlineAndDrawWidthLength(result: measurementCaptureResult)
+                return measurementCaptureResult.image.draw(outlines: measurementCaptureResult.outlines)
             }
         } else if let videoCaptureResult = captureResult as? VideoCaptureResult {
             return videoCaptureResult.preview
@@ -115,7 +117,6 @@ class WoundGeniusWrapper: NSObject {
         if let photoCaptureResult = series.captureResults[row] as? PhotoCaptureResult {
             let details = MeasurementDetailsController(style: tableViewStyle,
                                                        image: photoCaptureResult.preview,
-                                                       mediaManager: ImitoMeasureMediaManager(),
                                                        isRightButtonShown: false,
                                                        outlines: nil,
                                                        isDepthOrHeightInputEnabled: false,
@@ -129,7 +130,6 @@ class WoundGeniusWrapper: NSObject {
         } else if let imageCaptureResult = series.captureResults[row] as? ImageCaptureResult {
             let details = MeasurementDetailsController(style: tableViewStyle,
                                                        image: imageCaptureResult.image,
-                                                       mediaManager: ImitoMeasureMediaManager(),
                                                        isRightButtonShown: false,
                                                        outlines: nil,
                                                        isDepthOrHeightInputEnabled: false,
@@ -141,27 +141,26 @@ class WoundGeniusWrapper: NSObject {
                                                        willDisappear: nil)
             over.navigationController?.pushViewController(details, animated: true)
         } else if let measurement = series.captureResults[row] as? MeasurementResult {
-            let outlines = measurement.outlines.map {
-                MeasuredOutline(points: $0.points,
-                                areaInCM: $0.areaInCM,
-                                circumferenceInCM: $0.circumferenceInCM,
-                                lengthInCM: $0.lengthInCM,
-                                lengthStartPointPixels: $0.lengthStartPointPixels,
-                                lengthEndPointPixels: $0.lengthEndPointPixels,
-                                widthInCM: $0.widthInCM,
-                                widthStartPointPixels: $0.widthStartPointPixels,
-                                widthEndPointPixels: $0.widthEndPointPixels,
-                                depthCM: $0.depthCM,
-                                order: $0.order,
-                                cluster: $0.cluster,
-                                excluding: $0.excluding,
-                                parentOutlineOrder: $0.parentOutlineOrder,
-                                parentOutlineCluster: $0.parentOutlineCluster)
+            let outlines = measurement.outlines.enumerated().map {
+                MeasuredOutline(id: $0.0, points: $0.1.points,
+                                areaInCM: $0.1.areaInCM,
+                                circumferenceInCM: $0.1.circumferenceInCM,
+                                lengthInCM: $0.1.lengthInCM,
+                                lengthStartPointPixels: $0.1.lengthStartPointPixels,
+                                lengthEndPointPixels: $0.1.lengthEndPointPixels,
+                                widthInCM: $0.1.widthInCM,
+                                widthStartPointPixels: $0.1.widthStartPointPixels,
+                                widthEndPointPixels: $0.1.widthEndPointPixels,
+                                depthCM: $0.1.depthCM,
+                                order: $0.1.order,
+                                cluster: $0.1.cluster,
+                                excluding: $0.1.excluding,
+                                parentOutlineOrder: $0.1.parentOutlineOrder,
+                                parentOutlineCluster: $0.1.parentOutlineCluster)
             }
             if outlines.filter({ $0.cluster.isSecondaryType }).count > 0 {
                 let summary = MeasurementSummaryController(style: tableViewStyle,
                                                            image: measurement.image,
-                                                           mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
                                                            mlOutlines: nil,
@@ -175,7 +174,6 @@ class WoundGeniusWrapper: NSObject {
             } else {
                 let details = MeasurementDetailsController(style: tableViewStyle,
                                                            image: measurement.image,
-                                                           mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
                                                            isDepthOrHeightInputEnabled: false,
