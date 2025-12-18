@@ -44,12 +44,7 @@ class MyWoundGeniusLokalizable: NSObject, WGLokalizable {
 }
 
 class MyWoundGeniusPresenter: NSObject, WGPresenterProtocol {
-    var availablePoseModes: [WoundGenius.PoseMode]?
-    
-    var defaultPoseMode: WoundGenius.PoseMode?
-    
-    var isFacialSurgeryEnabled: Bool = false
-    
+        
     var isSingleAreaModeEnabled: Bool = false
     
     var rulerScaleAutoDetectionEnabled: Bool = false
