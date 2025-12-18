@@ -24,6 +24,10 @@ To launch the Sample App, perform the following actions:
 # WoundGenius SDK Objective-C Sample App
 
 This repository contains the Objective-C Sample App (SampleObjc folder). The Initial Setup process is similar to the Inital Setup process of the Swift Sample App.
+In contrast to Main Swift Sample - paste you key to the following method in WoundGeniusWrapper class:
+```swift
+WG.activate(licenseKey: "KEY")
+```
 
 # WoundGenius SDK React Native Sample App
 
