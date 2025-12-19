@@ -45,5 +45,3 @@ To launch the SampleRN26 App, perform the following actions:
 10. Switch back to Xcode. Run the iOS app from ```ios``` folder on your device.
 11. Allow access to local Network. Click "Start Capturing" button. Allow access to Camera.
 13. Capture a photo or marker/ruler measurement. The resulting image will be displayed in React Native part of the app. You can transfer other required resulting data form Swift to React Native by analogy to the way the image is returned.
-
-

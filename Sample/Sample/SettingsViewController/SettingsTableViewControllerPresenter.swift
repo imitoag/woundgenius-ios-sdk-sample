@@ -23,9 +23,12 @@ enum SettingKey: String {
     
     /// Bool
     case rulerModeEnabled
-    
+
     /// Bool
     case handyscopeModeEnabled
+    
+    /// Bool
+    case localStorageLineMeasurementEnabled
     
     /// Bool
     case localStorageMediaEnabled
@@ -35,7 +38,8 @@ enum SettingKey: String {
     
     /// Bool
     case frontalCameraEnabled
-    
+    case isSingleAreaModeEnabled
+
     /// Bool
     case woundDetection
     case woundDetectionDescription
@@ -53,7 +57,7 @@ enum SettingKey: String {
     case maxNumberOfMediaInt
     case minMaxNumberOfMediaDescription
     case multipleOutlinesPerImageEnabled
-    
+
     /// Bool
     case stomaCapturing
     case stomaCapturingDescription
@@ -61,7 +65,7 @@ enum SettingKey: String {
     /// Bool
     case primaryButtonColor
     case lightBackgroundColor
-    
+
     var cellId: String {
         switch self {
         case .licenseKey:
@@ -78,9 +82,15 @@ enum SettingKey: String {
                 .liveWoundDetection,
                 .tissueTypesDetection,
                 .multipleOutlinesPerImageEnabled,
-                .stomaCapturing:
+                .stomaCapturing,
+                .localStorageLineMeasurementEnabled,
+                .isSingleAreaModeEnabled:
             return String(describing: SwitchTableViewCell.self)
-        case .woundDetectionDescription, .liveWoundDetectionDescription, .tissueTypesDetectionDescription, .stomaCapturingDescription, .minMaxNumberOfMediaDescription:
+        case .woundDetectionDescription,
+                .liveWoundDetectionDescription,
+                .tissueTypesDetectionDescription,
+                .stomaCapturingDescription,
+                .minMaxNumberOfMediaDescription:
             return String(describing: DescriptionTableViewCell.self)
         case .minNumberOfMediaInt, .maxNumberOfMediaInt:
             return String(describing: SliderTableViewCell.self)
@@ -119,6 +129,10 @@ enum SettingKey: String {
             return .multipleWoundsPerImage
         case .stomaCapturing:
             return .stomaDocumentation
+        case .localStorageLineMeasurementEnabled:
+            return .lineMeasurement
+        case .isSingleAreaModeEnabled:
+            return .singleAreaMode
         }
     }
 }
@@ -204,7 +218,7 @@ class SettingsTableViewControllerPresenter: NSObject {
         
         let isMLEnabled = UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) != true &&
         UserDefaults.standard.bool(forKey: SettingKey.multipleOutlinesPerImageEnabled.rawValue) != false
-        
+
         result.append(
             SettingsSection(labelText: "Machine Learning",
                             elements: [SettingsElement(labelText: Feature.woundDetection.title,
@@ -221,7 +235,9 @@ class SettingsTableViewControllerPresenter: NSObject {
                                                        isEnabled: WG.isAvailable(feature: .liveWoundDetection) && isMLEnabled && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue)),
                                        SettingsElement(labelText: Feature.tissueTypeDetection.title,
                                                        key: .tissueTypesDetection,
-                                                       isEnabled: WG.isAvailable(feature: .tissueTypeDetection) && isMLEnabled),
+                                                       isEnabled: WG.isAvailable(feature: .tissueTypeDetection) &&
+                                                       isMLEnabled &&
+                                                       UserDefaults.standard.bool(forKey: SettingKey.isSingleAreaModeEnabled.rawValue) != true),
                                        SettingsElement(labelText: "iOS 14+. To enable Tissue Type Detection - your license should have it enabled. (Model: \(WGConstants.tissueTypeDetectionModelName))",
                                                        key: .tissueTypesDetectionDescription,
                                                        isEnabled: WG.isAvailable(feature: .tissueTypeDetection) && isMLEnabled)])
@@ -230,6 +246,9 @@ class SettingsTableViewControllerPresenter: NSObject {
         result.append(
             SettingsSection(labelText: "Other",
                             elements: [
+                                SettingsElement(labelText: "Line Measurement",
+                                                key: .localStorageLineMeasurementEnabled,
+                                                isEnabled: UserDefaults.standard.bool(forKey: SettingKey.stomaCapturing.rawValue) != true && UserDefaults.standard.bool(forKey: SettingKey.isSingleAreaModeEnabled.rawValue) != true),
                                 SettingsElement(labelText: "Import from Camera Roll",
                                                 key: .localStorageMediaEnabled,
                                                 isEnabled: WG.isAvailable(feature: .localStorageImages) || WG.isAvailable(feature: .localStorageVideos)),
@@ -242,6 +261,9 @@ class SettingsTableViewControllerPresenter: NSObject {
                                 SettingsElement(labelText: "Multiple Outlines per Image",
                                                 key: .multipleOutlinesPerImageEnabled,
                                                 isEnabled: WG.isAvailable(feature: .multipleWoundsPerImage)),
+                                SettingsElement(labelText: Feature.singleAreaMode.title,
+                                                key: .isSingleAreaModeEnabled,
+                                                isEnabled: WG.isAvailable(feature: .singleAreaMode))
                             ])
         )
         

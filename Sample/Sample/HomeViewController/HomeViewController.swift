@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 import WoundGenius
+import SwiftUI
 import FileBrowser
 
 class HomeViewController: UIViewController {
@@ -23,7 +24,7 @@ class HomeViewController: UIViewController {
             self.woundGeniusRouter?.stopCapturing()
         })
     }()
-    
+        
     // MARK: Properties
     
     /** Initiate the woundGeniusFlow instace with presenter. */
@@ -31,6 +32,12 @@ class HomeViewController: UIViewController {
     
     /** Core Module: A button to launch WoundGenius Capturing */
     private let startCapturing = UIButton(frame: .zero)
+    
+    /** Core Module: A button to launch WoundGenius 3D Capturing */
+    private let start3DCapturing = UIButton(frame: .zero)
+    
+    /** Core Module: A button to launch WoundGenius 3D Capturing */
+    private let displayMeasuremntResults = UIButton(frame: .zero)
     
     /** Core Module: A button to show Body Part Picker */
     private let showBodyPartPicker = UIButton(frame: .zero)
@@ -50,15 +57,24 @@ class HomeViewController: UIViewController {
     /** No need to integrate this in client apps. Integrated to handle the case when the license key is modified during single app session. Relevant only for Sample app. */
     private var lastUsedLicenseKey: String?
     
+    private var isSample3D: Bool = false
+    private var ifAppSupportDevice: Bool = false
+    
     // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+#if SAMPLE3D
+        isSample3D = true
+#endif
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
         if let appVersion = appVersion, let buildVersion = buildVersion {
+            #if DEBUG
+            assert(WGConstants.sdkVersion == appVersion, "⚠️⚠️⚠️ Reminder: The App Version and the SDK Version should match in most of the cases during Debugging.\nDisable this assert only when it's required to test non-matching Sample App and SDK version.")
+            #endif
             self.title = "WoundGenius: \(WGConstants.sdkVersion). Build: \(appVersion).\(buildVersion)."
         } else {
             self.title = "WoundGenius v\(WGConstants.sdkVersion)"
@@ -88,7 +104,11 @@ class HomeViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
         
+        //Hide 3D scanning button
+        //        start3DCapturing.isHidden = false
+        
         /* START CAPTURING BUTTON */
+        startCapturing.isHidden = isSample3D
         startCapturing.translatesAutoresizingMaskIntoConstraints = false
         startCapturing.addTarget(self, action: #selector(launchCamera), for: .touchUpInside)
         startCapturing.backgroundColor = UINavigationBar.appearance().tintColor
@@ -104,6 +124,7 @@ class HomeViewController: UIViewController {
         ])
         
         /* SHOW Universal BODY PART PICKER */
+        showBodyPartPicker.isHidden = isSample3D
         showBodyPartPicker.translatesAutoresizingMaskIntoConstraints = false
         showBodyPartPicker.addTarget(self, action: #selector(startBodyPartPicker), for: .touchUpInside)
         showBodyPartPicker.backgroundColor = startCapturing.backgroundColor
@@ -113,6 +134,8 @@ class HomeViewController: UIViewController {
         showBodyPartPicker.layer.masksToBounds = true
         self.view.addSubview(showBodyPartPicker)
         
+        //        camera.start(mode: .scanner, inView: inView, isFullHDVideoEnabled: false)
+        
         NSLayoutConstraint.activate([
             showBodyPartPicker.topAnchor.constraint(equalTo: startCapturing.bottomAnchor, constant: 10),
             showBodyPartPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
@@ -121,6 +144,45 @@ class HomeViewController: UIViewController {
             showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
         ])
         
+#if SAMPLE3D
+        /* DISPLAY MEASUREMENT RESULT */
+        displayMeasuremntResults.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 18.0, *) {
+            displayMeasuremntResults.addTarget(self, action: #selector(display3DMeasurementResult), for: .touchUpInside)
+        } else {
+            // Fallback on earlier versions
+        }
+        displayMeasuremntResults.backgroundColor = UINavigationBar.appearance().tintColor
+        displayMeasuremntResults.tintColor = .white
+        displayMeasuremntResults.setTitle("Display Measurement Result 3D", for: .normal)
+        displayMeasuremntResults.layer.cornerRadius = 5
+        displayMeasuremntResults.layer.masksToBounds = true
+        self.view.addSubview(displayMeasuremntResults)
+        NSLayoutConstraint.activate([
+            displayMeasuremntResults.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            displayMeasuremntResults.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            displayMeasuremntResults.heightAnchor.constraint(equalToConstant: 40),
+            displayMeasuremntResults.bottomAnchor.constraint(equalTo: startCapturing.topAnchor, constant: -10)
+        ])
+        
+        if #available(iOS 18, *) {
+            /* START 3D CAPTURING BUTTON */
+            start3DCapturing.translatesAutoresizingMaskIntoConstraints = false
+            start3DCapturing.addTarget(self, action: #selector(open3DCapturing), for: .touchUpInside)
+            start3DCapturing.backgroundColor = UINavigationBar.appearance().tintColor
+            start3DCapturing.tintColor = .white
+            start3DCapturing.setTitle("Start 3D Capturing", for: .normal)
+            start3DCapturing.layer.cornerRadius = 5
+            start3DCapturing.layer.masksToBounds = true
+            self.view.addSubview(start3DCapturing)
+            NSLayoutConstraint.activate([
+                start3DCapturing.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+                start3DCapturing.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+                start3DCapturing.heightAnchor.constraint(equalToConstant: 40),
+                start3DCapturing.bottomAnchor.constraint(equalTo: displayMeasuremntResults.topAnchor, constant: -10)
+            ])
+        }
+#endif
         /* SETUP DEFAULT VALUES */
         if UserDefaults.standard.value(forKey: SettingKey.minNumberOfMediaInt.rawValue) == nil {
             UserDefaults.standard.setValue(1, forKey: SettingKey.minNumberOfMediaInt.rawValue)
@@ -178,7 +240,7 @@ extension HomeViewController {
         }
         self.present(bpPickerVC, animated: true)
     }
-    
+        
     /* WundGenius: To launch the Camera */
     @objc func launchCamera() {
         if self.woundGeniusRouter == nil {
@@ -189,9 +251,11 @@ extension HomeViewController {
             UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
             return
         }
-        self.woundGeniusRouter?.startCapturing(over: self, completion: { _ in })
+        self.woundGeniusRouter?.startCapturing(over: self) { success in
+            
+        }
     }
-    
+            
     /* Core Module: Settings */
     @objc func openSettings() {
         performSegue(withIdentifier: "showSettings", sender: nil)
@@ -278,7 +342,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 if measurement.outlines.contains(where: { $0.cluster == .stoma }) {
                     config.image = measurement.image.draw(outlines: measurement.outlines, drawFullAreaLabel: false, drawWidthLength: false, drawDiameter: true, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
                 } else {
-                    config.image = measurement.image.outlineAndDrawWidthLength(result: measurement)
+                    config.image = measurement.image.draw(outlines: measurement.outlines, drawFullAreaLabel: true, drawWidthLength: true, drawDiameter: false, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
                 }
                 config.text = "Measurement"
                 cell.contentConfiguration = config
@@ -310,48 +374,62 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             self.present(playerViewController, animated: true) {
                 playerViewController.player?.play()
             }
-        case .image(let image):
+        case .image(let result):
+            let config = MyWoundGeniusPresenter(completion: {_ in })
+            
             let details = MeasurementDetailsController(style: tableViewStyle,
-                                                       image: image.image,
-                                                       mediaManager: ImitoMeasureMediaManager(),
+                                                       image: result.image,
                                                        isRightButtonShown: false,
                                                        outlines: nil,
                                                        isDepthOrHeightInputEnabled: false,
                                                        title: "",
                                                        subtitle: "",
-                                                       config: MyWoundGeniusPresenter(completion: {_ in }),
+                                                       config: config,
                                                        willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
-        case .photo(let photo):
+        case .photo(let result):
+            let config = MyWoundGeniusPresenter(completion: {_ in })
+            
             let details = MeasurementDetailsController(style: tableViewStyle,
-                                                       image: photo.preview,
-                                                       mediaManager: ImitoMeasureMediaManager(),
+                                                       image: result.preview,
                                                        isRightButtonShown: false,
                                                        outlines: nil,
                                                        isDepthOrHeightInputEnabled: false,
                                                        title: "",
                                                        subtitle: "",
-                                                       config: MyWoundGeniusPresenter(completion: {_ in }),
+                                                       config: config,
                                                        willDisappear: nil)
             self.navigationController?.pushViewController(details, animated: true)
         case .measurement(let measurement):
-            let outlines = measurement.outlines.map {
-                MeasuredOutline(points: $0.points,
-                                areaInCM: $0.areaInCM,
-                                circumferenceInCM: $0.circumferenceInCM,
-                                lengthInCM: $0.lengthInCM,
-                                lengthStartPointPixels: $0.lengthStartPointPixels,
-                                lengthEndPointPixels: $0.lengthEndPointPixels,
-                                widthInCM: $0.widthInCM,
-                                widthStartPointPixels: $0.widthStartPointPixels,
-                                widthEndPointPixels: $0.widthEndPointPixels,
-                                depthCM: $0.depthCM,
-                                order: $0.order,
-                                cluster: $0.cluster,
-                                excluding: $0.excluding,
-                                parentOutlineOrder: $0.parentOutlineOrder,
-                                parentOutlineCluster: $0.parentOutlineCluster)
+            let filteredOutlines = measurement.outlines.filter {
+                if $0.cluster == .line {
+                    return $0.points.count >= 2
+                } else {
+                    return $0.points.count >= 3
+                }
             }
+            let outlines = filteredOutlines.map {
+                MeasuredOutline(
+                    id: $0.id,
+                    points: $0.points,
+                    areaInCM: $0.areaInCM,
+                    circumferenceInCM: $0.circumferenceInCM,
+                    lengthInCM: $0.lengthInCM,
+                    lengthStartPointPixels: $0.lengthStartPointPixels,
+                    lengthEndPointPixels: $0.lengthEndPointPixels,
+                    widthInCM: $0.widthInCM,
+                    widthStartPointPixels: $0.widthStartPointPixels,
+                    widthEndPointPixels: $0.widthEndPointPixels,
+                    depthCM: $0.depthCM,
+                    order: $0.order,
+                    cluster: $0.cluster,
+                    excluding: $0.excluding,
+                    parentOutlineOrder: $0.parentOutlineOrder,
+                    parentOutlineCluster: $0.parentOutlineCluster)
+            }
+            let config = MyWoundGeniusPresenter(completion: {_ in })
+            config.isDepthOrHeightInputEnabled = false
+            
             if outlines.filter({ $0.cluster.isSecondaryType }).count > 0 {
                 // Use the outlines to get needed values out.
                 // To get the tissue types and areas you as well can use the convenience method.
@@ -364,25 +442,23 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let summary = MeasurementSummaryController(style: tableViewStyle,
                                                            image: measurement.image,
-                                                           mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
                                                            mlOutlines: nil,
                                                            isDepthOrHeightInputEnabled: false,
-                                                           config: MyWoundGeniusPresenter(completion: {_ in }),
+                                                           config: config,
                                                            title: "",
                                                            subtitle: "")
                 self.navigationController?.pushViewController(summary, animated: true)
             } else {
                 let details = MeasurementDetailsController(style: tableViewStyle,
                                                            image: measurement.image,
-                                                           mediaManager: ImitoMeasureMediaManager(),
                                                            isRightButtonShown: false,
                                                            outlines: outlines,
-                                                           isDepthOrHeightInputEnabled: false,
+                                                            isDepthOrHeightInputEnabled: false,
                                                            title: "",
                                                            subtitle: "",
-                                                           config: MyWoundGeniusPresenter(completion: {_ in }),
+                                                           config: config,
                                                            willDisappear: nil)
                 self.navigationController?.pushViewController(details, animated: true)
             }
@@ -405,11 +481,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: Show What's New If Needed
 
 extension HomeViewController {
-    
     func showWhatsNewIfNeeded() {
         guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return
         }
+        
+        let config = MyWoundGeniusPresenter(completion: {_ in })
         
         func present(key: String, userId: String?) -> Bool {
             let body = L.strWithPatterns(key)
@@ -426,9 +503,7 @@ extension HomeViewController {
         
         let iOSKey = "WHATS_NEW_\(appVersion)_iOS_HTML"
         let universalKey = "WHATS_NEW_\(appVersion)_HTML"
-        
-        let config = MyWoundGeniusPresenter(completion: {_ in })
-        
+        //
         if present(key: iOSKey, userId: config.userId) {
             return // If there is iOS specific What's new defined. "WHATS_NEW_\(appVersion)_iOS_HTML" - try to show it, if not shown before.
         } else if present(key: universalKey, userId: config.userId) {

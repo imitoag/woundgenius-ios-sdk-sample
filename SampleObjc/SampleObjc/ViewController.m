@@ -35,7 +35,7 @@
         [self.wgWrapper isAvailableWithFeature:@"woundDetection"]) {
         [self.wgWrapper startCapturingWithOver:self];
     } else {
-        NSLog(@"%@", @"Some of the features in this sample are not unlocked by your license");
+        NSLog(@"%@", @"Please verify the license key in WoundGeniusWrapper.swift - Invalid license or some of the features in this sample are not unlocked by your license.");
     }
 }
 
