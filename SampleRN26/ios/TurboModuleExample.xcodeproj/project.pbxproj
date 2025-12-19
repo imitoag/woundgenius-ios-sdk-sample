@@ -10,6 +10,7 @@
 		0C80B921A6F3F58F76C31292 /* libPods-TurboModuleExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TurboModuleExample.a */; };
 		0E2A8615CB6FB72111D17296 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		18B6E2FE2EF57E2F00CC0E2D /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18B6E2FD2EF57E2F00CC0E2D /* WoundGeniusSDK */; };
 		18E9A5BD2E8FC1EC0072D70C /* RCTNativeLocalStorage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E9A5BC2E8FC1EC0072D70C /* RCTNativeLocalStorage.mm */; };
 		18E9A5C02E8FC8900072D70C /* WoundGeniusSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18E9A5BF2E8FC8900072D70C /* WoundGeniusSDK */; };
 		18E9A5C52E8FC8D30072D70C /* WoundGeniusRN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9A5C42E8FC8D30072D70C /* WoundGeniusRN.swift */; };
@@ -50,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B6E2FE2EF57E2F00CC0E2D /* WoundGeniusSDK in Frameworks */,
 				18E9A7FE2E9518A10072D70C /* WoundGeniusSDK in Frameworks */,
 				18E9A5C02E8FC8900072D70C /* WoundGeniusSDK in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-TurboModuleExample.a in Frameworks */,
@@ -199,7 +201,7 @@
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			packageReferences = (
-				18E9A7FC2E9518A10072D70C /* XCLocalSwiftPackageReference "../../../../Desktop/woundgenius-ios-sdk-main" */,
+				18B6E2FC2EF57E2F00CC0E2D /* XCLocalSwiftPackageReference "../../../../Desktop/woundgenius-ios-sdk-beta-v1.5.0" */,
 			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
@@ -570,13 +572,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		18E9A7FC2E9518A10072D70C /* XCLocalSwiftPackageReference "../../../../Desktop/woundgenius-ios-sdk-main" */ = {
+		18B6E2FC2EF57E2F00CC0E2D /* XCLocalSwiftPackageReference "../../../../Desktop/woundgenius-ios-sdk-beta-v1.5.0" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../../Desktop/woundgenius-ios-sdk-main";
+			relativePath = "../../../../Desktop/woundgenius-ios-sdk-beta-v1.5.0";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		18B6E2FD2EF57E2F00CC0E2D /* WoundGeniusSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WoundGeniusSDK;
+		};
 		18E9A5BF2E8FC8900072D70C /* WoundGeniusSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WoundGeniusSDK;

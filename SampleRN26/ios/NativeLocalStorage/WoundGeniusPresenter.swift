@@ -14,11 +14,9 @@ import AVFoundation
  */
 class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
   
-  // Start: Non-protocol properties
-  
-  // Zxing wrapper to search for markers.
-  private let markerDetector = ZXWrapper()
-  
+  // Disabled single wound per image mode.
+  var isSingleAreaModeEnabled: Bool = false
+    
   // Custom completion, which can return the Photo result or Measurement result.
   private var completion: ((PhotoCaptureResult?, MeasurementResult?)->())?
   
@@ -28,7 +26,7 @@ class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
     super.init()
     
     // Activate the WoundGenius with your license key.
-    WG.activate(licenseKey: "eyJzaWciOiJDWnFEMmRZRlkzU21hKzRqM2JxSVpUREJIb0RTNnVmTTdIQ3F6TXQxZTd1VWVsY1wvbzBmbkpydUFyQkY4NnIyb3dTd3N3ZDQyaytZbFRaa2gzZmZlYmo3S0MyTWZBMjYzSEJGdHpJRGdHT0dZd2l5TGNYQ1pVSGVjamxmWTZkSldvSjhxRUk3UUdoTFZOVzJvZ1F6YWp0aDU2RU1zeEJNU3h0bnl6QklSK2JidlJqb1dibDFjTkQyS3pcL2FRbk5ZWml2QTR6aHdydjR5ZUhNcjV6dHpOTU5UMDBuZ3pLTFpENTVQTUlPUWhhVjFMaGZEd3MrQXRsNU9BYWZxT3NGNmlyYThzSktPOTNFODlyb1NIRlVkMXIwbHdtaFVyWDN0aWNnbkFIZTFzbmZTSkdGRHBJWURWd25OWVhvY1F5RFhNd1lnSDc3OE8zREJITU5kYXdIdVd2d1RYeVhyQmFhWkY1OEFUYmN2ZVZtWlwvTHlaTkdtbTZIUk9UWHp4SFFXMmUzMFJyTGNNWnZJQlc1TUFSa01GZDhXUk5TemRFRENFTE51UzUrWjJhU3pIZGVmcEc0bFwvM2FVR2YrSnM5NVo2RGQrWVZTcXpLcVwvQlA1QzhDY3lMMjF4c0RuVHZVSjVKUXhsd1diZUliV2JOZXNncXd6NWRoRWZldkFoQXVOZ1M2eDBBdzM5V1U4QWlmWGUxYVJNN3N6dzY5bzlFZDNzYWZta2xKRytGU0lxam9udzdoYmxjQ3ExU1ExT3dDbTNOZ0d3VkJFSkJyRTVPeWw3cUJMQ0ZGcUc0WCtiQnpoczRibzVic1gzaFhsT29UYjJzS21JYnhcL0xzK1lxQ1l0NHBMbkN3ME9zSnFtM2tERkNqUU9NWEtGeDN0bVZPV0NVT284WmVNbFlLWHI2Zz0iLCJhbGciOiIxIiwiZW5jIjoiZXlKcGJtTnNkV1JsWkNJNlczc2lkSGx3WlNJNkltRndjR3hwWTJGMGFXOXVTV1FpTENKcFpDSTZJbWx2TG1sdGFYUnZMbmR2ZFc1a1oyVnVhWFZ6TG5OaGJYQnNaU0o5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pY0dodmRHOURZWEIwZFhKcGJtY2lmU3g3SW5SNWNHVWlPaUptWldGMGRYSmxTV1FpTENKcFpDSTZJblpwWkdWdlEyRndkSFZ5YVc1bkluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSnlkV3hsY2sxbFlYTjFjbVZ0Wlc1MFEyRndkSFZ5YVc1bkluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSnRZWEpyWlhKTlpXRnpkWEpsYldWdWRFTmhjSFIxY21sdVp5SjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2liR2x1WlUxbFlYTjFjbVZ0Wlc1MEluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSm1jbTl1ZEdGc1EyRnRaWEpoSW4wc2V5SjBlWEJsSWpvaVptVmhkSFZ5WlVsa0lpd2lhV1FpT2lKaGNtVmhVMk5oYm01cGJtY3pSQ0o5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pYlhWc2RHbHdiR1ZYYjNWdVpITlFaWEpKYldGblpTSjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2lkMjkxYm1SRVpYUmxZM1JwYjI0aWZTeDdJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlMQ0pwWkNJNklteHBkbVZYYjNWdVpFUmxkR1ZqZEdsdmJpSjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2lZbTlrZVZCaGNuUlFhV05yWlhJaWZTeDdJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlMQ0pwWkNJNklteHZZMkZzVTNSdmNtRm5aVWx0WVdkbGN5SjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2liRzlqWVd4VGRHOXlZV2RsVm1sa1pXOXpJbjFkTENKa1lYUmhJanA3ZlN3aWJXVjBZU0k2ZXlKbGVIQnBjbmtpT2lJeU1ESTFMVEV5TFRNeElERXdPalE1T2pBd0lpd2lhWE56ZFdWa0lqb2lNakF5TlMweE1DMHdNeUF3T1RvME9UbzFPQ0o5ZlE9PSJ9") // Till December 31, 2025.
+    WG.activate(licenseKey: "eyJzaWciOiJDWnFEMmRZRlkzU21hKzRqM2JxSVpUREJIb0RTNnVmTTdIQ3F6TXQxZTd1VWVsY1wvbzBmbkpydUFyQkY4NnIyb3dTd3N3ZDQyaytZbFRaa2gzZmZlYmo3S0MyTWZBMjYzSEJGdHpJRGdHT0dZd2l5TGNYQ1pVSGVjamxmWTZkSldvSjhxRUk3UUdoTFZOVzJvZ1F6YWp0aDU2RU1zeEJNU3h0bnl6QklSK2JidlJqb1dibDFjTkQyS3pcL2FRbk5ZWml2QTR6aHdydjR5ZUhNcjV6dHpOTU5UMDBuZ3pLTFpENTVQTUlPUWhhVjFMaGZEd3MrQXRsNU9BYWZxT3NGNmlyYThzSktPOTNFODlyb1NIRlVkMXIwbHdtaFVyWDN0aWNnbkFIZTFzbmZTSkdGRHBJWURWd25OWVhvY1F5RFhNd1lnSDc3OE8zREJITU5kYXdIdVd2d1RYeVhyQmFhWkY1OEFUYmN2ZVZtWlwvTHlaTkdtbTZIUk9UWHp4SFFXMmUzMFJyTGNNWnZJQlc1TUFSa01GZDhXUk5TemRFRENFTE51UzUrWjJhU3pIZGVmcEc0bFwvM2FVR2YrSnM5NVo2RGQrWVZTcXpLcVwvQlA1QzhDY3lMMjF4c0RuVHZVSjVKUXhsd1diZUliV2JOZXNncXd6NWRoRWZldkFoQXVOZ1M2eDBBdzM5V1U4QWlmWGUxYVJNN3N6dzY5bzlFZDNzYWZta2xKRytGU0lxam9udzdoYmxjQ3ExU1ExT3dDbTNOZ0d3VkJFSkJyRTVPeWw3cUJMQ0ZGcUc0WCtiQnpoczRibzVic1gzaFhsT29UYjJzS21JYnhcL0xzK1lxQ1l0NHBMbkN3ME9zSnFtM2tERkNqUU9NWEtGeDN0bVZPV0NVT284WmVNbFlLWHI2Zz0iLCJhbGciOiIxIiwiZW5jIjoiZXlKcGJtTnNkV1JsWkNJNlczc2lkSGx3WlNJNkltRndjR3hwWTJGMGFXOXVTV1FpTENKcFpDSTZJbWx2TG1sdGFYUnZMbmR2ZFc1a1oyVnVhWFZ6TG5OaGJYQnNaU0o5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pY0dodmRHOURZWEIwZFhKcGJtY2lmU3g3SW5SNWNHVWlPaUptWldGMGRYSmxTV1FpTENKcFpDSTZJblpwWkdWdlEyRndkSFZ5YVc1bkluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSnlkV3hsY2sxbFlYTjFjbVZ0Wlc1MFEyRndkSFZ5YVc1bkluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSnRZWEpyWlhKTlpXRnpkWEpsYldWdWRFTmhjSFIxY21sdVp5SjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2liR2x1WlUxbFlYTjFjbVZ0Wlc1MEluMHNleUowZVhCbElqb2labVZoZEhWeVpVbGtJaXdpYVdRaU9pSm1jbTl1ZEdGc1EyRnRaWEpoSW4wc2V5SjBlWEJsSWpvaVptVmhkSFZ5WlVsa0lpd2lhV1FpT2lKaGNtVmhVMk5oYm01cGJtY3pSQ0o5TEhzaWRIbHdaU0k2SW1abFlYUjFjbVZKWkNJc0ltbGtJam9pYlhWc2RHbHdiR1ZYYjNWdVpITlFaWEpKYldGblpTSjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2lkMjkxYm1SRVpYUmxZM1JwYjI0aWZTeDdJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlMQ0pwWkNJNklteHBkbVZYYjNWdVpFUmxkR1ZqZEdsdmJpSjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2lZbTlrZVZCaGNuUlFhV05yWlhJaWZTeDdJblI1Y0dVaU9pSm1aV0YwZFhKbFNXUWlMQ0pwWkNJNklteHZZMkZzVTNSdmNtRm5aVWx0WVdkbGN5SjlMSHNpZEhsd1pTSTZJbVpsWVhSMWNtVkpaQ0lzSW1sa0lqb2liRzlqWVd4VGRHOXlZV2RsVm1sa1pXOXpJbjFkTENKa1lYUmhJanA3ZlN3aWJXVjBZU0k2ZXlKbGVIQnBjbmtpT2lJeU1ESTFMVEV5TFRNeElERXdPalE1T2pBd0lpd2lhWE56ZFdWa0lqb2lNakF5TlMweE1DMHdNeUF3T1RvME9UbzFPQ0o5ZlE9PSJ9") // Sample License Key. Valid Till December 31, 2025. Use your license key here, with your bundle id to run the sample app.
     
     self.completion = completion
   }
@@ -111,28 +109,7 @@ class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
   }
   
   var refreshLastMediaIconAndRightBarButtonState: (() -> ())?
-  
-  func captured(sampleBuffer: CMSampleBuffer, previewOrientation: UIInterfaceOrientation, videoOrientation: AVCaptureVideoOrientation, processingResult: @escaping ((WoundGenius.MarkerDetectionStatus, [CGPoint]?, CGSize?)) -> ()) {
-    self.markerDetector.submitNewSampleBuffer(sampleBuffer: sampleBuffer,
-                                              previewOrientation: previewOrientation,
-                                              videoOrientation: videoOrientation)
     
-    self.markerDetector.detectionStatus = { status in
-      DispatchQueue.main.async {
-        switch status {
-        case .detected(let pointsInPrecentage, let frameSize):
-          processingResult((.detectedImitoMarkerTiltOk, pointsInPrecentage, frameSize))
-        case .detectedWrongTilt(let pointsInPrecentage, let frameSize):
-          processingResult((.detectedImitoMerkerTiltNotOk, pointsInPrecentage, frameSize))
-        case .stoppedDetecting, .notDetected, .detectedCompletelyWrongTilt:
-          processingResult((.searching, nil, nil))
-        @unknown default:
-          assertionFailure("Unknown default")
-        }
-      }
-    }
-  }
-  
   func handle(event: WoundGenius.WGEvent) {
     switch event {
     case .cancelButtonTapped(let vc):
@@ -144,12 +121,12 @@ class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
       self.showOutlining(captureVC: vc, captureResult: result)
     case .capturedRulerMeasurementImage(let vc, let result):
       self.showRulerMeasurementScaleDefinition(captureVC: vc, captureResult: result)
-    case .pickedPhoto(vc: let vc, result: let photoResult):
+    case .pickedPhoto(vc: let vc, result: let photoResult, let markerDetector):
       print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
       // Search for imito marker on the image. If it will be detected - start measurement.
       switch vc.currentMode {
       case .markerMeasurement, .rulerMeasurement:
-        self.markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
+        markerDetector.searchMarker(image: photoResult.preview) { [weak self] status in
           DispatchQueue.main.async {
             guard let self = self else { return }
             switch status {
@@ -257,7 +234,6 @@ class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
                                                  woundStomaConfig: woundStomaConfig)
     
     imNavController = IMNavigationController(image: image,
-                                             mediaManager: ImitoMeasureMediaManager(),
                                              resultScreenBottomView: nil,
                                              sideSize: sideSize,
                                              linePoints: linePoints,
@@ -302,7 +278,6 @@ class WoundGeniusPresenter: NSObject, WGPresenterProtocol {
                                                 woundStomaConfig: woundStomaConfig)
       
       imNavController = IMNavigationController(image: captureResult.photo!,
-                                               mediaManager: ImitoMeasureMediaManager(),
                                                qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()), resultScreenBottomView: nil,
                                                markerPointsPercentage: captureResult.codeDetection.pointsPercentage,
                                                navConfig: config,
