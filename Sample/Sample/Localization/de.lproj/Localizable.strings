@@ -15,7 +15,7 @@
 "RETAKE_BUTTON" = "Wiederholen";
 "MEASURE_BUTTON" = "Messen";
 "PLEASE_START_DRAWING" = "Umranden Sie mit dem Finger die zu messende Fläche.";
-"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Verwenden Sie Ihren Finger, um Bereiche zu umranden, oder tippen Sie auf Auto-Erkennung, um die Ränder automatisch zu erkennen.";
+"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Bereiche manuell umranden oder mit \"Auto-Erkennung\" automatisch erfassen.";
 "PLEASE_CLOSE_THE_PATH" = "Schliessen Sie die Umrandung, damit die Messung durchgeführt werden kann.";
 "TAP_MEASURE_TO_COUNTINUE" = "Perfekt! Tippen Sie auf Bestätigen, um fortzufahren.";
 "RESULT_TITLE" = "Messergebnisse";
@@ -62,7 +62,7 @@
 "RIGHT_SHORT_TEXT" = "R";
 "LATERAL" = "Lateral";
 "MEDIAL" = "Medial";
-"ENSURE_ACCURATE_DETECTION" = "Stellen Sie sicher, dass die Wundränder genau erfasst werden, und nehmen Sie bei Bedarf Anpassungen vor. Tippen Sie auf Bestätigen, um die Messung abzuschliessen.";
+"ENSURE_ACCURATE_DETECTION" = "Wundränder genau erfassen, bei Bedarf anpassen und die Messung durch Bestätigen abschliessen.";
 "REVIEW_CONTOURS" = "Review";
 "CLEAR_CONTOURS" = "Alle Löschen";
 "EDIT_CONTOURS" = "Bearbeiten";
@@ -254,7 +254,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "NO_OPEN_WOUND_DETECTED" = "Keine offene Wunde erkannt. Erwägen Sie, ein neues Foto aufzunehmen oder Messungen manuell über die obigen Schaltflächen hinzuzufügen.";
 
 /*Fuzzy*/
-"START_DRAWING_LINE" = "Beginnen Sie zu zeichnen, um Linien oder Kurven zu messen, oder ziehen Sie vorhandene Punkte, um sie anzupassen. Tippen Sie auf „Fertig“, um fortzufahren.";
+"START_DRAWING_LINE" = "Linien zeichnen oder Punkte zum Anpassen ziehen. Zum Fortfahren auf \"Fertig\" tippen.";
 "MEASUREMENT_RESULTS_ZOOM" = "Zoomen";
 "QR_CODE_NOT_SUPPORTED" = "Kalibriermarker nutzen";
 "LINE_ITEM_NUMBER" = "Linie L%d";

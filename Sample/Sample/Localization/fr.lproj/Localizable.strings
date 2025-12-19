@@ -14,8 +14,8 @@
 "PLEASE_DECREASE_THE_TILT_OF_DEVICE" = "Veuillez tenir l’appareil parallèle au marqueur.";
 "RETAKE_BUTTON" = "Reprendre";
 "MEASURE_BUTTON" = "Mesurer";
-"PLEASE_START_DRAWING" = "Utilisez votre doigt pour tracer le contour.";
-"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Utilisez votre doigt pour délimiter les zones ou appuyez sur Auto-détecter pour une détection automatique des bords.";
+"PLEASE_START_DRAWING" = "Utilisez votre doigt pour encercler la zone à mesurer.";
+"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Délimitez la zone au doigt ou utilisez Détection auto pour détecter les bords.";
 "PLEASE_CLOSE_THE_PATH" = "Fermez le contour pour procéder à la mesure.";
 "TAP_MEASURE_TO_COUNTINUE" = "Parfait. Appuyez sur Confirmer pour poursuivre.";
 "RESULT_TITLE" = "Résultats de mesure";
@@ -62,7 +62,7 @@
 "RIGHT_SHORT_TEXT" = "D";
 "LATERAL" = "Latéral";
 "MEDIAL" = "Médian";
-"ENSURE_ACCURATE_DETECTION" = "Assurez-vous que les bords de la plaie sont détectés avec précision et apportez les ajustements nécessaires. Appuyez sur « Confirmer» pour finaliser la mesure.";
+"ENSURE_ACCURATE_DETECTION" = "Assurez une détection précise des bords de la plaie et ajustez si nécessaire. Appuyez sur Confirmer pour finaliser la mesure.";
 "REVIEW_CONTOURS" = "Revoir";
 "CLEAR_CONTOURS" = "Tout effacer";
 "EDIT_CONTOURS" = "Éditer";
@@ -254,7 +254,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "NO_OPEN_WOUND_DETECTED" = "Aucune plaie ouverte détectée. Envisagez de reprendre une photo ou d'ajouter des mesures manuellement en utilisant les boutons ci-dessus.";
 
 /*Fuzzy*/
-"START_DRAWING_LINE" = "Commencez à dessiner pour mesurer des lignes ou des courbes, ou faites glisser les points d’une mesure existante pour l’ajuster. Appuyez sur Terminer pour continuer.";
+"START_DRAWING_LINE" = "Tracez pour mesurer des lignes ou des courbes, ou ajustez en déplaçant les points. Appuyez sur Terminer pour continuer.";
 "MEASUREMENT_RESULTS_ZOOM" = "Zoomer";
 "QR_CODE_NOT_SUPPORTED" = "Utiliser marqueur calib.";
 "LINE_ITEM_NUMBER" = "Ligne L%d";

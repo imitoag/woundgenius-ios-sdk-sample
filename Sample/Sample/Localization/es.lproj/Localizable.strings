@@ -14,8 +14,8 @@
 "PLEASE_DECREASE_THE_TILT_OF_DEVICE" = "Mantener paralelo al marcador";
 "RETAKE_BUTTON" = "Repetir";
 "MEASURE_BUTTON" = "Medida";
-"PLEASE_START_DRAWING" = "Utilice el dedo para rodear la zona a medir.";
-"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Utiliza el dedo para delinear áreas o pulse en Detección automática para detectar los bordes automáticamente.";
+"PLEASE_START_DRAWING" = "Utiliza el dedo para rodear la zona a medir.";
+"PLEASE_START_DRAWING_WITH_AUTODETECT" = "Utiliza el dedo para delinear áreas o pulsa en Detección automática para detectar los bordes automáticamente.";
 "PLEASE_CLOSE_THE_PATH" = "Por favor, cierre la ruta para proceder a la medición.";
 "TAP_MEASURE_TO_COUNTINUE" = "Todo bien. Pulse Confirmar para continuar con la evaluación.";
 "RESULT_TITLE" = "Resultados medición";
@@ -249,7 +249,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "LINE_MEASUREMENT_POPUP_DESCRIPTION" = "Mida suturas postoperatorias y otras características con el nuevo modo de medición de línea.";
 "OUTLINE" = "Contorno";
 "NO_OPEN_WOUND_DETECTED" = "No se detectó ninguna herida abierta. Considere tomar otra foto o agregar las medidas manualmente usando los botones de arriba.";
-"START_DRAWING_LINE" = "Comience a dibujar para medir líneas o curvas, o arrastre los puntos existentes para ajustarlos. Toque en Listo para continuar.";
+"START_DRAWING_LINE" = "Comienza a dibujar para medir líneas o curvas, o arrastra los puntos existentes para ajustarlos. Toca en Listo para continuar.";
 "MEASUREMENT_RESULTS_ZOOM" = "Ampliar";
 "QR_CODE_NOT_SUPPORTED" = "Usar marcador calib.";
 "LINE_ITEM_NUMBER" = "Línea L%d";
