@@ -206,7 +206,29 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                 self.refreshLastMediaIconAndRightBarButtonState?()
             }
             switch vc.currentMode {
-            case .markerMeasurement, .rulerMeasurement:
+            case .markerMeasurement:
+                markerDetector.searchMarker(image: photoResult.preview) { result in
+                    switch result {
+                    case .detected(let pointsPercentage, _):
+                        DispatchQueue.main.async {
+                            // Start Marker Measurement Flow, as the marker was detected.
+                            let captureResultNew = MeasurementCaptureResult(photoName: photoResult.photoName,
+                                                                            photo: photoResult.preview,
+                                                                            codeDetection: CodeDetectionResult(code: "10mm",
+                                                                                                               fromQRCode: false,
+                                                                                                               pointsPercentage: pointsPercentage))
+                            self.showOutlining(captureVC: vc, captureResult: captureResultNew)
+                        }
+                    case .detectedWrongTilt, .detectedCompletelyWrongTilt, .stoppedDetecting, .notDetected:
+                        DispatchQueue.main.async {
+                            UIUtils.showConfirmationAlert(title: nil, message: L.str("MARKER_NOT_DETECTED_DESCRIPTION"), confirmButton: L.str("USE_MANUAL_CALIBRATION"), cancelButton: L.str("CANCEL"), style: .alert) { [weak self] in
+                                // Starting the Ruler Measurement. As there is no marker in the image. You can adjust it to required behaviour.
+                                self?.presentMeasurementFlow(overCaptureVC: vc, captureResult: photoResult, pointViews: nil, sideSize: nil)
+                            }
+                        }
+                    }
+                }
+            case .rulerMeasurement:
                 markerDetector.searchMarker(image: photoResult.preview) { result in
                     switch result {
                     case .detected(let pointsPercentage, _):
@@ -540,3 +562,4 @@ extension MyWoundGeniusPresenter {
         }
     }
 }
+
