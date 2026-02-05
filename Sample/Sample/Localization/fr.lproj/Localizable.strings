@@ -62,7 +62,7 @@
 "RIGHT_SHORT_TEXT" = "D";
 "LATERAL" = "Latéral";
 "MEDIAL" = "Médian";
-"ENSURE_ACCURATE_DETECTION" = "Assurez une détection précise des bords de la plaie et ajustez si nécessaire. Appuyez sur Confirmer pour finaliser la mesure.";
+"ENSURE_ACCURATE_DETECTION" = "Vérifiez la détection des bords de la plaie et ajustez si nécessaire. Appuyez sur Confirmer pour finaliser la mesure.";
 "REVIEW_CONTOURS" = "Revoir";
 "CLEAR_CONTOURS" = "Tout effacer";
 "EDIT_CONTOURS" = "Éditer";
@@ -254,7 +254,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "NO_OPEN_WOUND_DETECTED" = "Aucune plaie ouverte détectée. Envisagez de reprendre une photo ou d'ajouter des mesures manuellement en utilisant les boutons ci-dessus.";
 
 /*Fuzzy*/
-"START_DRAWING_LINE" = "Tracez pour mesurer des lignes ou des courbes, ou ajustez en déplaçant les points. Appuyez sur Terminer pour continuer.";
+"START_DRAWING_LINE" = "Dessinez des lignes ou des courbes, ou ajustez-les en déplaçant les points. Appuyez sur Terminer pour continuer.";
 "MEASUREMENT_RESULTS_ZOOM" = "Zoomer";
 "QR_CODE_NOT_SUPPORTED" = "Utiliser marqueur calib.";
 "LINE_ITEM_NUMBER" = "Ligne L%d";
