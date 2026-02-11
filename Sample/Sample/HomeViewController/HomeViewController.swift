@@ -232,7 +232,8 @@ extension HomeViewController {
             .flatMap({ $0.items })
             .map({ $0.itemId }),
                                                  languageISO2Alpha: L.str("LANGUAGE_CODE"),
-                                                 gender: .female, primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
+                                                 gender: .female,
+                                                 primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
                                                  localization: self.woundGeniusFlowPresenter, devLogs: { log in
             print(log)
         }) { [weak self] result in
