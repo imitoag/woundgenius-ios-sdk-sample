@@ -168,6 +168,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                 self.completion?(self.capturedItemsToReturn)
                 self.capturedItemsToReturn = [CaptureResult]()
             }
+            self.refreshLastMediaIconAndRightBarButtonState?()
         case .capturedPhoto(let vc, let photoResult):
             print("The IMCaptureViewController: \(vc), the photoResult: \(photoResult)")
             capturedItemsToReturn.append(.photo(photoResult))
@@ -175,6 +176,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                 self.completion?(self.capturedItemsToReturn)
                 self.capturedItemsToReturn = [CaptureResult]()
             }
+            self.refreshLastMediaIconAndRightBarButtonState?()
         case .capturedMarkerMeasurement(let vc, let result):
             self.showOutlining(captureVC: vc, captureResult: result)
         case .capturedRulerMeasurementImage(vc: let vc, let result):
@@ -267,7 +269,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             switch mode {
             case .markerMeasurement:
                 do {
-                    let jsonHelpConfig = (self.autoDetectionMode == .none) ? "CALIBRATION_MARKER_HELP_JSON" : "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON"
+                    let jsonHelpConfig = (self.isLiveWoundDetectionEnabled) ? "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON" : "CALIBRATION_MARKER_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
                         vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
                         break
@@ -282,7 +284,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
                 }
             case .rulerMeasurement:
                 do {
-                    let jsonHelpConfig = (self.autoDetectionMode == .none) ? "RULER_HELP_JSON" : "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON"
+                    let jsonHelpConfig = (self.isLiveWoundDetectionEnabled) ? "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON" : "RULER_HELP_JSON"
                     guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
                         vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
                         break
@@ -366,9 +368,9 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     var primaryButtonColor: UIColor {
         switch UserDefaults.standard.integer(forKey: SettingKey.primaryButtonColor.rawValue) {
         case 1:
-            return .blue
+            return .systemBlue
         case 2:
-            return .green
+            return .systemGreen
         default:
             return UIColor(red: 226/255.0, green: 53/255.0, blue: 42/255.0, alpha: 1.0)
         }
@@ -490,6 +492,8 @@ extension MyWoundGeniusPresenter {
                 self.completion?(self.capturedItemsToReturn)
                 self.capturedItemsToReturn = [CaptureResult]()
             }
+            
+            self.refreshLastMediaIconAndRightBarButtonState?()
         }, bottomViewCompletion: { _ in
             
         })
@@ -551,6 +555,8 @@ extension MyWoundGeniusPresenter {
                     self.completion?(self.capturedItemsToReturn)
                     self.capturedItemsToReturn = [CaptureResult]()
                 }
+                
+                self.refreshLastMediaIconAndRightBarButtonState?()
             }, bottomViewCompletion: { _ in
                 
             })
@@ -562,4 +568,3 @@ extension MyWoundGeniusPresenter {
         }
     }
 }
-
