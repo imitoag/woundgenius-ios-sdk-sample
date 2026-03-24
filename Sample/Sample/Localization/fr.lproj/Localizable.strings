@@ -220,7 +220,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "NEED_HELP_DIALOG_title" = "Besoin d'aide ?";
 "NEED_HELP_DIALOG_description" = "Cliquez ici pour consulter le guide rapide sur l'utilisation des marqueurs de calibration et d'autres modes de capture.";
 "ONBOARDING_DIALOG_title" = "Démarrage rapide";
-"ONBOARDING_DIALOG_description" = "Placez le marqueur de calibration près de la plaie, alignez votre appareil en conséquence et maintenez-le stable pour la capture. Gardez un œil sur le recouvrement vert pour améliorer la détection de la plaie.";
+"ONBOARDING_DIALOG_description" = "Placez le marqueur de calibration près de la plaie, alignez l’appareil et maintenez-le immobile. Surveillez le recouvrement vert pour améliorer la détection de la plaie.";
 "ONBOARDING_DIALOG_replay_video" = "Relire la vidéo";
 "ONBOARDING_DIALOG_get_started" = "Commencer";
 "WATCH_VIDEO" = "Regarder la vidéo";
