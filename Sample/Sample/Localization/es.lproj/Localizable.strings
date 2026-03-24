@@ -220,7 +220,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 /*Fuzzy*/
 "NEED_HELP_DIALOG_description" = "Pulse aquí para consultar la guía rápida sobre el uso de los Marcadores de Calibración y otros modos de Captura";
 "ONBOARDING_DIALOG_title" = "Inicio rápido";
-"ONBOARDING_DIALOG_description" = "Coloque el marcador de calibración cerca de la herida, alinee el dispositivo en consecuencia y manténgalo firme para capturar. No pierda de vista la superposición verde para mejorar la detección de la herida.";
+"ONBOARDING_DIALOG_description" = "Coloque el marcador cerca de la herida, alinee el dispositivo y manténgalo firme. No pierda de vista la superposición verde para mejorar la detección de la herida.";
 "ONBOARDING_DIALOG_replay_video" = "Reproducir vídeo";
 "ONBOARDING_DIALOG_get_started" = "Empezar";
 "WATCH_VIDEO" = "Ver el vídeo";

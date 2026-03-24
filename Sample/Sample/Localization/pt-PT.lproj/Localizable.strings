@@ -216,7 +216,7 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "NEED_HELP_DIALOG_title" = "Precisa de ajuda?";
 "NEED_HELP_DIALOG_description" = "Toque aqui para conferir o guia rápido sobre o uso de marcadores de calibração. Não tem marcadores? Experimente o modo Régua.";
 "ONBOARDING_DIALOG_title" = "Início rápido";
-"ONBOARDING_DIALOG_description" = "Coloque o marcador de calibração próximo à ferida, alinhe o dispositivo de acordo e segure-o com firmeza para capturar. Fique de olho na sobreposição verde para melhorar a detecção da ferida.";
+"ONBOARDING_DIALOG_description" = "Posicione o marcador próximo à ferida, alinhe o dispositivo e segure firme. Siga o contorno verde para melhorar a detecção.";
 "ONBOARDING_DIALOG_replay_video" = "Repetir o vídeo";
 "ONBOARDING_DIALOG_get_started" = "Comece a usar";
 "WATCH_VIDEO" = "Assista ao vídeo";
