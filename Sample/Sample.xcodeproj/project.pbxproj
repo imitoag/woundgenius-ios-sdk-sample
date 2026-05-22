@@ -536,7 +536,6 @@
 			);
 			mainGroup = CE0107512930B844000804BC;
 			packageReferences = (
-				1890FA6F2FC0909B00B4A1BE /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CE01075B2930B844000804BC /* Products */;
@@ -1329,13 +1328,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		1890FA6F2FC0909B00B4A1BE /* XCLocalSwiftPackageReference "../../woundgenius-ios-sdk" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../woundgenius-ios-sdk";
-		};
-/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		6A2871E02D9016660083375F /* XCRemoteSwiftPackageReference "netfox" */ = {
