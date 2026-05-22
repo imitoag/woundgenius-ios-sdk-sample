@@ -141,12 +141,17 @@ class SettingsTableViewController: UITableViewController {
                             UserDefaults.standard.set(false, forKey: SettingKey.stomaCapturing.rawValue)
                         case .barcodeScanning:
                             break
+                        case .facialSurgery:
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature), forKey: SettingKey.isFacialSurgeryEnabled.rawValue)
                         case .manualMeasurementInput:
                             break
                         case .handyscopeCapturing:
                             break
                         case .debugMode:
                             break
+                        case .areaScanning3D:
+                            UserDefaults.standard.set(WG.isAvailable(feature: feature),
+                                                      forKey: SettingKey.isAreaScanning3DEnabled.rawValue)
                         @unknown default:
                             break
                         }

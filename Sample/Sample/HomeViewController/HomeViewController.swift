@@ -18,13 +18,23 @@ class HomeViewController: UIViewController {
     private lazy var woundGeniusFlowPresenter: MyWoundGeniusPresenter = {
         MyWoundGeniusPresenter(completion: { [weak self] captureResults in
             guard let self = self else { return }
-            self.series.append(Series(captureResults: captureResults))
+            self.series.append(Series(captureResults: captureResults, formsModel: nil))
             (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
             self.tableView.reloadData()
             self.woundGeniusRouter?.stopCapturing()
         })
     }()
-        
+    
+    private lazy var woundGeniusFacilFlowPresenter = {
+        WoundGeniusPresenterFacialSurgery(completion: { [weak self] captureResults in
+            guard let self = self else { return }
+            self.series.append(Series(captureResults: captureResults, formsModel: nil))
+            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
+            self.tableView.reloadData()
+            self.woundGeniusRouter?.stopCapturing()
+        })
+    }()
+    
     // MARK: Properties
     
     /** Initiate the woundGeniusFlow instace with presenter. */
@@ -39,26 +49,58 @@ class HomeViewController: UIViewController {
     /** Core Module: A button to launch WoundGenius 3D Capturing */
     private let displayMeasuremntResults = UIButton(frame: .zero)
     
+    private lazy var startFacialCapturing: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(lanchFacilCapturing), for: .touchUpInside)
+        button.backgroundColor = UINavigationBar.appearance().tintColor
+        button.tintColor = .white
+        button.setTitle("Start Facial Capturing", for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
+        return button
+    }()
     /** Core Module: A button to show Body Part Picker */
     private let showBodyPartPicker = UIButton(frame: .zero)
     
     /** Core Module: A button to show Body Part Picker */
     private let showV1BodyPartPicker = UIButton(frame: .zero)
     
+    /** A button to launch Default Assessment + CDS flow */
+    private lazy var startDefaultAssessmentCDS: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(launchDefaultAssessmentCDS), for: .touchUpInside)
+        button.backgroundColor = UINavigationBar.appearance().tintColor
+        button.tintColor = .white
+        button.setTitle("Default Assessment + CDS", for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
+        return button
+    }()
+    
+    /** Vertical stack view for bottom action buttons */
+    private let bottomButtonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     /** Core Module: TableView is showing the captured results. And provides the showcase - how to show the measurement results with available viewers. */
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
     /** Core Module: Store the Series - set of Capture Results captured by WoundGenius. */
     private var series = [Series]()
-    
-    /** Universal Body Part Picker Results */
-    private var pickedUBodyParts: [UBPPSection]?
-    
+        
     /** No need to integrate this in client apps. Integrated to handle the case when the license key is modified during single app session. Relevant only for Sample app. */
     private var lastUsedLicenseKey: String?
     
     private var isSample3D: Bool = false
     private var ifAppSupportDevice: Bool = false
+    
+    private let standaloneAssessmentsManager = StandaloneAssessmentManager()
     
     // MARK: View Controller Lifecycle
     
@@ -107,81 +149,59 @@ class HomeViewController: UIViewController {
         //Hide 3D scanning button
         //        start3DCapturing.isHidden = false
         
-        /* START CAPTURING BUTTON */
+        /* BOTTOM BUTTONS STACK VIEW */
         startCapturing.isHidden = isSample3D
-        startCapturing.translatesAutoresizingMaskIntoConstraints = false
         startCapturing.addTarget(self, action: #selector(launchCamera), for: .touchUpInside)
         startCapturing.backgroundColor = UINavigationBar.appearance().tintColor
         startCapturing.tintColor = .white
         startCapturing.setTitle("Start Capturing", for: .normal)
         startCapturing.layer.cornerRadius = 5
         startCapturing.layer.masksToBounds = true
-        self.view.addSubview(startCapturing)
-        NSLayoutConstraint.activate([
-            startCapturing.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            startCapturing.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            startCapturing.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        startCapturing.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        /* SHOW Universal BODY PART PICKER */
         showBodyPartPicker.isHidden = isSample3D
-        showBodyPartPicker.translatesAutoresizingMaskIntoConstraints = false
         showBodyPartPicker.addTarget(self, action: #selector(startBodyPartPicker), for: .touchUpInside)
         showBodyPartPicker.backgroundColor = startCapturing.backgroundColor
         showBodyPartPicker.setTitle("Body Part Picker", for: .normal)
         showBodyPartPicker.tintColor = UINavigationBar.appearance().tintColor
         showBodyPartPicker.layer.cornerRadius = 5
         showBodyPartPicker.layer.masksToBounds = true
-        self.view.addSubview(showBodyPartPicker)
+        showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        //        camera.start(mode: .scanner, inView: inView, isFullHDVideoEnabled: false)
-        
+        bottomButtonsStackView.addArrangedSubview(startCapturing)
+        bottomButtonsStackView.addArrangedSubview(showBodyPartPicker)
+        self.view.addSubview(bottomButtonsStackView)
         NSLayoutConstraint.activate([
-            showBodyPartPicker.topAnchor.constraint(equalTo: startCapturing.bottomAnchor, constant: 10),
-            showBodyPartPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            showBodyPartPicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            showBodyPartPicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            showBodyPartPicker.heightAnchor.constraint(equalToConstant: 40)
+            bottomButtonsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            bottomButtonsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            bottomButtonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
 #if SAMPLE3D
         /* DISPLAY MEASUREMENT RESULT */
-        displayMeasuremntResults.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 18.0, *) {
             displayMeasuremntResults.addTarget(self, action: #selector(display3DMeasurementResult), for: .touchUpInside)
-        } else {
-            // Fallback on earlier versions
         }
         displayMeasuremntResults.backgroundColor = UINavigationBar.appearance().tintColor
         displayMeasuremntResults.tintColor = .white
         displayMeasuremntResults.setTitle("Display Measurement Result 3D", for: .normal)
         displayMeasuremntResults.layer.cornerRadius = 5
         displayMeasuremntResults.layer.masksToBounds = true
-        self.view.addSubview(displayMeasuremntResults)
-        NSLayoutConstraint.activate([
-            displayMeasuremntResults.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            displayMeasuremntResults.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            displayMeasuremntResults.heightAnchor.constraint(equalToConstant: 40),
-            displayMeasuremntResults.bottomAnchor.constraint(equalTo: startCapturing.topAnchor, constant: -10)
-        ])
+        displayMeasuremntResults.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         if #available(iOS 18, *) {
             /* START 3D CAPTURING BUTTON */
-            start3DCapturing.translatesAutoresizingMaskIntoConstraints = false
             start3DCapturing.addTarget(self, action: #selector(open3DCapturing), for: .touchUpInside)
             start3DCapturing.backgroundColor = UINavigationBar.appearance().tintColor
             start3DCapturing.tintColor = .white
             start3DCapturing.setTitle("Start 3D Capturing", for: .normal)
             start3DCapturing.layer.cornerRadius = 5
             start3DCapturing.layer.masksToBounds = true
-            self.view.addSubview(start3DCapturing)
-            NSLayoutConstraint.activate([
-                start3DCapturing.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-                start3DCapturing.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-                start3DCapturing.heightAnchor.constraint(equalToConstant: 40),
-                start3DCapturing.bottomAnchor.constraint(equalTo: displayMeasuremntResults.topAnchor, constant: -10)
-            ])
+            start3DCapturing.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            
+            bottomButtonsStackView.insertArrangedSubview(start3DCapturing, at: 0)
         }
+        bottomButtonsStackView.insertArrangedSubview(displayMeasuremntResults, at: start3DCapturing.superview != nil ? 1 : 0)
 #endif
         /* SETUP DEFAULT VALUES */
         if UserDefaults.standard.value(forKey: SettingKey.minNumberOfMediaInt.rawValue) == nil {
@@ -199,6 +219,11 @@ class HomeViewController: UIViewController {
         if self.woundGeniusRouter == nil {
             self.woundGeniusRouter = self.woundGeniusRouterInstance()
         }
+        
+        if !isSample3D {
+            configureFacialSurgeryLayout()
+            configureDefaultAssessmentCDSLayout()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -210,6 +235,24 @@ class HomeViewController: UIViewController {
 #endif
         
         self.showWhatsNewIfNeeded()
+                
+        let bodyPartPickerView = WGBodyPartPickerFrontBackView(preselect: ["index-finger-right-palmar", "hand-left"],
+                                                               language: "en",
+                                                               gender: .male,
+                                                               backgroundColor: nil,
+                                                               bodyMapColor: nil,
+                                                               primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
+                                                               localization: self.woundGeniusFlowPresenter)
+        bodyPartPickerView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//        self.tableView.addSubview(bodyPartPickerView)
+        bodyPartPickerView.snapshot { result in
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
 }
 
@@ -228,20 +271,25 @@ extension HomeViewController {
             return
         }
         
-        let bpPickerVC = UBPPickerViewController(preselect: self.pickedUBodyParts?
-            .flatMap({ $0.items })
-            .map({ $0.itemId }),
-                                                 languageISO2Alpha: L.str("LANGUAGE_CODE"),
-                                                 gender: .female,
-                                                 primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
-                                                 localization: self.woundGeniusFlowPresenter, devLogs: { log in
-            print(log)
-        }) { [weak self] result in
-            self?.pickedUBodyParts = result
-        }
-        self.present(bpPickerVC, animated: true)
+        let bodyPartPickerSampleVC = SampleBodyPartPickerViewController(woundGeniusPresenter: self.woundGeniusFlowPresenter)
+        self.navigationController?.pushViewController(bodyPartPickerSampleVC, animated: true)
     }
+    
+    /* WundGenius: To launch the Facil Capturing */
+    @objc func lanchFacilCapturing() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusFacilRouterInstance()
+        }
         
+        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
+            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
+            return
+        }
+        self.woundGeniusRouter?.startCapturing(over: self) { success in
+            
+        }
+    }
+    
     /* WundGenius: To launch the Camera */
     @objc func launchCamera() {
         if self.woundGeniusRouter == nil {
@@ -256,7 +304,69 @@ extension HomeViewController {
             
         }
     }
-            
+    
+    /* WoundGenius: To launch Default Assessment + CDS */
+    @objc func launchDefaultAssessmentCDS() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusRouterInstance()
+        }
+        
+        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
+            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
+            return
+        }
+
+        if #available(iOS 17.0, *) {
+            self.woundGeniusRouter?.startDefaultStandaloneAssessment(over: self, assessmentManager: standaloneAssessmentsManager, completion: { [weak self] formsModel, captureResult in
+                guard let self = self else { return }
+                var captureResults = [CaptureResult]()
+                if let captureResult = captureResult {
+                    captureResults = [captureResult]
+                } else {
+                    captureResults = [.image(ImageCaptureResult(image: UIImage(systemName: "list.bullet.clipboard")?.withTintColor(.red, renderingMode: .alwaysOriginal)))]
+                }
+                self.series.append(Series(captureResults: captureResults, formsModel: formsModel))
+                (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    @available(iOS 18.0, *)
+    @objc func open3DCapturing() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusRouterInstance()
+        }
+        
+        guard let woundGeniusRouter = self.woundGeniusRouter else { return }
+        
+        if isDeviceSupported() {
+                let contentView = ContentView().environment(AppDataModel.instance)
+                
+                let hostingController = UIHostingController(rootView: contentView)
+                hostingController.modalPresentationStyle = .fullScreen
+                self.present(hostingController, animated: true)
+        } else {
+            // Show alert if device is not supported
+            let alert = UIAlertController(title: "Device Not Supported", message: "This device does not support 3D capturing.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @available(iOS 18.0, *)
+    @objc func display3DMeasurementResult() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusRouterInstance()
+        }
+        
+        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
+            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
+            return
+        }
+        self.woundGeniusRouter?.display3DMeasurementResult(over: self)
+    }
+    
     /* Core Module: Settings */
     @objc func openSettings() {
         performSegue(withIdentifier: "showSettings", sender: nil)
@@ -273,6 +383,17 @@ extension HomeViewController {
         }
         
         let router = WGRouter(presenter: woundGeniusFlowPresenter)
+        woundGeniusFlowPresenter.router = router
+        
+        return router
+    }
+    
+    private func woundGeniusFacilRouterInstance() -> WGRouter {
+        if let key = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
+            WG.activate(licenseKey: key)
+        }
+        
+        let router = WGRouter(presenter: woundGeniusFacilFlowPresenter)
         woundGeniusFlowPresenter.router = router
         
         return router
@@ -309,6 +430,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let captureResult = series[indexPath.section].captureResults[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CaptureResultTableViewCell.self), for: indexPath)
+        let formsModelExists = series[indexPath.section].formsModel != nil
         switch captureResult {
         case .video(let video):
             if #available(iOS 14.0, *) {
@@ -323,7 +445,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
                 config.image = image.image
-                config.text = "Mask"
+                config.text = "Image" + (formsModelExists ? " + Form" : "")
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
@@ -332,7 +454,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             if #available(iOS 14.0, *) {
                 var config = cell.defaultContentConfiguration()
                 config.image = photo.preview
-                config.text = "Photo"
+                config.text = "Photo" + (formsModelExists ? " + Form" : "")
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
@@ -345,14 +467,50 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 } else {
                     config.image = measurement.image.draw(outlines: measurement.outlines, drawFullAreaLabel: true, drawWidthLength: true, drawDiameter: false, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
                 }
-                config.text = "Measurement"
+                config.text = "Measurement" + (formsModelExists ? " + Form" : "")
+                cell.contentConfiguration = config
+            } else {
+                // Fallback on earlier versions
+            }
+        case .mesh3D(_):
+            break
+        case .facialSurgery(let facialSurgeryPhoto):
+            if #available(iOS 14.0, *) {
+                var config = cell.defaultContentConfiguration()
+                config.image = facialSurgeryPhoto.preview
+                config.text = "Photo"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
             }
         }
         cell.imageView?.contentMode = .scaleAspectFit
+        if formsModelExists {
+            cell.accessoryType = .detailButton
+            cell.tintColor = .red
+        } else {
+            cell.accessoryType = .none
+            cell.tintColor = nil
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        guard let formsModel = series[indexPath.section].formsModel else { return }
+        let updatedModel = formsModel.withUpdatedResults()
+        guard let jsonData = updatedModel.jsonEncodedData() else { return }
+        
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("formsModel.json")
+        do {
+            try jsonData.write(to: tempURL)
+        } catch {
+            print("Failed to write JSON file: \(error.localizedDescription)")
+            return
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = tableView.cellForRow(at: indexPath)
+        self.present(activityVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -463,6 +621,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                            willDisappear: nil)
                 self.navigationController?.pushViewController(details, animated: true)
             }
+        case .mesh3D(let result):
+            fatalError(#function)
+        case .facialSurgery(let result):
+            let config = MyWoundGeniusPresenter(completion: {_ in })
+            
+            let details = MeasurementDetailsController(style: tableViewStyle,
+                                                       image: result.preview,
+                                                       isRightButtonShown: false,
+                                                       outlines: nil,
+                                                       isDepthOrHeightInputEnabled: false,
+                                                       title: "",
+                                                       subtitle: "",
+                                                       config: config,
+                                                       willDisappear: nil)
+            self.navigationController?.pushViewController(details, animated: true)
         }
     }
     
@@ -482,6 +655,30 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: Show What's New If Needed
 
 extension HomeViewController {
+    private func configureFacialSurgeryLayout() {
+        guard woundGeniusFlowPresenter.isFacialSurgeryEnabled else {
+            bottomButtonsStackView.removeArrangedSubview(startFacialCapturing)
+            startFacialCapturing.removeFromSuperview()
+            return
+        }
+        
+        startFacialCapturing.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        bottomButtonsStackView.insertArrangedSubview(startFacialCapturing, at: 0)
+    }
+    
+    private func configureDefaultAssessmentCDSLayout() {
+        guard WG.isAvailable(feature: .therapyCDS), #available(iOS 17.0, *) else {
+            bottomButtonsStackView.removeArrangedSubview(startDefaultAssessmentCDS)
+            startDefaultAssessmentCDS.removeFromSuperview()
+            return
+        }
+        
+        startDefaultAssessmentCDS.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        // Insert before the last item (showBodyPartPicker) to keep it above the picker
+        let insertIndex = max(bottomButtonsStackView.arrangedSubviews.count - 1, 0)
+        bottomButtonsStackView.insertArrangedSubview(startDefaultAssessmentCDS, at: insertIndex)
+    }
+    
     func showWhatsNewIfNeeded() {
         guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return

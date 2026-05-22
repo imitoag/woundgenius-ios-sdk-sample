@@ -1,0 +1,3985 @@
+{
+  "catalogue_version": "2.0.0",
+  "verified_against": "EMDN_V2_EN.xlsx (2025)",
+  "slot_model": {
+    "primary_dressing": {
+      "prefix": "PRM_",
+      "nullable": false
+    },
+    "secondary_dressing": {
+      "prefix": "SEC_",
+      "nullable": false
+    },
+    "fixation": {
+      "prefix": "FIX_",
+      "nullable": true
+    },
+    "periwound_care": {
+      "prefix": "PWC_",
+      "nullable": true
+    },
+    "therapeutic_system": {
+      "prefix": "THS_",
+      "nullable": true
+    }
+  },
+  "families": {
+    "PRM_001": {
+      "name": "Foam Dressings (Absorbent)",
+      "emdn_code": "M040406",
+      "slot": "primary",
+      "importance": "essential",
+      "indication": "Moderate-to-heavy exudate wounds (PU Stage II\\u2013IV, VLU, DFU). Hydrophilic inner layer absorbs; hydrophobic outer provides vapour/bacterial barrier and thermal insulation.",
+      "contraindications": "Dry or necrotic wound beds (insufficient moisture donation).",
+      "guidelines": "NICE ESMPB2"
+    },
+    "PRM_002": {
+      "name": "Silicone-Border Foam Dressings",
+      "emdn_code": "M040406",
+      "slot": "primary",
+      "importance": "essential",
+      "indication": "Atraumatic adhesion for fragile skin. Prophylactic use over bony prominences to prevent pressure injuries. Reduces pain at dressing changes.",
+      "contraindications": "None specific.",
+      "guidelines": "NICE ESMPB2; NPIAP Prevention"
+    },
+    "PRM_003": {
+      "name": "Alginate Dressings",
+      "emdn_code": "M040402",
+      "slot": "primary",
+      "importance": "essential",
+      "indication": "Highly absorbent seaweed-derived polysaccharide. Gels on contact with exudate. For deep cavities, moderate/heavy exudate, and minor haemostasis.",
+      "contraindications": "Dry wounds (desiccates wound bed). Always requires a secondary dressing.",
+      "guidelines": "NICE ESMPB2; Cochrane (Dumville et al.)"
+    },
+    "PRM_004": {
+      "name": "Hydrocolloid Dressings",
+      "emdn_code": "M040404",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Occlusive, self-adhesive (CMC, gelatin, pectin) that gel on contact. For partial-thickness wounds, minor burns, low exudate. Promotes autolytic debridement.",
+      "contraindications": "Clinically infected wounds (occlusive nature traps bacteria). Heavy exudate.",
+      "guidelines": "NICE CG179"
+    },
+    "PRM_005": {
+      "name": "Hydrogel Dressings",
+      "emdn_code": "M040405",
+      "slot": "primary",
+      "importance": "essential",
+      "indication": "High water-content (70\\u201390%) polymers that actively donate moisture to dry beds. Promotes autolytic debridement of dry eschar/slough. Cooling, pain-relieving.",
+      "contraindications": "Moderate-to-high exudate (will over-hydrate and macerate).",
+      "guidelines": "NICE ESMPB2; Cochrane (Dumville et al.)"
+    },
+    "PRM_006": {
+      "name": "Gelling Fibre Dressings",
+      "emdn_code": "M040404",
+      "slot": "primary",
+      "importance": "essential",
+      "indication": "Sodium CMC fibres that transform into cohesive gel. Vertical wicking minimises lateral fluid spread, preventing periwound maceration.",
+      "contraindications": "Dry wounds.",
+      "guidelines": "BNF Wound Management"
+    },
+    "PRM_007": {
+      "name": "Transparent Film Dressings",
+      "emdn_code": "M04010202",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Thin adhesive membranes permeable to vapour/oxygen, impermeable to water/bacteria. For superficial, non-exuding wounds and Stage I PU friction protection.",
+      "contraindications": "Any exudate > none (maceration risk).",
+      "guidelines": "NICE ESMPB2; NICE NG125"
+    },
+    "PRM_008": {
+      "name": "Wound Contact Layers",
+      "emdn_code": "M0402",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Porous perforated sheets (silicone mesh, lipido-colloid) placed directly on wound to protect fragile granulation tissue. Exudate passes through to secondary.",
+      "contraindications": "None specific. Always requires a secondary dressing.",
+      "guidelines": "EWMA Position Document"
+    },
+    "PRM_009": {
+      "name": "Silver Antimicrobial Dressings",
+      "emdn_code": "M040408",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Broad-spectrum antimicrobial disrupting bacterial cell walls/DNA. For wounds with clinical signs of local infection or critical colonisation.",
+      "contraindications": "Silver allergy. Must review after 2 weeks (stewardship).",
+      "guidelines": "NICE ESMPB2; BNF; EWMA Antimicrobial Stewardship"
+    },
+    "PRM_010": {
+      "name": "Polyhexanide (PHMB) Dressings",
+      "emdn_code": "M040412",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Broad-spectrum synthetic polymer active against MRSA/VRE and biofilms. No reported microbial resistance. For critically colonised/infected wounds.",
+      "contraindications": "Known PHMB hypersensitivity.",
+      "guidelines": "IWII Consensus; EWMA Antimicrobials"
+    },
+    "PRM_011": {
+      "name": "Cadexomer Iodine Dressings",
+      "emdn_code": "M040412",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Controlled slow-release iodine via cadexomer microspheres. Absorbs exudate while releasing iodine. For infected or sloughy chronic wounds with moderate exudate.",
+      "contraindications": "Thyroid disorders. Pregnancy/lactation. Iodine allergy. Lithium therapy.",
+      "guidelines": "NICE ESMPB2; Cochrane (Storm-Versloot)"
+    },
+    "PRM_012": {
+      "name": "Povidone-Iodine Dressings",
+      "emdn_code": "M040412",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Broad-spectrum antiseptic iodophor releasing free iodine. For superficial infected wounds, wound bed preparation. Non-absorbent formulations.",
+      "contraindications": "Thyroid disorders. Pregnancy/lactation. Iodine allergy. Lithium therapy.",
+      "guidelines": "NICE ESMPB2; Cochrane (Storm-Versloot)"
+    },
+    "PRM_013": {
+      "name": "Medical-Grade Honey Dressings",
+      "emdn_code": "M040499",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Gamma-irradiated Manuka honey providing osmotic autolytic debridement, malodour reduction, and antimicrobial action via low pH and hydrogen peroxide.",
+      "contraindications": "Bee product allergy. Can cause stinging (concordance risk).",
+      "guidelines": "Cochrane (Jull et al.)"
+    },
+    "PRM_014": {
+      "name": "Charcoal Dressings (Odour-Absorbing)",
+      "emdn_code": "M040409",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Adsorbs volatile malodorous compounds and bacteria. For malodorous, fungating, malignant, or heavily colonised chronic wounds.",
+      "contraindications": "None specific.",
+      "guidelines": "EWMA Palliative Wound Care; BNF"
+    },
+    "PRM_015": {
+      "name": "DACC Antimicrobial Dressings",
+      "emdn_code": "M040416",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Hydrophobic fatty acid coating irreversibly binds bacteria/fungi physically without chemical agents. Avoids AMR and cytotoxicity. For colonised/contaminated wounds.",
+      "contraindications": "None specific.",
+      "guidelines": "Int. Consensus on Antimicrobial Stewardship; EWMA"
+    },
+    "PRM_016": {
+      "name": "TLC-NOSF Dressings (Sucrose Octasulfate)",
+      "emdn_code": "M040413",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Lipido-colloid layer inhibiting excess MMPs, rebalancing chronic wound milieu. Specifically recommended for diabetic foot and venous leg ulcers.",
+      "contraindications": "None specific.",
+      "guidelines": "NICE MTG42; IWGDF 2023"
+    },
+    "PRM_017": {
+      "name": "Protease-Modulating Dressings",
+      "emdn_code": "M040413",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Composites (ORC/collagen) that gel on contact, binding and inactivating excess proteases (MMPs) and protecting endogenous growth factors. For stalled chronic wounds.",
+      "contraindications": "Actively infected wounds (address infection first).",
+      "guidelines": "Health Technology Wales TER235; WII Protease Consensus"
+    },
+    "PRM_018": {
+      "name": "Collagen Scaffold Dressings",
+      "emdn_code": "M040410",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Animal-derived (bovine, porcine) structural scaffold supporting cellular migration, granulation, and epithelialisation for stalled chronic wounds.",
+      "contraindications": "Animal collagen allergy.",
+      "guidelines": "Adv Skin Wound Care (Wu S et al.); IWGDF 2023"
+    },
+    "PRM_019": {
+      "name": "Haemostatic Dressings (ORC / Collagen / Gelatin)",
+      "emdn_code": "M040501",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Bioresorbable agents promoting clot formation. ORC (oxidised regenerated cellulose), collagen sponges, or gelatin for capillary/post-debridement bleeding control.",
+      "contraindications": "Animal collagen allergy (for collagen/gelatin variants).",
+      "guidelines": "Adv Skin Wound Care"
+    },
+    "PRM_020": {
+      "name": "Saline Dressings",
+      "emdn_code": "M040401",
+      "slot": "primary",
+      "importance": "low",
+      "indication": "Passive dressings for basic hydration of dry/necrotic wounds. Minimal therapeutic action.",
+      "contraindications": "None specific.",
+      "guidelines": "Basic formulary inclusion"
+    },
+    "PRM_021": {
+      "name": "Burn Dressings",
+      "emdn_code": "M0408",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Specialised dressings for partial- and full-thickness thermal injuries. Includes biosynthetic membranes, silver-based burn sheets, silicone burn contact layers.",
+      "contraindications": "Agent must trigger 'Refer to Burn Centre' advisory for full-thickness burns.",
+      "guidelines": "Burns trauma management; NICE"
+    },
+    "PRM_022": {
+      "name": "Hypochlorous Acid (HOCl) Dressings",
+      "emdn_code": "M040412",
+      "slot": "primary",
+      "importance": "high",
+      "indication": "Endogenous antimicrobial in stable formulation. Broad-spectrum against bacteria, biofilms, fungi, viruses. Non-cytotoxic. For wound bed preparation and biofilm disruption.",
+      "contraindications": "None specific.",
+      "guidelines": "IWII Consensus; WUWHS Biofilm Management"
+    },
+    "PRM_023": {
+      "name": "Methylene Blue / Gentian Violet Dressings",
+      "emdn_code": "M040412",
+      "slot": "primary",
+      "importance": "conditional",
+      "indication": "Polyurethane foam impregnated with MB/GV. Disrupts bacterial biofilms via photodynamic and direct antimicrobial mechanisms. For infected and biofilm-harbouring chronic wounds.",
+      "contraindications": "G6PD deficiency (methylene blue).",
+      "guidelines": "Woo KY et al.; Int Wound J"
+    },
+    "SEC_001": {
+      "name": "Superabsorbent Polymer Dressings",
+      "emdn_code": "M040299",
+      "slot": "secondary",
+      "importance": "essential",
+      "indication": "Polyacrylate polymers absorbing and locking massive exudate volumes. Prevent strike-through under compression. Reduce dressing change frequency.",
+      "contraindications": "None specific.",
+      "guidelines": "WUWHS Consensus Document"
+    },
+    "SEC_002": {
+      "name": "Adhesive Island Dressings (Composites)",
+      "emdn_code": "M0401",
+      "slot": "secondary",
+      "importance": "high",
+      "indication": "Non-adherent contact layer + absorbent pad + adhesive border. For low-to-moderately exuding acute wounds and surgical incisions.",
+      "contraindications": "High exudate (insufficient capacity). Fragile skin (adhesive border risk).",
+      "guidelines": "NICE NG125"
+    },
+    "SEC_003": {
+      "name": "Non-Adherent Absorbent Pads",
+      "emdn_code": "M040204",
+      "slot": "secondary",
+      "importance": "moderate",
+      "indication": "Simple exudate absorption without wound bed adhesion. Basic secondary cover.",
+      "contraindications": "High exudate (will saturate).",
+      "guidelines": "Standard formulary"
+    },
+    "SEC_004": {
+      "name": "Foam Secondary Covers",
+      "emdn_code": "M040406",
+      "slot": "secondary",
+      "importance": "high",
+      "indication": "Thin, non-bordered foam sheets as secondary absorption over contact layers or alginates. Provides cushioning and fluid management without adhesive wound contact.",
+      "contraindications": "None specific.",
+      "guidelines": "BNF Wound Management; NICE ESMPB2"
+    },
+    "SEC_005": {
+      "name": "Gauze Dressings (Cotton / Non-Woven)",
+      "emdn_code": "M010101",
+      "slot": "secondary",
+      "importance": "low",
+      "indication": "Traditional low-cost packing and secondary absorption.",
+      "contraindications": "Chronic pressure ulcers (NICE CG179 deprecation). Trauma on removal.",
+      "guidelines": "NICE CG179 (deprecates for chronic PU)"
+    },
+    "SEC_006": {
+      "name": "Paraffin Gauze (Tulle Gras)",
+      "emdn_code": "M0203",
+      "slot": "secondary",
+      "importance": "low",
+      "indication": "Open-weave gauze impregnated with soft paraffin to reduce adherence. For minor burns and skin graft donor sites.",
+      "contraindications": "Maceration risk with prolonged use.",
+      "guidelines": "SIGN 120; BNF"
+    },
+    "FIX_001": {
+      "name": "Tubular Retention Bandages",
+      "emdn_code": "M0303",
+      "slot": "fixation",
+      "importance": "moderate",
+      "indication": "Seamless elasticated fabric for holding dressings without adhesives. Eliminates MARSI risks on fragile skin.",
+      "contraindications": "None specific.",
+      "guidelines": "ISTAP Best Practice"
+    },
+    "FIX_002": {
+      "name": "Silicone Adhesive Tapes",
+      "emdn_code": "M0501",
+      "slot": "fixation",
+      "importance": "high",
+      "indication": "Soft silicone for gentle atraumatic removal. For fragile, ageing, or corticosteroid-compromised skin. MARSI prevention.",
+      "contraindications": "None specific.",
+      "guidelines": "MARSI Consensus (McNichol L et al.)"
+    },
+    "FIX_003": {
+      "name": "Microporous Adhesive Tapes",
+      "emdn_code": "M0501",
+      "slot": "fixation",
+      "importance": "moderate",
+      "indication": "Breathable, hypoallergenic paper tapes for sensitive skin. Lower adhesion than zinc oxide.",
+      "contraindications": "Very fragile skin (prefer silicone).",
+      "guidelines": "MARSI Consensus"
+    },
+    "FIX_004": {
+      "name": "Zinc Oxide Tapes",
+      "emdn_code": "M0501",
+      "slot": "fixation",
+      "importance": "low",
+      "indication": "Rigid, strong-adhesion, water-resistant tape. High MARSI risk. Reserved for robust skin only.",
+      "contraindications": "Fragile skin. Elderly patients.",
+      "guidelines": "MARSI Consensus"
+    },
+    "FIX_005": {
+      "name": "Cohesive Bandages",
+      "emdn_code": "M0303",
+      "slot": "fixation",
+      "importance": "moderate",
+      "indication": "Self-adherent elastic bandages sticking to themselves, not to skin/hair. Retention and light compression.",
+      "contraindications": "None specific.",
+      "guidelines": "Cochrane (Shi et al.)"
+    },
+    "FIX_006": {
+      "name": "Conforming Bandages",
+      "emdn_code": "M0301",
+      "slot": "fixation",
+      "importance": "moderate",
+      "indication": "Lightweight non-rigid bandages moulding to body contours (joints/digits). Secures primary dressings without compression.",
+      "contraindications": "None specific.",
+      "guidelines": "BNF Wound Care"
+    },
+    "FIX_007": {
+      "name": "Wound Closure Strips",
+      "emdn_code": "H9002",
+      "slot": "fixation",
+      "importance": "conditional",
+      "indication": "Sterile adhesive strips for non-invasive closure of low-tension lacerations or surgical incisions.",
+      "contraindications": "High-tension wounds. Infected wounds.",
+      "guidelines": "NICE NG125; ISTAP"
+    },
+    "FIX_008": {
+      "name": "Sub-Bandage Padding (Orthopaedic Wool)",
+      "emdn_code": "M0101",
+      "slot": "fixation",
+      "importance": "moderate",
+      "indication": "Padding layer beneath compression to protect bony prominences and redistribute mechanical pressure.",
+      "contraindications": "None specific.",
+      "guidelines": "EPUAP/NPIAP CPG; IWGDF Offloading"
+    },
+    "PWC_001": {
+      "name": "Liquid Skin Barrier Films",
+      "emdn_code": "M9002",
+      "slot": "periwound",
+      "importance": "essential",
+      "indication": "Terpolymer/cyanoacrylate transparent waterproof coating on intact/compromised skin. Protects against MASD and caustic exudate.",
+      "contraindications": "Open wounds (apply to periwound skin only).",
+      "guidelines": "ISTAP Best Practice; NPIAP"
+    },
+    "PWC_002": {
+      "name": "Barrier Creams (Zinc / Dimethicone)",
+      "emdn_code": "M9002",
+      "slot": "periwound",
+      "importance": "essential",
+      "indication": "Occlusive protective layer shielding periwound skin from heavy exudate or incontinence. Key for IAD prevention.",
+      "contraindications": "None specific.",
+      "guidelines": "NICE CG179; EPUAP/NPIAP"
+    },
+    "PWC_003": {
+      "name": "Silicone Adhesive Removers",
+      "emdn_code": "M9003",
+      "slot": "periwound",
+      "importance": "moderate",
+      "indication": "Silicone-based solutions painlessly dissolving medical adhesive bonds. MARSI prevention.",
+      "contraindications": "None specific.",
+      "guidelines": "MARSI Consensus"
+    },
+    "PWC_004": {
+      "name": "pH-Balanced Skin Cleansers",
+      "emdn_code": "M9002",
+      "slot": "periwound",
+      "importance": "high",
+      "indication": "Mild formulations (pH 4.0\\u20136.8) removing wound debris and exudate without disrupting the skin acid mantle.",
+      "contraindications": "None specific.",
+      "guidelines": "IWII Global Consensus"
+    },
+    "PWC_005": {
+      "name": "Cyanoacrylate Tissue Adhesives",
+      "emdn_code": "H9001",
+      "slot": "periwound",
+      "importance": "conditional",
+      "indication": "Flexible waterproof closure for low-tension lacerations and skin tears (ISTAP Types 1\\u20132). Also serves as durable periwound protectant.",
+      "contraindications": "High-tension wounds. Deep wounds requiring sutures.",
+      "guidelines": "ISTAP Best Practice"
+    },
+    "PWC_006": {
+      "name": "Emollients (Skin Moisturisers)",
+      "emdn_code": "M9002",
+      "slot": "periwound",
+      "importance": "high",
+      "indication": "Lipid-replenishing creams maintaining skin hydration and barrier integrity around the wound. Prevents dryness, cracking, and breakdown.",
+      "contraindications": "None specific.",
+      "guidelines": "NICE CG179; EPUAP/NPIAP CPG; Dermatology best practice"
+    },
+    "PWC_007": {
+      "name": "Wound Irrigation Solutions",
+      "emdn_code": "M9002",
+      "slot": "periwound",
+      "importance": "essential",
+      "indication": "Sterile saline, Ringer's lactate, or antimicrobial irrigants (PHMB, HOCl) for mechanical cleansing of wound bed and debris removal prior to dressing.",
+      "contraindications": "Specific antimicrobial irrigant contraindications apply (e.g. PHMB hypersensitivity).",
+      "guidelines": "IWII 2025; EWMA Wound Bed Preparation; Wound Hygiene guidance"
+    },
+    "THS_001": {
+      "name": "Standard NPWT (Pump-Based)",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Active aspiration (\\u221275 to \\u2212125 mmHg) removing exudate, reducing bioburden, stimulating angiogenesis. For stalled Stage III/IV ulcers and complex surgical wounds.",
+      "contraindications": "Malignant wounds. Exposed vessels/organs. Untreated osteomyelitis.",
+      "guidelines": "EWMA NPWT Update"
+    },
+    "THS_002": {
+      "name": "Single-Use NPWT (Disposable)",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Canister-free portable NPWT via evaporation. Primarily for closed surgical incisions in high-risk patients to prevent SSIs.",
+      "contraindications": "Open wounds with high exudate (insufficient capacity).",
+      "guidelines": "NICE MTG43"
+    },
+    "THS_003": {
+      "name": "NPWT with Instillation (NPWTi-d)",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Standard NPWT + automated cyclical instillation of topical solutions (saline, PHMB) with dwell time. For highly contaminated wounds.",
+      "contraindications": "Same as standard NPWT.",
+      "guidelines": "NICE MTG54"
+    },
+    "THS_004": {
+      "name": "Multi-Layer Compression Systems",
+      "emdn_code": "M0304",
+      "slot": "therapeutic",
+      "importance": "essential",
+      "indication": "Gold standard VLU treatment (ABPI \\u2265 0.8). Multi-component systems delivering sustained 35\\u201340 mmHg at ankle to reverse venous hypertension.",
+      "contraindications": "ABPI < 0.5 (arterial disease). Uncompensated heart failure. DVT.",
+      "guidelines": "Cochrane (Shi et al.); ESVS CPG"
+    },
+    "THS_005": {
+      "name": "Short-Stretch Compression Bandages",
+      "emdn_code": "M0304010201",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Inelastic compression: high working pressure, low resting pressure. For VLUs and mixed arteriovenous disease.",
+      "contraindications": "Pure arterial disease (ABPI < 0.5).",
+      "guidelines": "SIGN 120; ESVS CPG"
+    },
+    "THS_006": {
+      "name": "Two-Layer Compression Systems",
+      "emdn_code": "M0304",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Simplified systems achieving 30\\u201340 mmHg with reduced bulk. Faster application, improved patient concordance.",
+      "contraindications": "Same as multi-layer compression.",
+      "guidelines": "ESVS CPG; Cochrane"
+    },
+    "THS_007": {
+      "name": "Adjustable Compression Wraps",
+      "emdn_code": "M0304",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Inelastic Velcro-strap devices self-applicable by patients. Comparable VLU healing to short-stretch. For patients with limited dexterity.",
+      "contraindications": "Same as multi-layer compression.",
+      "guidelines": "NICE MIB25"
+    },
+    "THS_008": {
+      "name": "Compression Hosiery (Class 2/3)",
+      "emdn_code": "M030405",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Long-term maintenance therapy post-VLU closure to prevent recurrence.",
+      "contraindications": "Active VLU (insufficient compression). Arterial disease.",
+      "guidelines": "SIGN 120; Cochrane"
+    },
+    "THS_009": {
+      "name": "Intermittent Pneumatic Compression",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Mechanical leg sleeves enhancing venous return. For patients who cannot tolerate bandaging or have restricted mobility.",
+      "contraindications": "DVT. Uncompensated heart failure.",
+      "guidelines": "Cochrane (Nelson et al.)"
+    },
+    "THS_010": {
+      "name": "Larval (Maggot) Debridement",
+      "emdn_code": "M0404",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Sterile Lucilia sericata larvae selectively debriding necrotic tissue. Active against MRSA. When surgical debridement is contraindicated.",
+      "contraindications": "Patients near major blood vessels. Extreme aversion (concordance).",
+      "guidelines": "EWMA Debridement"
+    },
+    "THS_011": {
+      "name": "Enzymatic Debridement Agents",
+      "emdn_code": "M0404",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Collagenase or bromelain selectively hydrolysing denatured collagen anchoring necrotic tissue. For ulcers and severe burns.",
+      "contraindications": "Clean granulating wounds. Regional availability varies (collagenase mainly US; bromelain EU).",
+      "guidelines": "Int Wound J (Patry); EWMA"
+    },
+    "THS_012": {
+      "name": "Mechanical Debridement Pads",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Monofilament polyester pads for gentle, rapid removal of slough and hyperkeratosis at the bedside.",
+      "contraindications": "Deep necrotic tissue (insufficient action).",
+      "guidelines": "NICE MTG17"
+    },
+    "THS_013": {
+      "name": "Ultrasonic / Hydrosurgical Debridement",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Low-frequency ultrasound devices or high-pressure waterjet systems for selective, precise debridement while preserving viable tissue.",
+      "contraindications": "Near exposed vessels/nerves.",
+      "guidelines": "EWMA Debridement Document; NICE interventional procedures"
+    },
+    "THS_014": {
+      "name": "Electrical Stimulation Therapy",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Low-frequency electrical current promoting fibroblast migration in recalcitrant Stage II+ pressure injuries.",
+      "contraindications": "Pacemakers. Malignant wounds. Over metallic implants.",
+      "guidelines": "EPUAP/NPIAP CPG"
+    },
+    "THS_015": {
+      "name": "Topical Oxygen Therapy",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Delivers oxygen directly to wound surface to address local hypoxia. For non-healing DFU after 4\\u20136 weeks of standard care.",
+      "contraindications": "None specific.",
+      "guidelines": "CADTH Review; IWGDF 2023 (conditional)"
+    },
+    "THS_016": {
+      "name": "Hyperbaric Oxygen Therapy (HBOT)",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Systemic 100% oxygen at elevated pressure (1.5\\u20133 ATA). Enhances tissue oxygenation, fibroblast proliferation, angiogenesis in ischaemic wounds.",
+      "contraindications": "Untreated pneumothorax. Certain chemotherapy agents.",
+      "guidelines": "IWGDF 2023; Cochrane (Kranke et al.)"
+    },
+    "THS_017": {
+      "name": "Acellular Dermal Matrices",
+      "emdn_code": "M0404",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Biological scaffold for cellular invasion and neovascularisation in full-thickness soft-tissue defects.",
+      "contraindications": "Active infection. Animal-derived material allergy.",
+      "guidelines": "WII Skin Substitutes Consensus; Scars Burn Heal"
+    },
+    "THS_018": {
+      "name": "Cellular / Bioengineered Skin Substitutes",
+      "emdn_code": "M040499",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Living or tissue-engineered constructs providing growth factors, ECM, and/or living cells. For chronic full-thickness wounds failing standard care.",
+      "contraindications": "Active infection. Cost and availability constraints.",
+      "guidelines": "IWGDF 2023; WII Skin Substitutes Consensus"
+    },
+    "THS_019": {
+      "name": "Autologous Platelet-Rich Plasma (PRP)",
+      "emdn_code": "Z12019003",
+      "slot": "therapeutic",
+      "importance": "conditional",
+      "indication": "Blood-derived concentrate with supraphysiological growth factors applied topically to chronic wounds.",
+      "contraindications": "Thrombocytopenia. Active infection.",
+      "guidelines": "Cochrane (Martinez-Zapata); IWGDF 2023 (conditional)"
+    },
+    "THS_020": {
+      "name": "Non-Removable Offloading Devices (TCC / Irremovable Walker)",
+      "emdn_code": "M030502",
+      "slot": "therapeutic",
+      "importance": "essential",
+      "indication": "Gold-standard offloading for plantar neuropathic DFU. Total contact cast or irremovable walker redistributing plantar pressure.",
+      "contraindications": "Infected DFU requiring frequent inspection. Ischaemic limb. Heavily exuding ulcers requiring daily dressing changes.",
+      "guidelines": "IWGDF 2023 Offloading (Strong; Moderate CoE)"
+    },
+    "THS_021": {
+      "name": "Removable Offloading Devices (Walker / Healing Sandal)",
+      "emdn_code": "Y061206",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Removable offloading when non-removable is contraindicated, not tolerated, or operationally impractical.",
+      "contraindications": "None absolute \\u2014 but non-removable preferred when possible.",
+      "guidelines": "IWGDF 2023 Offloading"
+    },
+    "THS_022": {
+      "name": "Heel Offloading / Suspension Devices",
+      "emdn_code": "V0811",
+      "slot": "therapeutic",
+      "importance": "high",
+      "indication": "Devices offloading the heel or floating the limb to reduce pressure and shear. For heel pressure injuries or fragile posterior heel tissue.",
+      "contraindications": "None specific.",
+      "guidelines": "NPIAP Pressure Injury Prevention/Treatment; EPUAP/NPIAP CPG"
+    },
+    "THS_023": {
+      "name": "Pressure Redistribution Support Surfaces",
+      "emdn_code": "V0807",
+      "slot": "therapeutic",
+      "importance": "essential",
+      "indication": "Specialised mattresses, overlays, cushions (alternating pressure, low-air-loss, reactive foam) redistributing interface pressure to prevent/treat PU.",
+      "contraindications": "None absolute.",
+      "guidelines": "EPUAP/NPIAP/PPPIA International CPG 2019; NICE CG179"
+    }
+  },
+  "decision_tree": [
+    {
+      "condition_id": "e0212ff6cfa4",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Light",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "e0212ff6cfa4"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "pH-Balanced Skin Cleansers",
+          "id": "PWC_004",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Hydrogel dressings donate moisture to the lightly exuding, necrotic wound bed, facilitating autolytic debridement as recommended by WHS and EPUAP/NPIAP/PPPIA guidelines. A secondary foam cover protects the wound and manages fluid. A pressure redistribution support surface is critical to mitigate the mechanical forces causing the sacral pressure injury."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official peer-reviewed clinical guideline directly addressing pressure ulcer treatment, debridement, and support surfaces.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          },
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Major international consensus guideline providing specific dressing recommendations based on pressure injury stage and exudate.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://members.ecri.org/evidenceanalysis/wound-dressings-for-managing-pressure-injuries",
+            "title": "Wound Dressings for Managing Pressure Injuries",
+            "doi": null,
+            "journal": "Clinical Evidence Assessment",
+            "publication_date": "2023-02-14",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Systematic clinical evidence assessment evaluating the efficacy of advanced wound dressings for pressure injuries.",
+            "summary": "Advanced wound dressings, including foam, hydrocolloid, alginate, and hydrogel, are recommended over basic gauze to promote a moist wound environment and facilitate pressure injury healing. While evidence suggests advanced dressings are more effective than basic gauze, no single advanced dressing type has been proven superior to others. Clinicians should select dressings based on individual wound characteristics, such as exudate level, depth, and infection status, while prioritizing patient comfort and ease of use."
+          }
+        ],
+        "contraindications": [],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T12:12:45.486Z"
+    },
+    {
+      "condition_id": "scen_2026_04_28_malignant_head",
+      "criteria": {
+        "body_location": "Head and Neck",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Malignant / Fungating Wound",
+        "id": "scen_2026_04_28_malignant_head"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": null,
+        "rationale": "For an infected malignant fungating wound with high exudate, silver antimicrobial dressings are used to manage local bioburden and infection. High exudate levels in the head and neck region are managed with superabsorbent polymer dressings for maximum capacity, secured by tubular retention to avoid adhesive trauma on fragile skin. Liquid skin barrier films protect the periwound from maceration caused by excessive fluid."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://nhsforthvalley.com/wp-content/uploads/2025/01/Management-of-Malignant-Wounds-MEMPHIS-Pathway.pdf",
+            "title": "NHS FORTH VALLEY: Guidelines for the Management of Malignant Wounds (M:EMPHIS PATHWAY)",
+            "journal": "NHS Forth Valley",
+            "publication_date": "2025-01-13",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "summary": "Management of malignant fungating wounds focuses on palliative symptom control, including managing high exudate with absorbent dressings and infection with appropriate antimicrobials."
+          }
+        ],
+        "contraindications": [
+          "Negative Pressure Wound Therapy (NPWT) is contraindicated in malignant wounds due to the risk of tumor growth.",
+          "Aggressive debridement is avoided due to high bleeding risks in friable malignant tissue."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 90,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-28T14:50:00.000Z"
+    },
+    {
+      "condition_id": "scen_2026_04_28_pressure_head",
+      "criteria": {
+        "body_location": "Head and Neck",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "Light",
+        "tissue": [
+          "Granulation",
+          "Epithelialisation"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "scen_2026_04_28_pressure_head"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "For a superficial, granulating pressure injury on the head and neck with light exudate, a hydrogel primary dressing maintains a moist environment to support epithelialisation. A foam secondary cover provides cushioning and handles minor fluid. Therapeutic support surfaces are essential to redistribute pressure at the site of injury. Liquid skin barrier films protect the delicate periwound skin from moisture and friction."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "summary": "The guideline recommends selecting moist wound dressings such as hydrogels for non-infected pressure injuries to facilitate healing and using support surfaces to manage mechanical loads."
+          }
+        ],
+        "contraindications": [
+          "Avoid highly absorbent dressings on lightly exuding wounds to prevent desiccation of new tissue."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 90,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-28T14:52:00.000Z"
+    },
+    {
+      "condition_id": "scen_2026_04_28_arterial_foot",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "None",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Arterial Leg Ulcer",
+        "id": "scen_2026_04_28_arterial_foot"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Povidone-Iodine Dressings",
+          "id": "PRM_012",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Gauze Dressings (Cotton / Non-Woven)",
+          "id": "SEC_005",
+          "emdn": [
+            {
+              "code": "M010101"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Microporous Adhesive Tapes",
+          "id": "FIX_003",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Removable Offloading Devices (Walker / Healing Sandal)",
+          "id": "THS_021",
+          "emdn": [
+            {
+              "code": "Y061206"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "For a superficial arterial foot ulcer with necrosis and no exudate, povidone-iodine dressings are indicated for wound bed preparation and to keep the site dry. Non-absorbent gauze provides simple protection, while microporous tape ensures a breathable fixation. A removable offloading device is used to redistribute pressure from the foot, and emollients maintain the integrity of the surrounding skin."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984409/",
+            "title": "Dressings and topical agents for arterial leg ulcers",
+            "journal": "Cochrane Database of Systematic Reviews",
+            "publication_date": "2020",
+            "source_type": "PEER_REVIEWED",
+            "summary": "Current evidence suggests a focus on addressing underlying arterial insufficiency, while topical management focuses on infection prevention and maintaining a stable environment."
+          }
+        ],
+        "contraindications": [
+          "Debridement is contraindicated in the presence of severe ischaemia without infection.",
+          "Avoid occlusive dressings when peripheral pulses are absent to prevent further ischaemic damage."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-28T14:53:00.000Z"
+    },
+    {
+      "condition_id": "scen_2026_04_28",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "Moderate",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Other / Atypical Wound",
+        "id": "scen_2026_04_28"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Cadexomer Iodine Dressings",
+          "id": "PRM_011",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Barrier Creams (Zinc / Dimethicone)",
+          "id": "PWC_002",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": null,
+        "rationale": "For an infected, deep atypical wound with moderate exudate and slough, Cadexomer Iodine is indicated to provide controlled antimicrobial release while absorbing exudate and facilitating debridement. A superabsorbent secondary dressing manages fluid under retention, while barrier creams protect the periwound from maceration."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://ewma.org/wp-content/uploads/2024/02/JWC-EWMA-supplement_Atypical-Wounds_March-2019.pdf",
+            "title": "EWMA document; Atypical wounds. Best clinical practice and challenges",
+            "journal": "Journal of Wound Care",
+            "publication_date": "2019-06-01",
+            "source_type": "PEER_REVIEWED",
+            "summary": "This document provides a framework for managing atypical wounds, emphasizing the need for biopsy and specialized topical management. For infected, sloughy atypical wounds, controlled-release antimicrobials and atraumatic fluid management are recommended."
+          }
+        ],
+        "contraindications": [
+          "Thyroid disorders, pregnancy, or iodine allergy (due to Cadexomer Iodine use)."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 85,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-28T14:42:00.000Z"
+    },
+    {
+      "condition_id": "fbc915443f35",
+      "criteria": {
+        "body_location": "Head and Neck",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "High",
+        "tissue": [
+          "Slough",
+          "Necrosis"
+        ],
+        "wound_type": "Malignant / Fungating Wound",
+        "id": "fbc915443f35"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Foam Dressings (Absorbent)",
+          "id": "PRM_001",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Monitor for signs of bleeding or malodour. Ensure trauma-free dressing removal. Avoid sharp debridement.",
+        "rationale": "Just a foam dressing should be sufficient in this case."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://nhsforthvalley.com/wp-content/uploads/2025/01/Management-of-Malignant-Wounds-MEMPHIS-Pathway.pdf",
+            "title": "NHS FORTH VALLEY: Guidelines for the Management of Malignant Wounds (M:EMPHIS PATHWAY)",
+            "doi": null,
+            "journal": "NHS Forth Valley",
+            "publication_date": "2025-01-13",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent, official NHS clinical guideline specifically addressing the management of malignant fungating wounds and their symptoms.",
+            "summary": "Management of malignant fungating wounds should focus on palliative symptom control, including the use of non-adherent contact layers and highly absorbent secondary dressings to manage high exudate. For malodour and slough, autolytic debridement and charcoal-based or antimicrobial dressings are recommended, while surgical debridement should be avoided due to bleeding risks. Pain and haemorrhage management strategies include the use of silicone-based dressings to minimize trauma and haemostatic agents for bleeding control."
+          },
+          {
+            "url": "https://somerset.eolcare.uk/uploads/documents/Management-of-Malignant-Fungating-Wounds-MFW.pdf",
+            "title": "Management of Malignant Fungating Wounds [MFW]",
+            "doi": null,
+            "journal": "Somerset Foundation Trust",
+            "publication_date": "2021-05-28",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official NHS Foundation Trust protocol providing direct therapy and dressing selection guidance for malignant wounds.",
+            "summary": "Management of malignant fungating wounds focuses on symptom control and quality of life rather than healing. Recommended interventions include autolytic debridement, the use of high-absorbency dressings to manage high exudate, and specific protocols for pain and malodour control. For bleeding, the protocol suggests alginate dressings as first-line treatment, with tranexamic acid or silver nitrate as secondary options."
+          },
+          {
+            "url": "https://www.nhstaysideadtc.scot.nhs.uk/wound%20Formulary/Sections/Section%2014%20-%20WMF%20-%20Management%20of%20Malignant%20Wounds.pdf",
+            "title": "Section 14: Management of Malignant Wounds",
+            "doi": null,
+            "journal": "NATVNS Wound Formulary",
+            "publication_date": "2020",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official regional wound formulary section dedicated to the symptomatic management of malignant wounds.",
+            "summary": "For malignant wounds with necrosis, slough, and excessive exudate, the document recommends effective cleansing to disrupt biofilm and the use of antimicrobial agents like honey or PHMB. Management of excessive exudate should involve super-absorbent silicone dressings or wound manager bags, while ensuring trauma-free removal to address pain and bleeding. If infection is present, an antimicrobial dressing should be paired with a super-absorbent secondary dressing."
+          },
+          {
+            "url": "https://journals.cambridgemedia.com.au/wpr/volume-30-number-3/managing-malignant-wound-palliative-care",
+            "title": "Managing a malignant wound in palliative care",
+            "doi": "10.33235/wpr.30.3.150-157",
+            "journal": "Wound Practice and Research",
+            "publication_date": "2022-09",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review detailing evidence-based palliative management strategies for malignant wounds.",
+            "summary": "Management of malignant wounds in palliative care focuses on symptom control and quality of life rather than healing. Key interventions include gentle cleansing, the use of absorbent dressings to manage exudate and odour, and systemic analgesia for pain. A holistic, multidisciplinary approach is essential to address the complex physical, psychosocial, and spiritual needs of patients with advanced cancer."
+          }
+        ],
+        "contraindications": [
+          "Negative Pressure Wound Therapy (NPWT) is contraindicated due to the risk of promoting tumour genesis and metastasis.",
+          "Active/sharp debridement is contraindicated due to the high risk of bleeding in friable malignant tissue.",
+          "Traditional adhesive tapes should be avoided to prevent trauma to fragile skin."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T20:34:19.671Z"
+    },
+    {
+      "condition_id": "scen_2026_04_28_mixed",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Light",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Mixed Arterial Venous Leg Ulcer",
+        "id": "scen_2026_04_28_mixed"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Conforming Bandages",
+          "id": "FIX_006",
+          "emdn": [
+            {
+              "code": "M0301"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Short-Stretch Compression Bandages",
+          "id": "THS_005",
+          "emdn": [
+            {
+              "code": "M0304010201"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "For a deep, mixed arterial-venous ulcer with necrotic slough and light exudate, hydrogel dressings are indicated to donate moisture and facilitate autolytic debridement. Short-stretch compression is utilized as it provides high working pressure and low resting pressure, which is generally safer for mixed disease. A liquid skin barrier protects the periwound from any moisture buildup."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://register.awmf.org/assets/guidelines/037-009l_S2k_Diagnostik-Therapie-Ulcus-cruris-venosum__2024-01_1.pdf",
+            "title": "S2k-Leitlinie Diagnostik und Therapie des Ulcus cruris venosum",
+            "journal": "AWMF",
+            "publication_date": "2024-01-30",
+            "source_type": "PEER_REVIEWED",
+            "summary": "This guideline recommends a structured approach to leg ulcers, prioritizing compression therapy and regular debridement of necrotic tissue while emphasizing caution in mixed arterial-venous disease."
+          }
+        ],
+        "contraindications": [
+          "Avoid high-pressure compression (over 40 mmHg) if arterial insufficiency is present.",
+          "Hydrogels should be monitored for maceration risk if exudate levels increase."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 85,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-28T14:47:00.000Z"
+    },
+    {
+      "condition_id": "9ac208597f31",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "Light",
+        "tissue": [
+          "Granulation"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "9ac208597f31"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Wound Contact Layers",
+          "id": "PRM_008",
+          "emdn": [
+            {
+              "code": "M0402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Non-Adherent Absorbent Pads",
+          "id": "SEC_003",
+          "emdn": [
+            {
+              "code": "M040204"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Wound Irrigation Solutions",
+          "id": "PWC_007",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Multi-Layer Compression Systems",
+          "id": "THS_004",
+          "emdn": [
+            {
+              "code": "M0304"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "High-strength compression therapy is the definitive standard of care for venous leg ulcers to counteract venous hypertension and reduce edema. For a superficial, lightly exuding, granulating wound bed, a wound contact layer paired with an absorbent secondary pad maintains an optimal moist environment while preventing trauma to delicate new tissue upon removal. Non-toxic wound irrigation is used to cleanse the wound without harming granulation tissue."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK567802/",
+            "title": "Venous Leg Ulcer",
+            "doi": null,
+            "journal": "StatPearls",
+            "publication_date": "2022/09/18",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent, peer-reviewed clinical overview directly addressing the etiology and standard of care for venous leg ulcers.",
+            "summary": "Management of venous leg ulcers in the scenario should prioritize compression therapy to address venous hypertension and reduce edema. For a superficial, granulating wound with light exudate, treatment should focus on maintaining a moist wound environment using appropriate dressings while avoiding toxic cleansers. Regular debridement of non-viable tissue is recommended to support continued healing and prevent infection."
+          },
+          {
+            "url": "https://www.phlebolymphology.org/local-treatment-of-venous-leg-ulcers/",
+            "title": "Phlebolymphology, Vol 16, No 2, 2009",
+            "doi": null,
+            "journal": "Phlebolymphology",
+            "publication_date": "2009",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed journal article providing specific, detailed guidelines on dressing selection for venous leg ulcers based on wound stage and exudate.",
+            "summary": "This journal issue provides comprehensive reviews on the management of venous leg ulcers, emphasizing the standard of care involving compression therapy and modern wound dressings. It also discusses the application of the Venous Clinical Severity Score (VCSS) and quality-of-life tools for assessing treatment outcomes in patients with chronic venous disease. Additionally, it covers the pathophysiology of lymphangiogenesis in cancer and the prevention of venous thromboembolism in pregnancy."
+          }
+        ],
+        "contraindications": [
+          "Antimicrobial dressings are contraindicated for non-infected wounds.",
+          "Systemic antibiotics are contraindicated for non-infected wounds.",
+          "Routine use of cytotoxic antiseptics is contraindicated as it damages viable granulation tissue."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:37:18.616Z"
+    },
+    {
+      "condition_id": "8ce694a6376d",
+      "criteria": {
+        "body_location": "Head and Neck",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "Excessive",
+        "tissue": [
+          "Slough",
+          "Necrosis"
+        ],
+        "wound_type": "Burn",
+        "id": "8ce694a6376d"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrocolloid Dressings",
+          "id": "PRM_004",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Mechanical Debridement Pads",
+          "id": "THS_012",
+          "emdn": [
+            {
+              "code": "Z12019003"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Regular mechanical disruption of biofilm at every dressing change; monitor for effective debridement of necrotic tissue.",
+        "rationale": "I personally think honey is for eating not for wounds......"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.oxfordhealth.nhs.uk/wp-content/uploads/2015/08/Oxford_Wound-Management-Formulary_FINAL_version_April_2015.sflb_.pdf",
+            "title": "Wound Management: ADVICE & PRESCRIBING GUIDANCE 2015",
+            "doi": null,
+            "journal": "Oxfordshire Clinical Commissioning Group and Oxford Health NHS Foundation Trust",
+            "publication_date": "2015",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official NHS formulary providing explicit, evidence-based product recommendations for infection, debridement, and exudate management.",
+            "summary": "For a venous leg ulcer with granulation/slough and high exudate, the formulary recommends managing exudate levels to prevent maceration and protect delicate tissue. It suggests using absorbent dressings like Sorbion Sachet Extra or alginates for high exudate, and emphasizes the importance of compression therapy following a full lower limb assessment and Doppler. Topical antimicrobials like medical-grade honey are recommended if local infection is diagnosed."
+          },
+          {
+            "url": "https://www.racgp.org.au/getattachment/ec2645a4-5750-4267-8375-6aa0066917f3/Burns-dressings.aspx",
+            "title": "Burns dressings",
+            "doi": null,
+            "journal": "Australian Journal of General Practice",
+            "publication_date": "2017",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Peer-reviewed clinical review detailing dressing selection based on burn depth and exudate levels.",
+            "summary": "For deep burns with slough and necrosis, the authors recommend initial debridement of blisters and dead tissue to improve perfusion and reduce infection risk. Nanocrystalline silver is recommended for the first 48 hours to manage infection, followed by hydrogels to rehydrate necrotic slough or alginates for highly exudative wounds. Ongoing assessment is critical, as deep burns require specialist review and carry a high risk of hypertrophic scarring."
+          },
+          {
+            "url": "https://www.northern-burncare-network.nhs.uk/_common/getdocument?id=383083",
+            "title": "Clinical Guideline for the Management of Chronic Burn Wounds",
+            "doi": null,
+            "journal": "Northern Burn Care Network",
+            "publication_date": "2025-07",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent, official clinical guideline specifically addressing the management, debridement, and infection control of complex burn wounds.",
+            "summary": "For deep, necrotic, or sloughy burn wounds with high exudate, the guideline recommends aggressive debridement (sharp or larval) followed by biofilm-based wound care using surfactant-based cleansers and antimicrobial dressings. Protease-modulating dressings are indicated once the wound bed is clean to address elevated MMP levels. If the wound remains recalcitrant, advanced therapies such as negative pressure wound therapy or topical oxygen may be considered, provided infection is managed and vascular status is assessed."
+          }
+        ],
+        "contraindications": [
+          "Obvious necrotic tissue may impede healing and must be removed or managed (e.g., via autolytic or mechanical debridement) to ensure the efficacy of the antimicrobial pathway."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T20:38:47.906Z"
+    },
+    {
+      "condition_id": "a40f0d7ef078",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Slough",
+          "Granulation"
+        ],
+        "wound_type": "Other / Atypical Wound",
+        "id": "a40f0d7ef078"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Cadexomer Iodine Dressings",
+          "id": "PRM_011",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Short-Stretch Compression Bandages",
+          "id": "THS_005",
+          "emdn": [
+            {
+              "code": "M0304010201"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Apply compression therapy cautiously at reduced pressures (e.g., 20mmHg) to ensure patient tolerance.",
+        "rationale": "Cadexomer are more appropriate to highly exudative pressure injuries that are deep "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://ewma.org/wp-content/uploads/2024/02/JWC-EWMA-supplement_Atypical-Wounds_March-2019.pdf",
+            "title": "EWMA document; Atypical wounds. Best clinical practice and challenges",
+            "doi": "10.12968/jowc.2019.28.Sup6.S1",
+            "journal": "Journal of Wound Care",
+            "publication_date": "2019-06-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official European consensus guideline providing specific, peer-reviewed clinical recommendations for the diagnosis and topical management of atypical wounds.",
+            "summary": "This document provides a comprehensive framework for diagnosing and managing atypical wounds, emphasizing the need for multidisciplinary assessment and biopsy to differentiate between inflammatory, malignant, and vasculopathic causes. It highlights that atypical wounds often require specific systemic immunosuppressive or surgical interventions rather than standard wound care. For deep, high-exudate wounds, it recommends atraumatic dressing selection and, where appropriate, surgical debridement and skin grafting once inflammation is controlled."
+          }
+        ],
+        "contraindications": [
+          "Adhesive dressings and tapes (to avoid trauma and the pathergy phenomenon)",
+          "Standard high-pressure compression therapy (due to severe pain; must use reduced pressures)"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T20:38:34.501Z"
+    },
+    {
+      "condition_id": "f6aa29d03baa",
+      "criteria": {
+        "body_location": "Upper Extremity",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "None",
+        "tissue": [
+          "Epithelialisation"
+        ],
+        "wound_type": "Burn",
+        "id": "f6aa29d03baa"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrocolloid Dressings",
+          "id": "PRM_004",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Gauze Dressings (Cotton / Non-Woven)",
+          "id": "SEC_005",
+          "emdn": [
+            {
+              "code": "M010101"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Conforming Bandages",
+          "id": "FIX_006",
+          "emdn": [
+            {
+              "code": "M0301"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Sun protection for the newly healed epidermis.",
+        "rationale": "Sofia The authors’ burns service recommends blister debridement followed by 48 hours of\nnanocrystalline silver dressings before a decision regarding burn depth is made."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.northern-burncare-network.nhs.uk/_common/getdocument?id=383083",
+            "title": "Clinical Guideline for the Management of Chronic Burn Wounds",
+            "doi": null,
+            "journal": "Northern Burn Care Network",
+            "publication_date": "2025-07",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official regional clinical guideline detailing burn wound healing trajectories and standard care principles.",
+            "summary": "For deep, necrotic, or sloughy burn wounds with high exudate, the guideline recommends aggressive debridement (sharp or larval) followed by biofilm-based wound care using surfactant-based cleansers and antimicrobial dressings. Protease-modulating dressings are indicated once the wound bed is clean to address elevated MMP levels. If the wound remains recalcitrant, advanced therapies such as negative pressure wound therapy or topical oxygen may be considered, provided infection is managed and vascular status is assessed."
+          },
+          {
+            "url": "https://www.racgp.org.au/afp/2017/march/burns-dressings",
+            "title": "Burns dressings",
+            "doi": null,
+            "journal": "Australian Journal of General Practice",
+            "publication_date": "2017",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review explicitly addressing dressing selection for superficial burns and epithelialising tissue.",
+            "summary": "For deep burns with slough and necrosis, the authors recommend initial debridement of blisters and dead tissue to improve perfusion and reduce infection risk. Nanocrystalline silver is recommended for the first 48 hours to manage infection, followed by hydrogels to rehydrate necrotic slough or alginates for highly exudative wounds. Ongoing assessment is critical, as deep burns require specialist review and carry a high risk of hypertrophic scarring."
+          }
+        ],
+        "contraindications": [
+          "Highly absorbent dressings (e.g., foams, alginates) due to risk of tissue desiccation and adherence.",
+          "Aggressive interventions such as debridement, topical steroids, or protease modulators."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-16T11:13:21.627Z"
+    },
+    {
+      "condition_id": "1e06c54c3342",
+      "criteria": {
+        "body_location": "Anterior Trunk",
+        "infection": "Yes",
+        "depth": "Superficial",
+        "exudate": "Light",
+        "tissue": [
+          "Slough"
+        ],
+        "wound_type": "Malignant / Fungating Wound",
+        "id": "1e06c54c3342"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Gentle cleansing; monitor for signs of bleeding; prioritize symptom control and patient comfort.",
+        "rationale": "I think honey you need to eat, not to put on wounds..."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://somerset.eolcare.uk/uploads/documents/Management-of-malignant-fungating-wounds.pdf",
+            "title": "Management of Malignant Fungating Wounds [MFW]",
+            "doi": null,
+            "journal": "Somerset NHS Foundation Trust",
+            "publication_date": "2023-12-19",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "NHS trust guideline addressing autolytic debridement and trauma prevention in malignant wounds.",
+            "summary": "This clinical guideline emphasizes a holistic, symptom-focused approach to managing malignant fungating wounds, prioritizing patient comfort and quality of life over wound healing. It provides specific protocols for managing excessive exudate, infection, and pain, including the use of topical morphine for painful lesions and tranexamic acid for bleeding. The document advises against aggressive debridement, recommending instead autolytic debridement and the use of high-absorbency, non-adherent dressings."
+          },
+          {
+            "url": "https://nhsforthvalley.com/wp-content/uploads/2025/01/Management-of-Malignant-Wounds-MEMPHIS-Pathway.pdf",
+            "title": "NHS FORTH VALLEY: Guidelines for the Management of Malignant Wounds (M:EMPHIS PATHWAY)",
+            "doi": null,
+            "journal": "NHS Forth Valley",
+            "publication_date": "2025-01-13",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent NHS clinical pathway providing specific dressing recommendations for infected, low-exudate malignant wounds.",
+            "summary": "Management of malignant fungating wounds should focus on palliative symptom control, including the use of non-adherent contact layers and highly absorbent secondary dressings to manage high exudate. For malodour and slough, autolytic debridement and charcoal-based or antimicrobial dressings are recommended, while surgical debridement should be avoided due to bleeding risks. Pain and haemorrhage management strategies include the use of silicone-based dressings to minimize trauma and haemostatic agents for bleeding control."
+          },
+          {
+            "url": "https://journals.cambridgemedia.com.au/wpr/volume-30-number-3/managing-malignant-wound-palliative-care",
+            "title": "Managing a malignant wound in palliative care",
+            "doi": "10.33235/wpr.30.3.150-157",
+            "journal": "Wound Practice and Research",
+            "publication_date": "2022-09",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review detailing the use of medical honey for infection and odour in malignant wounds.",
+            "summary": "Management of malignant wounds in palliative care focuses on symptom control and quality of life rather than healing. Key interventions include gentle cleansing, the use of absorbent dressings to manage exudate and odour, and systemic analgesia for pain. A holistic, multidisciplinary approach is essential to address the complex physical, psychosocial, and spiritual needs of patients with advanced cancer."
+          },
+          {
+            "url": "https://www.centreleonberard.fr/sites/default/files/2024-11/prise_en_charge_des_plaies_chroniques_cancereuses.pdf",
+            "title": "PRISE EN CHARGE DES PLAIES CHRONIQUES CANCEREUSES",
+            "doi": null,
+            "journal": "Direction des Soins infirmiers",
+            "publication_date": "2024-03-05",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official oncology center protocol detailing contraindications and infection management in cancerous wounds.",
+            "summary": "For malignant wounds with slough and light exudate, the guideline recommends gentle cleansing with pH-neutral soap or saline, avoiding mechanical debridement. Management should focus on symptom control, using hydrogels or fatty dressings for slough/fibrin and appropriate absorbent dressings for exudate. Infection management involves medical consultation, potentially using silver-based dressings or Sorbact, while prioritizing non-traumatic dressing removal and pain management."
+          },
+          {
+            "url": "https://www.hug.ch/soins-palliatifs-aide-memoire-destine-aux-soignants/plaie-oncologique-soins-plaies",
+            "title": "Plaie oncologique, soins de plaies",
+            "doi": null,
+            "journal": null,
+            "publication_date": "2025-03-31",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official hospital guideline directly addressing malignant wound care, exudate, and infection management.",
+            "summary": "For malignant fungating wounds with slough and infection, the guidelines recommend autolytic debridement using alginates or hydrogels to manage slough, and antimicrobial dressings (e.g., silver or charcoal-based) to control odor and infection. Exudate should be managed with absorbent dressings like hydrofibers or alginates, while ensuring the periwound skin is protected. Pain management should include both systemic analgesia and topical options like morphine gel or local anesthetics during dressing changes."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9385755/",
+            "title": "Management of malignant cutaneous wounds in oncologic patients",
+            "doi": "10.1007/s00403-022-02385-w",
+            "journal": "Archives of Dermatological Research",
+            "publication_date": "2022-06-08",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "MODERATE",
+            "relevance_reasoning": "Peer-reviewed retrospective study providing clinical data on dressing selections for malignant cutaneous wounds.",
+            "summary": "Management of malignant fungating wounds is primarily palliative, focusing on symptom relief and quality of life rather than curative intent. Effective care involves a multidisciplinary approach using antiseptic, absorbent, and non-adherent dressings to manage exudate, malodor, and infection. Autolytic debridement is preferred over mechanical methods to minimize bleeding risks in these fragile tissues."
+          }
+        ],
+        "contraindications": [
+          "Mechanical debridement (due to risk of catastrophic haemorrhage)",
+          "Negative Pressure Wound Therapy (NPWT) (due to risk of promoting tumour genesis and metastasis)",
+          "Aggressive adhesives (due to friable periwound skin)"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-16T11:16:37.653Z"
+    },
+    {
+      "condition_id": "f0da2fe7ff96",
+      "criteria": {
+        "body_location": "Anterior Trunk",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "Excessive",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Malignant / Fungating Wound",
+        "id": "f0da2fe7ff96"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silicone-Border Foam Dressings",
+          "id": "PRM_002",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Gentle autolytic debridement only; avoid active/sharp debridement. Monitor for signs of bleeding and manage psychosocial distress related to malodour and exudate.",
+        "rationale": "Foam dressings are more appropriate for malignant fungating wounds that are exudative"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://somerset.eolcare.uk/uploads/documents/Management-of-malignant-fungating-wounds.pdf",
+            "title": "Management of Malignant Fungating Wounds [MFW]",
+            "doi": null,
+            "journal": "Somerset NHS Foundation Trust",
+            "publication_date": "2023-12-19",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official NHS trust protocol detailing holistic care and dressing selection for malignant fungating wounds.",
+            "summary": "This clinical guideline emphasizes a holistic, symptom-focused approach to managing malignant fungating wounds, prioritizing patient comfort and quality of life over wound healing. It provides specific protocols for managing excessive exudate, infection, and pain, including the use of topical morphine for painful lesions and tranexamic acid for bleeding. The document advises against aggressive debridement, recommending instead autolytic debridement and the use of high-absorbency, non-adherent dressings."
+          },
+          {
+            "url": "https://nhsforthvalley.com/wp-content/uploads/2025/01/Management-of-Malignant-Wounds-MEMPHIS-Pathway.pdf",
+            "title": "NHS FORTH VALLEY: Guidelines for the Management of Malignant Wounds (M:EMPHIS PATHWAY)",
+            "doi": null,
+            "journal": "NHS Forth Valley",
+            "publication_date": "2025-01-13",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent official NHS guideline directly addressing malignant wound symptom management, exudate, and infection.",
+            "summary": "For malignant fungating wounds with necrosis, slough, and excessive exudate, the guideline recommends autolytic debridement and the use of non-adherent contact layers to prevent trauma. Management of excessive exudate should involve superabsorbent dressings, while malodour and infection may be addressed with PHMB-containing cleansers or antimicrobial dressings. Negative pressure wound therapy is strictly contraindicated due to the risk of promoting tumour growth."
+          },
+          {
+            "url": "https://www.nhstaysideadtc.scot.nhs.uk/wound%20Formulary/Sections/Section%2014%20-%20WMF%20-%20Management%20of%20Malignant%20Wounds.pdf",
+            "title": "Section 14: Management of Malignant Wounds",
+            "doi": null,
+            "journal": "NATVNS Wound Formulary",
+            "publication_date": "2020",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official NHS formulary providing direct product category recommendations for infected and highly exuding malignant wounds.",
+            "summary": "For malignant wounds with necrosis, slough, and excessive exudate, the document recommends effective cleansing to disrupt biofilm and the use of antimicrobial agents like honey or PHMB. Management of excessive exudate should involve super-absorbent silicone dressings or wound manager bags, while ensuring trauma-free removal to address pain and bleeding. If infection is present, an antimicrobial dressing should be paired with a super-absorbent secondary dressing."
+          },
+          {
+            "url": "https://journals.cambridgemedia.com.au/wpr/volume-30-number-3/managing-malignant-wound-palliative-care",
+            "title": "Managing a malignant wound in palliative care",
+            "doi": "10.33235/wpr.30.3.150-157",
+            "journal": "Wound Practice and Research",
+            "publication_date": "2022-09",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "MODERATE",
+            "relevance_reasoning": "Peer-reviewed clinical review providing specific dressing recommendations for exudate, odour, and infection in malignant wounds.",
+            "summary": "Management of malignant wounds in palliative care focuses on symptom control and quality of life rather than healing. Key interventions include gentle cleansing, the use of absorbent dressings to manage exudate and odour, and systemic analgesia for pain. A holistic, multidisciplinary approach is essential to address the complex physical, psychosocial, and spiritual needs of patients with advanced cancer."
+          }
+        ],
+        "contraindications": [
+          "Negative Pressure Wound Therapy (NPWT) is strictly contraindicated due to the risk of promoting tumour genesis, expediting metastasis, and provoking severe haemorrhage.",
+          "Active (mechanical or sharp) debridement is contraindicated due to the high risk of precipitating severe haemorrhage in friable tumour vessels."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:20:58.882Z"
+    },
+    {
+      "condition_id": "2fa0b2597dc0",
+      "criteria": {
+        "body_location": "Anterior Trunk",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Light",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Other / Atypical Wound",
+        "id": "2fa0b2597dc0"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Tubular Retention Bandages",
+          "id": "FIX_001",
+          "emdn": [
+            {
+              "code": "M0303"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Consider enzymatic debridement agents if autolytic debridement is slow or ineffective.",
+        "rationale": "Hydrogel dressings are recommended to donate moisture and facilitate atraumatic autolytic debridement of necrosis and slough in deep wounds. A foam secondary cover will manage the light exudate and maintain a moist wound environment. Liquid skin barrier films protect the periwound skin from maceration, and a tubular retention bandage secures the dressings on the trunk."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.clwk.ca/get-resource/wound-dressing-selectionguideline/",
+            "title": "Guideline: Wound Dressing Selection for Adults & Children",
+            "doi": null,
+            "journal": "British Columbia Provincial Nursing Skin & Wound Committee",
+            "publication_date": "2020-11",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent (2020) official clinical guideline that directly addresses the management of necrotic and sloughy wounds with varying exudate levels.",
+            "summary": "For superficial traumatic wounds on the head and neck, the guideline emphasizes selecting conformable dressings that maintain a moist environment to support epithelialization and granulation. Clinicians should prioritize non-adherent contact layers to protect fragile tissue and use secondary dressings that accommodate the anatomical location while managing any potential exudate. The selection must be based on a thorough assessment of the wound bed, ensuring the dressing does not cause trauma or impair movement in the head and neck region."
+          },
+          {
+            "url": "https://ewma.org/wp-content/uploads/2024/02/JWC-EWMA-supplement_Atypical-Wounds_March-2019.pdf",
+            "title": "EWMA document; Atypical wounds. Best clinical practice and challenges",
+            "doi": "10.12968/jowc.2019.28.Sup6.S1",
+            "journal": "Journal of Wound Care",
+            "publication_date": "2019-06-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent (2019) peer-reviewed consensus document from a major wound care organization, specifically addressing the \"Atypical Wound\" type.",
+            "summary": "This document provides a comprehensive framework for diagnosing and managing atypical wounds, emphasizing the need for multidisciplinary assessment and biopsy to differentiate between inflammatory, malignant, and vasculopathic causes. It highlights that atypical wounds often require specific systemic immunosuppressive or surgical interventions rather than standard wound care. For deep, high-exudate wounds, it recommends atraumatic dressing selection and, where appropriate, surgical debridement and skin grafting once inflammation is controlled."
+          }
+        ],
+        "contraindications": [
+          "Autolytic debridement is generally contraindicated for dry/stable eschar on wounds below the knee unless ordered by a specialist, though this does not apply to this anterior trunk wound."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:39:00.713Z"
+    },
+    {
+      "condition_id": "4a2c46d67213",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "None",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Arterial Leg Ulcer",
+        "id": "4a2c46d67213"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Povidone-Iodine Dressings",
+          "id": "PRM_012",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Gauze Dressings (Cotton / Non-Woven)",
+          "id": "SEC_005",
+          "emdn": [
+            {
+              "code": "M010101"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Conforming Bandages",
+          "id": "FIX_006",
+          "emdn": [
+            {
+              "code": "M0301"
+            }
+          ]
+        },
+        "periwound": null,
+        "therapeutic": {
+          "name": "Removable Offloading Devices (Walker / Healing Sandal)",
+          "id": "THS_021",
+          "emdn": [
+            {
+              "code": "Y061206"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Urgent referral to a vascular specialist for evaluation and potential revascularization. Keep the wound dry and monitor closely for signs of infection.",
+        "rationale": "BECAUSEBECAUSEBECAUSEBECAUSEBECAUSEBECAUSE"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://iwgdfguidelines.org/wp-content/uploads/2023/07/IWGDF-2023-05-PAD-Guideline.pdf",
+            "title": "The intersocietal IWGDF, ESVS, SVS guidelines on peripheral artery disease in patients with diabetes mellitus and a foot ulcer",
+            "doi": null,
+            "journal": "International Working Group on the Diabetic Foot",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official international guideline directly addressing PAD and foot ulcers.",
+            "summary": "For patients with arterial leg ulcers, the guidelines recommend systematic vascular assessment including pedal Doppler waveforms, ABI, and TBI to identify PAD. If PAD is confirmed, the WIfI classification system should be used to estimate healing likelihood and amputation risk. Revascularization should be considered for patients with clinical signs of ischemia, and care must be managed by a multidisciplinary team to optimize wound healing and limb salvage."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984409/",
+            "title": "Dressings and topical agents for arterial leg ulcers",
+            "doi": "10.1002/14651858.CD001836.pub4",
+            "journal": "Cochrane Database of Systematic Reviews",
+            "publication_date": "2020",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Cochrane systematic review evaluating dressings for arterial leg ulcers.",
+            "summary": "This systematic review found insufficient evidence to determine whether specific topical agents or wound dressings improve healing rates for arterial leg ulcers. The two included studies were small, of low methodological quality, and had short follow-up periods, preventing any definitive clinical recommendations. Clinicians should prioritize addressing the underlying arterial insufficiency, as current evidence does not support the superiority of any specific dressing or topical agent for these wounds."
+          },
+          {
+            "url": "https://iwgdfguidelines.org/guidelines-2023/",
+            "title": "Practical guidelines on the prevention and management of diabetes-related foot disease",
+            "doi": "10.1002/dmrr.3657",
+            "journal": "Diabetes/Metabolism Research and Reviews",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official international guideline on foot disease management.",
+            "summary": "The IWGDF guidelines recommend a multidisciplinary approach to diabetic foot ulcer management, emphasizing regular inspection, debridement, pressure offloading, and infection control. For superficial ulcers, standard care includes moist wound healing and appropriate offloading. Adjunctive therapies like sucrose octasulfate or negative pressure wound therapy may be considered for specific non-healing or post-surgical wounds, while routine use of topical antimicrobials or skin substitutes is not recommended."
+          }
+        ],
+        "contraindications": [
+          "Debridement in the presence of severe ischaemia without infection.",
+          "Use of occlusive dressings when peripheral pulses are absent."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T12:12:20.672Z"
+    },
+    {
+      "condition_id": "6dfdeccf2b57",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "6dfdeccf2b57"
+      },
+      "therapy": {
+        "primary": {
+          "name": "TLC-NOSF Dressings (Sucrose Octasulfate)",
+          "id": "PRM_016",
+          "emdn": [
+            {
+              "code": "M040413"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Conforming Bandages",
+          "id": "FIX_006",
+          "emdn": [
+            {
+              "code": "M0301"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Heel Offloading / Suspension Devices",
+          "id": "THS_022",
+          "emdn": [
+            {
+              "code": "V0811"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Debridement of necrotic tissue to prepare the wound bed and remove the nidus of infection.",
+        "rationale": "Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla vBla bla bla Bla bla bla Bla bla bla "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://epuap.org/pu-guidelines/",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Quick Reference Guide Prevention Recommendations",
+            "doi": null,
+            "journal": "International Guideline",
+            "publication_date": "2026-02-25",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "The most recent international guideline from EPUAP/NPIAP/PPPIA. Although focused on prevention, it reinforces key principles like offloading.",
+            "summary": "The guideline emphasizes a comprehensive approach to pressure injury prevention, including structured risk assessment, regular skin evaluation, and individualized repositioning regimens. It recommends the use of pressure redistribution support surfaces and specific interventions like heel offloading and preventive dressings for high-risk individuals. Nutritional support and careful management of medical devices are also highlighted as critical components of a prevention strategy."
+          },
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "The comprehensive international guideline that provides foundational evidence for all aspects of pressure injury care for this scenario.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "A recent, peer-reviewed clinical practice guideline for the treatment of pressure ulcers from a major wound care society.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          }
+        ],
+        "contraindications": [
+          "Conservative management (leaving in place) of necrotic tissue/eschar on the heel is contraindicated in the presence of infection; intervention/debridement is required.",
+          "Failing to offload the heel/foot in a pressure injury is contraindicated as it does not address the causative pressure."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T12:13:23.126Z"
+    },
+    {
+      "condition_id": "cf338610f4bf",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Moderate",
+        "tissue": [
+          "Granulation"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "cf338610f4bf"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Charcoal Dressings (Odour-Absorbing)",
+          "id": "PRM_014",
+          "emdn": [
+            {
+              "code": "M040409"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Sacral / Pelvic Area Sacral / Pelvic Area bla bla blaSacral / Pelvic Area Sacral / Pelvic Area bla bla bla"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Comprehensive international clinical practice guideline directly addressing dressing selection and pressure injury management.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent peer-reviewed clinical guideline update directly addressing pressure ulcer treatment and wound bed preparation.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          }
+        ],
+        "contraindications": [
+          "Premature superficial closure if deep cavity is not packed with a filler dressing"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T20:38:13.108Z"
+    },
+    {
+      "condition_id": "2b71a7940c7a",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Moderate",
+        "tissue": [
+          "Slough",
+          "Granulation"
+        ],
+        "wound_type": "Mixed Arterial Venous Leg Ulcer",
+        "id": "2b71a7940c7a"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Foam Dressings (Absorbent)",
+          "id": "PRM_001",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Short-Stretch Compression Bandages",
+          "id": "THS_005",
+          "emdn": [
+            {
+              "code": "M0304010201"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Ensure ABI is > 0.5 or absolute ankle pressure > 60 mmHg prior to applying compression. Target compression pressure of 20-30 mmHg, strictly not exceeding 40 mmHg.",
+        "rationale": "Because this is my gut feeling, and from experience..."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://journals.cambridgemedia.com.au/application/files/9616/8750/1118/EWMA_Lower_Leg_Ulcer_Diagnosis_Supp.pdf",
+            "title": "Lower Leg Ulcer Diagnosis & Principles of Treatment: Including Recommendations for Comprehensive Assessment and Referral Pathways",
+            "doi": "10.35279/jowm2023.24.02.sup01",
+            "journal": "Journal of Wound Management",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official 2023 EWMA guideline providing comprehensive evidence on local treatments and modified compression for mixed leg ulcers.",
+            "summary": "This guideline recommends a holistic assessment for all lower leg ulcers, including vascular assessment (ABI) and screening for infection and atypical causes. For mixed arterial-venous ulcers, compression therapy is recommended under close clinical supervision, provided arterial insufficiency is not severe (ABI <0.5). The document emphasizes that no specific neutral dressing is superior, and selection should be based on wound characteristics like exudate, odour, and pain."
+          },
+          {
+            "url": "https://www.journalofwoundcare.com/docs/Compression-Consensus.pdf",
+            "title": "Leg ulceration in venous and arteriovenous insufficiency assessment and management with compression therapy as part of a holistic wound-healing strategy",
+            "doi": null,
+            "journal": "Wounds International",
+            "publication_date": "2024",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed 2024 consensus document specifically detailing compression therapy protocols for combined arterial and venous insufficiency.",
+            "summary": "For venous leg ulcers with high exudate and necrosis, the document recommends a holistic approach including wound bed preparation (debridement and infection control) and compression therapy. In cases of combined arterial and venous insufficiency (CAVI), compression must be applied with caution, limiting pressure to a maximum of 40 mmHg after thorough vascular assessment. Inelastic compression systems are generally preferred for their ability to provide high working pressure and effective calf pump support, which aids in managing exudate and promoting healing."
+          },
+          {
+            "url": "https://register.awmf.org/assets/guidelines/037-009l_S2k_Diagnostik-Therapie-Ulcus-cruris-venosum__2024-01_1.pdf",
+            "title": "S2k-Leitlinie Diagnostik und Therapie des Ulcus cruris venosum",
+            "doi": "https://register.awmf.org/de/leitlinien/detail/037-009",
+            "journal": "AWMF",
+            "publication_date": "2024-01-30",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official 2024 German S2k guideline directly addressing the diagnosis and therapy of venous and mixed leg ulcers.",
+            "summary": "The guideline recommends a structured approach to venous leg ulcers, prioritizing compression therapy as the standard of care after excluding contraindications like severe peripheral arterial disease. It highlights the necessity of duplex sonography for diagnosis and suggests early invasive treatment of superficial venous reflux to improve healing and reduce recurrence. For wound management, it advocates for regular debridement, exudate management, and patient education to foster self-management and adherence."
+          }
+        ],
+        "contraindications": [
+          "Compression therapy if ABI is 0.5 or lower, or absolute ankle arterial pressure is 60 mmHg or lower.",
+          "Compression pressure exceeding 40 mmHg in combined arterial and venous insufficiency.",
+          "Use of highly elastic compression systems that exert high resting pressures."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-16T11:21:40.699Z"
+    },
+    {
+      "condition_id": "0ca8350cce4f",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "Yes",
+        "depth": "Superficial",
+        "exudate": "Excessive",
+        "tissue": [
+          "Slough",
+          "Granulation"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "0ca8350cce4f"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Wound Irrigation Solutions",
+          "id": "PWC_007",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Multi-Layer Compression Systems",
+          "id": "THS_004",
+          "emdn": [
+            {
+              "code": "M0304"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Evidence from NICE (NG152) demonstrates that silver dressings combined with compression significantly improve healing rates and reduce pain in infected leg ulcers. Superabsorbent dressings are required to manage the excessive exudate. Wound irrigation is indicated to remove slough, and multi-layer compression is the standard of care for venous leg ulcers."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.iatrox.com/guidelines/venous-leg-ulcer-management",
+            "title": "Leg ulcer infection: antimicrobial prescribing",
+            "doi": "10.1016/j.jtv.2020.04.001",
+            "journal": "NICE guideline (NG152)",
+            "publication_date": "2020-02-11",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official NICE guideline providing direct, evidence-based recommendations on the diagnosis and antimicrobial management of infected leg ulcers.",
+            "summary": "The guideline advises against routine microbiological sampling and recommends antibiotics only for clinically infected leg ulcers. Flucloxacillin is the first-line oral treatment, with specific alternatives provided for penicillin-allergic patients. Intravenous antibiotics should be reserved for severe cases and reviewed within 48 hours for potential de-escalation to oral therapy."
+          }
+        ],
+        "contraindications": [
+          "Inappropriate use of oral antibiotics without clear clinical signs of infection (e.g., localized warmth, increased pain, spreading redness)."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 90,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T15:14:39.227Z"
+    },
+    {
+      "condition_id": "2fc45cec5a17",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "Moderate",
+        "tissue": [
+          "Slough"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "2fc45cec5a17"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Alginate Dressings",
+          "id": "PRM_003",
+          "emdn": [
+            {
+              "code": "M040402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Multi-Layer Compression Systems",
+          "id": "THS_004",
+          "emdn": [
+            {
+              "code": "M0304"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Alginate dressings are highly effective for absorbing moderate exudate and facilitating autolytic debridement of slough. A foam secondary cover provides additional fluid handling and cushioning under compression. A liquid skin barrier protects the periwound skin from potential lateral wicking of exudate. Multi-layer compression is the standard of care to address the underlying venous hypertension."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4717498/",
+            "title": "Choosing a Wound Dressing Based on Common Wound Characteristics",
+            "doi": "10.1089/wound.2014.0587",
+            "journal": "Advances in Wound Care",
+            "publication_date": "2014-08-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review directly addressing dressing selection based on specific wound characteristics (exudate, slough).",
+            "summary": "This review categorizes wound dressings based on clinical characteristics such as exudate levels, presence of eschar, and infection status to optimize healing. It recommends specific dressing classes—including films, hydrocolloids, alginates, foams, and silver-based products—tailored to the wound bed environment. The authors emphasize that selecting the correct dressing is essential for reducing healing time, managing costs, and improving patient quality of life."
+          },
+          {
+            "url": "https://www.phlebolymphology.org/local-treatment-of-venous-leg-ulcers/",
+            "title": "Phlebolymphology, Vol 16, No 2, 2009",
+            "doi": null,
+            "journal": "Phlebolymphology",
+            "publication_date": "2009",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Peer-reviewed article specifically addressing the local treatment, debridement, and standard of care for venous leg ulcers.",
+            "summary": "This journal issue provides comprehensive reviews on the management of venous leg ulcers, emphasizing the standard of care involving compression therapy and modern wound dressings. It also discusses the application of the Venous Clinical Severity Score (VCSS) and quality-of-life tools for assessing treatment outcomes in patients with chronic venous disease. Additionally, it covers the pathophysiology of lymphangiogenesis in cancer and the prevention of venous thromboembolism in pregnancy."
+          }
+        ],
+        "contraindications": [
+          "Risk of lateral wicking from alginate dressings, which can lead to maceration of intact periwound skin if exudate is not properly managed."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 85,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:36:51.480Z"
+    },
+    {
+      "condition_id": "e0f7453e7389",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "None",
+        "tissue": [
+          "Epithelialisation",
+          "Granulation"
+        ],
+        "wound_type": "Diabetic Foot Ulcer",
+        "id": "e0f7453e7389"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Non-Removable Offloading Devices (TCC / Irremovable Walker)",
+          "id": "THS_020",
+          "emdn": [
+            {
+              "code": "M030502"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "The 2023 IWGDF guidelines recommend maintaining a moist wound environment, which is optimally achieved using a hydrogel dressing for this non-exuding DFU. Emollients are indicated for periwound skin hydration, and a non-removable offloading device is the gold standard for redistributing plantar pressure to facilitate healing."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://iwgdfguidelines.org/guidelines-2023/",
+            "title": "Practical guidelines on the prevention and management of diabetes-related foot disease",
+            "doi": "10.1002/dmrr.3657",
+            "journal": "Diabetes/Metabolism Research and Reviews",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official 2023 IWGDF consensus guideline directly addressing DFU management, offloading, and local wound care.",
+            "summary": "The IWGDF guidelines recommend a multidisciplinary approach to diabetic foot ulcer management, emphasizing regular inspection, debridement, pressure offloading, and infection control. For superficial ulcers, standard care includes moist wound healing and appropriate offloading. Adjunctive therapies like sucrose octasulfate or negative pressure wound therapy may be considered for specific non-healing or post-surgical wounds, while routine use of topical antimicrobials or skin substitutes is not recommended."
+          }
+        ],
+        "contraindications": [
+          "Failure to adequately offload the diabetic foot ulcer",
+          "Use of highly absorbent dressings on a non-exuding wound, which could lead to desiccation"
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:33:54.374Z"
+    },
+    {
+      "condition_id": "2a17056cec01",
+      "criteria": {
+        "body_location": "Head and Neck",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "None",
+        "tissue": [
+          "Epithelialisation",
+          "Granulation"
+        ],
+        "wound_type": "Traumatic Wound",
+        "id": "2a17056cec01"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrocolloid Dressings",
+          "id": "PRM_004",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Non-Adherent Absorbent Pads",
+          "id": "SEC_003",
+          "emdn": [
+            {
+              "code": "M040204"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Monitor for signs of maceration or desiccation; ensure dressing changes are performed gently to avoid trauma to new capillary loops.",
+        "rationale": "The hydrocolloids are more appropriate for highly exudative wound "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.oxfordhealth.nhs.uk/wp-content/uploads/2015/08/Oxford_Wound-Management-Formulary_FINAL_version_April_2015.sflb_.pdf",
+            "title": "Wound Management: ADVICE & PRESCRIBING GUIDANCE 2015",
+            "doi": null,
+            "journal": "Oxfordshire Clinical Commissioning Group and Oxford Health NHS Foundation Trust",
+            "publication_date": "2015",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official NHS formulary guideline detailing treatment aims for granulating and epithelialising wounds.",
+            "summary": "For a venous leg ulcer with granulation/slough and high exudate, the formulary recommends managing exudate levels to prevent maceration and protect delicate tissue. It suggests using absorbent dressings like Sorbion Sachet Extra or alginates for high exudate, and emphasizes the importance of compression therapy following a full lower limb assessment and Doppler. Topical antimicrobials like medical-grade honey are recommended if local infection is diagnosed."
+          },
+          {
+            "url": "https://www.clwk.ca/get-resource/wound-dressing-selectionguideline/",
+            "title": "Guideline: Wound Dressing Selection for Adults & Children",
+            "doi": null,
+            "journal": "British Columbia Provincial Nursing Skin & Wound Committee",
+            "publication_date": "2020-11",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official provincial clinical guideline providing direct, specific recommendations for exudate management, tissue types, and difficult anatomical locations.",
+            "summary": "For superficial traumatic wounds on the head and neck, the guideline emphasizes selecting conformable dressings that maintain a moist environment to support epithelialization and granulation. Clinicians should prioritize non-adherent contact layers to protect fragile tissue and use secondary dressings that accommodate the anatomical location while managing any potential exudate. The selection must be based on a thorough assessment of the wound bed, ensuring the dressing does not cause trauma or impair movement in the head and neck region."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1360405/",
+            "title": "ABC of wound healing: Wound assessment",
+            "doi": null,
+            "journal": "ABC of wound healing",
+            "publication_date": "2006",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Expert override justification for primary_dressing: The hydrocolloids are more appropriate for highly exudative wound ",
+            "summary": "Effective wound management requires a thorough diagnostic hypothesis based on clinical history and physical examination of the wound bed, edges, and surrounding skin. Treatment strategies should prioritize the removal of necrotic tissue through appropriate debridement methods and the management of exudate and infection to facilitate healing. In cases of chronic, non-healing wounds, the clinical focus should shift toward symptom control, pain management, and improving the patient's overall quality of life.",
+            "override_slot": "primary_dressing",
+            "override_quote": "The hydrocolloids are more appropriate for highly exudative wound that are not infected"
+          }
+        ],
+        "contraindications": [
+          "Use of strong traditional adhesives on fragile skin of the head and neck (risk of MARSI)",
+          "Allowing the wound to remain dry, which causes desiccation of delicate granulation tissue",
+          "Excessive moisture application without periwound protection, risking maceration and breakdown of new cells"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:19:40.298Z"
+    },
+    {
+      "condition_id": "8f1c2a9eb4c2",
+      "criteria": {
+        "body_location": "Anterior Trunk",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Moderate",
+        "tissue": [
+          "Granulation",
+          "Epithelialisation"
+        ],
+        "wound_type": "Surgical Wound",
+        "id": "8f1c2a9eb4c2"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Gelling Fibre Dressings",
+          "id": "PRM_006",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": null,
+        "rationale": "In this case I would use Gelling Fibers as primary"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.oxfordhealth.nhs.uk/wp-content/uploads/2015/08/Oxford_Wound-Management-Formulary_FINAL_version_April_2015.sflb_.pdf",
+            "title": "Wound Management: ADVICE & PRESCRIBING GUIDANCE 2015",
+            "doi": null,
+            "journal": "Oxfordshire Clinical Commissioning Group and Oxford Health NHS Foundation Trust",
+            "publication_date": "2015",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official NHS formulary providing direct dressing recommendations for granulating, deep, and exuding wounds.",
+            "summary": "For a venous leg ulcer with granulation/slough and high exudate, the formulary recommends managing exudate levels to prevent maceration and protect delicate tissue. It suggests using absorbent dressings like Sorbion Sachet Extra or alginates for high exudate, and emphasizes the importance of compression therapy following a full lower limb assessment and Doppler. Topical antimicrobials like medical-grade honey are recommended if local infection is diagnosed."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4717498/",
+            "title": "Choosing a Wound Dressing Based on Common Wound Characteristics",
+            "doi": "10.1089/wound.2014.0587",
+            "journal": "Advances in Wound Care",
+            "publication_date": "2014-08-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review detailing dressing selection based on depth, exudate, and tissue type.",
+            "summary": "This review categorizes wound dressings based on clinical characteristics such as exudate levels, presence of eschar, and infection status to optimize healing. It recommends specific dressing classes—including films, hydrocolloids, alginates, foams, and silver-based products—tailored to the wound bed environment. The authors emphasize that selecting the correct dressing is essential for reducing healing time, managing costs, and improving patient quality of life."
+          },
+          {
+            "url": "https://iswcap.org/wp-content/uploads/2022/05/ISWCAP22_CD_WINT-web.pdf",
+            "title": "Optimising prevention of surgical wound complications: Detection, diagnosis, surveillance and prediction",
+            "doi": "null",
+            "journal": "Wounds International",
+            "publication_date": "2022",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "International consensus guideline specifically addressing surgical wound management and dead space elimination.",
+            "summary": "The document recommends a holistic approach to surgical wound management, emphasising early detection of complications through clinical assessment and diagnostic technologies like fluorescence imaging. For deep, infected, and sloughy wounds, it highlights the importance of managing exudate, maintaining moisture balance, and considering advanced therapies or negative pressure wound therapy (NPWT) to reduce tension and promote healing. It also stresses the necessity of patient education and proactive post-discharge surveillance to prevent the escalation of surgical wound complications."
+          }
+        ],
+        "contraindications": [
+          "Leaving dead space unpacked, which can lead to fluid pooling, maceration, and increased infection risk",
+          "Premature superficial closure without packing the deeper areas of the defect"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:22:11.591Z"
+    },
+    {
+      "condition_id": "f90a0206a7c2",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "None",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Arterial Leg Ulcer",
+        "id": "f90a0206a7c2"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Wound Contact Layers",
+          "id": "PRM_008",
+          "emdn": [
+            {
+              "code": "M0402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Gauze Dressings (Cotton / Non-Woven)",
+          "id": "SEC_005",
+          "emdn": [
+            {
+              "code": "M010101"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Conforming Bandages",
+          "id": "FIX_006",
+          "emdn": [
+            {
+              "code": "M0301"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Urgent referral to a vascular specialist for assessment of reconstructive surgery or angioplasty.",
+        "rationale": "Debridement of dry, necrotic arterial ulcers is contraindicated as it can worsen ischaemia. A non-adherent wound contact layer protects the wound bed without promoting autolytic debridement. Gauze provides simple protection for this non-exuding wound. Emollients are recommended to maintain periwound skin integrity. Urgent vascular referral is required."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1363917/",
+            "title": "ABC of wound healing: Venous and arterial leg ulcers",
+            "doi": null,
+            "journal": "BMJ",
+            "publication_date": "2006",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical review published in the BMJ directly addressing the aetiology, assessment, and management of arterial leg ulcers.",
+            "summary": "The management of venous ulcers centers on graded compression therapy to reduce venous hypertension, while arterial ulcers require addressing underlying vascular insufficiency, often through surgical revascularization. Infection in both ulcer types should be managed with systemic antibiotics, avoiding topical agents to prevent resistance. Sharp debridement is recommended for venous ulcers to promote healing, but is contraindicated in arterial ulcers due to the risk of exacerbating ischemia."
+          }
+        ],
+        "contraindications": [
+          "Debridement of arterial ulcers (including autolytic debridement via hydrogels, enzymatic, or mechanical methods) is contraindicated as it may promote further ischaemia.",
+          "Compression therapy is contraindicated in severe arterial insufficiency."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 85,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:38:28.906Z"
+    },
+    {
+      "condition_id": "8da3e4736f2f",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Slough",
+          "Necrosis"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "8da3e4736f2f"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Perform sharp, enzymatic, biological, mechanical, ultrasonic, or autolytic debridement to remove necrotic tissue/slough. Implement an individualized repositioning schedule.",
+        "rationale": "Silver antimicrobial dressings are indicated to reduce local bacterial bioburden in the infected wound bed. A secondary foam cover is required to manage the high volume of exudate and prevent maceration. Pressure redistribution is foundational for sacral pressure injuries to relieve tissue ischemia."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline. The International Guideline 2019.",
+            "doi": null,
+            "journal": null,
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Comprehensive international clinical practice guideline directly addressing pressure injury prevention, support surfaces, and exudate management.",
+            "summary": "Abstract: This guideline is a collaborative effort from Partner Organizations, the European Pressure Ulcer Advisory Panel (EPUAP), National Pressure Injury Advisory Panel (NPIAP), and Pan Pacific Pressure Injury Alliance (PPPIA), and 14 additional wound organizations around the world. A comprehensive literature review was conducted on pressure injury prevention and treatment and a rigorous methodology was used to appraise the research and make evidence-based recommendations. This work builds on the work of the previous two editions of this guideline (2009 and 2014). Further, an international survey of patient consumers and their informal caregivers was undertaken to capture the perspectives of these individuals in the prevention and treatment of pressure injuries. The research evidence was summarized and evaluated using evidence-to-decision frameworks. Where sufficient research evidence was available, recommendations to guide clinical practice were developed. In areas without sufficient research, good practice statements were developed to promote comprehensive care. Both the recommendations and good practice statements are accompanied by implementation considerations supported by the research and/or expert opinion. The draft recommendations were made available to stakeholders for feedback. There were 699 health professionals, industry representatives, peak body organizations, researchers, policy makers, patient consumers and informal caregivers who reviewed and/or commented on the document. After refining the content, the final stage of the guideline development consisted of a consensus voting process to assign strengths of recommendations. Strength of recommendations indicate the extent to which one can be confident that adherence to a recommendation will do more good than harm, and are intended to assist health professionals to prioritize interventions. The guideline includes discussion of the science, followed by 115 recommendations and 61 good practice statements to guide practice in risk assessment, pressure injury prevention and treatment, and issues in implementing best practice. The needs of specific population groups are discussed, including individuals with obesity, critically ill individuals, older adults, neonates and children, and individuals in palliative care, operating room and community settings. The guideline also discusses the patient perspective of pressure injuries, and covers topics of importance to individuals, including pain and quality of life. Recommendations on supporting and engaging the patient consumer in their care are made. Finally, 20 quality indicators are provided to assist in monitoring implementation of the guideline."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent, peer-reviewed official clinical guideline directly addressing the treatment of pressure ulcers, including debridement and infection control.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          }
+        ],
+        "contraindications": [
+          "Systemic antibiotics are ineffective at lowering bacterial bioburden in the wound bed itself for localized infections.",
+          "Failure to mechanically offload the sacrum will prevent healing regardless of local wound care."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T15:15:08.028Z"
+    },
+    {
+      "condition_id": "57508c304e70",
+      "criteria": {
+        "body_location": "Anterior Trunk",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Necrosis",
+          "Slough"
+        ],
+        "wound_type": "Burn",
+        "id": "57508c304e70"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Gelling Fibre Dressings",
+          "id": "PRM_006",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Larval (Maggot) Debridement",
+          "id": "THS_010",
+          "emdn": [
+            {
+              "code": "M0404"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Monitor exudate levels closely and assess periwound skin for signs of maceration. Evaluate the progress of larval debridement and transition to standard autolytic debridement once the wound bed is clear of necrosis.",
+        "rationale": "I personally prefere gelling dressing, because I can bill more. "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.northern-burncare-network.nhs.uk/_common/getdocument?id=383083",
+            "title": "Clinical Guideline for the Management of Chronic Burn Wounds",
+            "doi": null,
+            "journal": "Northern Burn Care Network",
+            "publication_date": "2025-07",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent (2025) official clinical guideline directly addressing burn wound management, debridement, and exudate control.",
+            "summary": "For deep, necrotic, or sloughy burn wounds with high exudate, the guideline recommends aggressive debridement (sharp or larval) followed by biofilm-based wound care using surfactant-based cleansers and antimicrobial dressings. Protease-modulating dressings are indicated once the wound bed is clean to address elevated MMP levels. If the wound remains recalcitrant, advanced therapies such as negative pressure wound therapy or topical oxygen may be considered, provided infection is managed and vascular status is assessed."
+          },
+          {
+            "url": "https://www.oxfordhealth.nhs.uk/wp-content/uploads/2015/08/Oxford_Wound-Management-Formulary_FINAL_version_April_2015.sflb_.pdf",
+            "title": "Wound Management: ADVICE & PRESCRIBING GUIDANCE 2015",
+            "doi": null,
+            "journal": "Oxfordshire Clinical Commissioning Group and Oxford Health NHS Foundation Trust",
+            "publication_date": "2015",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Expert override justification for primary_dressing: I personally prefere gelling dressing, because I can bill more. ",
+            "summary": "For a venous leg ulcer with granulation/slough and high exudate, the formulary recommends managing exudate levels to prevent maceration and protect delicate tissue. It suggests using absorbent dressings like Sorbion Sachet Extra or alginates for high exudate, and emphasizes the importance of compression therapy following a full lower limb assessment and Doppler. Topical antimicrobials like medical-grade honey are recommended if local infection is diagnosed.",
+            "override_slot": "primary_dressing",
+            "override_quote": "No quote unfortunately"
+          }
+        ],
+        "contraindications": [
+          "Circumferential retention bandages are anatomically impractical for wounds on the anterior trunk.",
+          "Risk of periwound maceration and excoriation if high exudate is not managed with vertical wicking and superabsorbent secondary layers."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:20:13.927Z"
+    },
+    {
+      "condition_id": "02abec6ba8f7",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "None",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Other / Atypical Wound",
+        "id": "02abec6ba8f7"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrogel Dressings",
+          "id": "PRM_005",
+          "emdn": [
+            {
+              "code": "M040405"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Emollients (Skin Moisturisers)",
+          "id": "PWC_006",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": null,
+        "adjunctive_therapy": "Monitor for signs of pathergy; avoid aggressive mechanical trauma to the wound bed.",
+        "rationale": "Autolytic hydrogels provide moisture to facilitate atraumatic debridement of necrotic tissue, minimizing the risk of pathergy in atypical wounds. A gentle foam secondary cover and silicone adhesive tape ensure atraumatic dressing changes. Emollients support periwound skin integrity."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://ewma.org/wp-content/uploads/2024/02/JWC-EWMA-supplement_Atypical-Wounds_March-2019.pdf",
+            "title": "EWMA document; Atypical wounds. Best clinical practice and challenges",
+            "doi": "10.12968/jowc.2019.28.Sup6.S1",
+            "journal": "Journal of Wound Care",
+            "publication_date": "2019-06-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Comprehensive, peer-reviewed international guideline directly addressing atypical wound management.",
+            "summary": "This document provides a comprehensive framework for diagnosing and managing atypical wounds, emphasizing the need for multidisciplinary assessment and biopsy to differentiate between inflammatory, malignant, and vasculopathic causes. It highlights that atypical wounds often require specific systemic immunosuppressive or surgical interventions rather than standard wound care. For deep, high-exudate wounds, it recommends atraumatic dressing selection and, where appropriate, surgical debridement and skin grafting once inflammation is controlled."
+          }
+        ],
+        "contraindications": [
+          "Aggressive mechanical or surgical debridement during the active inflammatory phase (due to the risk of pathergy phenomenon)"
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 90,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-16T11:15:14.118Z"
+    },
+    {
+      "condition_id": "bfa8f7445aa5",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Granulation"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "bfa8f7445aa5"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Alginate Dressings",
+          "id": "PRM_003",
+          "emdn": [
+            {
+              "code": "M040402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Implement a strict repositioning schedule and monitor nutritional status to support wound healing.",
+        "rationale": "Alginate dressings are highly absorptive and conformable, making them ideal for filling dead space and managing high exudate in deep pressure injuries. Superabsorbent polymer dressings provide necessary secondary fluid-handling capacity. Liquid skin barrier films protect the periwound skin from maceration. Pressure redistribution support surfaces are a mandatory standard of care to offload the sacral area."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Comprehensive international clinical practice guideline directly addressing pressure injury management, support surfaces, and exudate control.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent, peer-reviewed official guideline update directly addressing pressure ulcer treatment and dressing selection.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          }
+        ],
+        "contraindications": [
+          "Failure to offload mechanical stress will render local wound care ineffective.",
+          "Failure to manage high exudate levels risks maceration of the periwound skin and desiccation or fluid accumulation in the ulcer bed."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T12:17:38.145Z"
+    },
+    {
+      "condition_id": "492650ff8720",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "Yes",
+        "depth": "Superficial",
+        "exudate": "High",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "492650ff8720"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Two-Layer Compression Systems",
+          "id": "THS_006",
+          "emdn": [
+            {
+              "code": "M0304"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Mechanical debridement of necrotic tissue prior to dressing application and compression.",
+        "rationale": "Silver Antimicrobial Dressings are indicated to manage the local bacterial burden and infection. Superabsorbent Polymer Dressings effectively manage high exudate under compression without causing maceration. Liquid Skin Barrier Films protect the periwound skin from corrosive exudate. Two-Layer Compression Systems provide the necessary therapeutic pressure for venous leg ulcer healing. Mechanical debridement is required as an adjunctive therapy to remove necrotic tissue and prepare the wound bed."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.journalofwoundcare.com/docs/Compression-Consensus.pdf",
+            "title": "Leg ulceration in venous and arteriovenous insufficiency assessment and management with compression therapy as part of a holistic wound-healing strategy",
+            "doi": null,
+            "journal": "Wounds International",
+            "publication_date": "2024",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Peer-reviewed international consensus document detailing VLU assessment, compression, and wound bed preparation.",
+            "summary": "For venous leg ulcers with high exudate and necrosis, the document recommends a holistic approach including wound bed preparation (debridement and infection control) and compression therapy. In cases of combined arterial and venous insufficiency (CAVI), compression must be applied with caution, limiting pressure to a maximum of 40 mmHg after thorough vascular assessment. Inelastic compression systems are generally preferred for their ability to provide high working pressure and effective calf pump support, which aids in managing exudate and promoting healing."
+          },
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2018/02/content_11889.pdf",
+            "title": "Best Practice Statement: Holistic Management of Venous Leg Ulceration",
+            "doi": null,
+            "journal": "Wounds UK",
+            "publication_date": "2016-11",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official Wounds UK Best Practice Statement covering the TIMES framework and VLU management.",
+            "summary": "For venous leg ulcers with high exudate and signs of infection, the document recommends using the TIMES framework to manage the wound bed, including mechanical debridement and appropriate antimicrobial dressings. Compression therapy is the gold standard for healing and should be initiated after a vascular assessment (ABPI) confirms safety. For complex ulcers with high exudate, clinicians should select absorbent dressings that effectively contain fluid to prevent maceration, while ensuring the compression system is appropriate for the limb's shape and condition."
+          },
+          {
+            "url": "https://www.nice.org.uk/guidance/hte32",
+            "title": "Compression products for treating venous leg ulcers: late-stage assessment",
+            "doi": "null",
+            "journal": "NICE HealthTech guidance",
+            "publication_date": "2025-08-27",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official NICE guidance directly addressing compression therapy for venous leg ulcers.",
+            "summary": "For venous leg ulcers with excessive exudate and slough, strong compression therapy is the first-line treatment. The guidance supports the use of compression hosiery as a cost-effective option that facilitates self-management, while noting that compression bandaging remains appropriate for specific clinical needs such as copious exudate or fragile skin. Shared decision-making is essential to select the most appropriate product based on patient preference, comfort, and clinical presentation."
+          }
+        ],
+        "contraindications": [
+          "Strong compression therapy is contraindicated in patients without adequate arterial supply."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T11:39:51.118Z"
+    },
+    {
+      "condition_id": "6eee32dd9578",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Slough",
+          "Necrosis"
+        ],
+        "wound_type": "Surgical Wound",
+        "id": "6eee32dd9578"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Cadexomer Iodine Dressings",
+          "id": "PRM_011",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Standard NPWT (Pump-Based)",
+          "id": "THS_001",
+          "emdn": [
+            {
+              "code": "Z12019003"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Cadexomer dressings are more appropriate for surgical wounds that are highly exudative and are on the pelvic area"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://iswcap.org/wp-content/uploads/2022/05/ISWCAP22_CD_WINT-web.pdf",
+            "title": "Optimising prevention of surgical wound complications: Detection, diagnosis, surveillance and prediction",
+            "doi": "null",
+            "journal": "Wounds International",
+            "publication_date": "2022",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "International consensus document directly addressing the assessment, prevention, and management of surgical wound complications (SSIs and dehiscence).",
+            "summary": "The document recommends a holistic approach to surgical wound management, emphasising early detection of complications through clinical assessment and diagnostic technologies like fluorescence imaging. For deep, infected, and sloughy wounds, it highlights the importance of managing exudate, maintaining moisture balance, and considering advanced therapies or negative pressure wound therapy (NPWT) to reduce tension and promote healing. It also stresses the necessity of patient education and proactive post-discharge surveillance to prevent the escalation of surgical wound complications."
+          }
+        ],
+        "contraindications": [
+          "Fluid pooling in dead space increasing infection risk",
+          "Maceration of periwound skin due to high exudate",
+          "Medical Adhesive-Related Skin Injury (MARSI) from inappropriate fixation"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:18:41.065Z"
+    },
+    {
+      "condition_id": "120b57a3a44b",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "None",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Diabetic Foot Ulcer",
+        "id": "120b57a3a44b"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrocolloid Dressings",
+          "id": "PRM_004",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Adhesive Island Dressings (Composites)",
+          "id": "SEC_002",
+          "emdn": [
+            {
+              "code": "M0401"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Wound Irrigation Solutions",
+          "id": "PWC_007",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Non-Removable Offloading Devices (TCC / Irremovable Walker)",
+          "id": "THS_020",
+          "emdn": [
+            {
+              "code": "M030502"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Compared to nuclear (e.g., leukocyte) imaging, positron emission t"
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://iwgdfguidelines.org/wp-content/uploads/2023/07/IWGDF-2023-07-Wound-Healing-Guideline.pdf",
+            "title": "Guidelines on interventions to enhance healing of foot ulcers in people with diabetes: IWGDF 2023 update",
+            "doi": "10.1002/dmrr.3657",
+            "journal": "Diabetes/Metabolism Research and Reviews",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Recent, peer-reviewed official guideline directly addressing standard of care, debridement, and dressing selection for DFU healing.",
+            "summary": "The IWGDF 2023 guidelines recommend that adjunctive therapies should only be considered when best standard of care (sharp debridement and moist wound dressings) has failed to heal the ulcer. For deep, necrotic diabetic foot ulcers, the guidelines advise against routine use of most advanced dressings or physical therapies, but conditionally support sucrose octasulfate for non-infected neuro-ischaemic ulcers and specific autologous patches or oxygen therapies if standard care is ineffective."
+          },
+          {
+            "url": "https://iwgdfguidelines.org/wp-content/uploads/2023/07/IWGDF-2023-04-Infection-Guideline.pdf",
+            "title": "IWGDF Infection Guideline 2023",
+            "doi": null,
+            "journal": "IWGDF Guidelines",
+            "publication_date": "2023",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Expert override justification for primary_dressing: Compared to nuclear (e.g., leukocyte) imaging, positron emission tomography (PET), especially\n",
+            "summary": "For deep, necrotic, and infected foot ulcers, the IWGDF recommends urgent surgical consultation for debridement and potential revascularization. Systemic antibiotic therapy should be initiated empirically based on severity and risk factors, with a preference for narrow-spectrum agents once culture results are available. Topical antibiotics, silver preparations, and other adjunctive therapies are not recommended due to insufficient evidence of clinical benefit.",
+            "override_slot": "primary_dressing",
+            "override_quote": "Compared to nuclear (e.g., leukocyte) imaging, positron emission tomography (PET), especially\ncombined with CT scan, offers high spatial resolution, precise anatomic localization,"
+          }
+        ],
+        "contraindications": [
+          "Routine use of topical antiseptics or antimicrobial dressings in uninfected ulcers"
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-16T11:21:12.884Z"
+    },
+    {
+      "condition_id": "0770a541181a",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "High",
+        "tissue": [
+          "Granulation",
+          "Slough"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "0770a541181a"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Alginate Dressings",
+          "id": "PRM_003",
+          "emdn": [
+            {
+              "code": "M040402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Two-Layer Compression Systems",
+          "id": "THS_006",
+          "emdn": [
+            {
+              "code": "M0304"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Alginate dressings are indicated to manage high exudate and facilitate autolytic debridement of sloughy tissue. A superabsorbent secondary dressing provides necessary fluid-handling capacity to prevent maceration. Liquid skin barrier films protect the periwound skin from corrosive exudate. Two-layer compression therapy addresses the underlying venous hypertension essential for healing venous leg ulcers. Antimicrobials are withheld as the wound is not clinically infected."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://www.iatrox.com/guidelines/venous-leg-ulcer-management",
+            "title": "Leg ulcer infection: antimicrobial prescribing",
+            "doi": "10.1016/j.jtv.2020.04.001",
+            "journal": "NICE guideline (NG152)",
+            "publication_date": "2020-02-11",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official NICE guideline directly addressing the management and infection status of leg ulcers.",
+            "summary": "The guideline advises against routine microbiological sampling and recommends antibiotics only for clinically infected leg ulcers. Flucloxacillin is the first-line oral treatment, with specific alternatives provided for penicillin-allergic patients. Intravenous antibiotics should be reserved for severe cases and reviewed within 48 hours for potential de-escalation to oral therapy."
+          },
+          {
+            "url": "https://www.oxfordhealth.nhs.uk/wp-content/uploads/2015/08/Oxford_Wound-Management-Formulary_FINAL_version_April_2015.sflb_.pdf",
+            "title": "Wound Management: ADVICE & PRESCRIBING GUIDANCE 2015",
+            "doi": null,
+            "journal": "Oxfordshire Clinical Commissioning Group and Oxford Health NHS Foundation Trust",
+            "publication_date": "2015",
+            "source_type": "GUIDELINE",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "Official NHS formulary providing specific, evidence-based dressing pathways for sloughy and highly exuding wounds.",
+            "summary": "For a venous leg ulcer with granulation/slough and high exudate, the formulary recommends managing exudate levels to prevent maceration and protect delicate tissue. It suggests using absorbent dressings like Sorbion Sachet Extra or alginates for high exudate, and emphasizes the importance of compression therapy following a full lower limb assessment and Doppler. Topical antimicrobials like medical-grade honey are recommended if local infection is diagnosed."
+          }
+        ],
+        "contraindications": [
+          "Use of systemic antibiotics or antimicrobial dressings in the absence of clinical infection."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:38:52.706Z"
+    },
+    {
+      "condition_id": "7cc77a8355ae",
+      "criteria": {
+        "body_location": "Foot",
+        "infection": "No",
+        "depth": "Deep",
+        "exudate": "Moderate",
+        "tissue": [
+          "Slough"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "7cc77a8355ae"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Alginate Dressings",
+          "id": "PRM_003",
+          "emdn": [
+            {
+              "code": "M040402"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Heel Offloading / Suspension Devices",
+          "id": "THS_022",
+          "emdn": [
+            {
+              "code": "V0811"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "Maybe rather alginate in this case, not 100% sure.. "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Peer-reviewed clinical guideline providing specific recommendations for pressure ulcer debridement and exudate management.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          },
+          {
+            "url": "https://epuap.org/pu-guidelines/",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Quick Reference Guide Prevention Recommendations",
+            "doi": null,
+            "journal": "International Guideline",
+            "publication_date": "2026-02-25",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Official international guideline directly addressing pressure injury management and heel offloading.",
+            "summary": "The guideline emphasizes a comprehensive approach to pressure injury prevention, including structured risk assessment, regular skin evaluation, and individualized repositioning regimens. It recommends the use of pressure redistribution support surfaces and specific interventions like heel offloading and preventive dressings for high-risk individuals. Nutritional support and careful management of medical devices are also highlighted as critical components of a prevention strategy."
+          }
+        ],
+        "contraindications": [],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-15T15:21:40.001Z"
+    },
+    {
+      "condition_id": "2babd933670b",
+      "criteria": {
+        "body_location": "Lower Extremity",
+        "infection": "Yes",
+        "depth": "Superficial",
+        "exudate": "Moderate",
+        "tissue": [
+          "Granulation"
+        ],
+        "wound_type": "Venous Leg Ulcer",
+        "id": "2babd933670b"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hypochlorous Acid (HOCl) Dressings",
+          "id": "PRM_022",
+          "emdn": [
+            {
+              "code": "M040412"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Foam Secondary Covers",
+          "id": "SEC_004",
+          "emdn": [
+            {
+              "code": "M040406"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Barrier Creams (Zinc / Dimethicone)",
+          "id": "PWC_002",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Compression Hosiery (Class 2/3)",
+          "id": "THS_008",
+          "emdn": [
+            {
+              "code": "M030405"
+            }
+          ]
+        },
+        "adjunctive_therapy": null,
+        "rationale": "CVI (postthrombotisches Syndrom, Varikose, venöse Dysplasie), periphere arterielle Verschlusskrankheit, arterielle Hypertonie, arteriovenöser Shunt, arterielle Thrombose, "
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://register.awmf.org/assets/guidelines/037-009l_S2k_Diagnostik-Therapie-Ulcus-cruris-venosum__2024-01_1.pdf",
+            "title": "S2k-Leitlinie Diagnostik und Therapie des Ulcus cruris venosum",
+            "doi": "https://register.awmf.org/de/leitlinien/detail/037-009",
+            "journal": "AWMF",
+            "publication_date": "2024-01-30",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent (2024) official AWMF guideline providing specific protocols for VLU infection and compression.",
+            "summary": "The guideline recommends a structured approach to venous leg ulcers, prioritizing compression therapy as the standard of care after excluding contraindications like severe peripheral arterial disease. It highlights the necessity of duplex sonography for diagnosis and suggests early invasive treatment of superficial venous reflux to improve healing and reduce recurrence. For wound management, it advocates for regular debridement, exudate management, and patient education to foster self-management and adherence."
+          },
+          {
+            "url": "https://www.nice.org.uk/guidance/hte32",
+            "title": "Compression products for treating venous leg ulcers: late-stage assessment",
+            "doi": "null",
+            "journal": "NICE HealthTech guidance",
+            "publication_date": "2025-08-27",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent (2025) official NICE guidance directly evaluating compression therapies for VLUs.",
+            "summary": "For venous leg ulcers with excessive exudate and slough, strong compression therapy is the first-line treatment. The guidance supports the use of compression hosiery as a cost-effective option that facilitates self-management, while noting that compression bandaging remains appropriate for specific clinical needs such as copious exudate or fragile skin. Shared decision-making is essential to select the most appropriate product based on patient preference, comfort, and clinical presentation."
+          }
+        ],
+        "contraindications": [
+          "Routine use of systemic antibiotics for localized bioburden is advised against."
+        ],
+        "validation_verdict": "EXPERT_OVERRIDE",
+        "validation_confidence": 100,
+        "is_expert_override": true
+      },
+      "approved_at": "2026-04-16T11:15:55.315Z"
+    },
+    {
+      "condition_id": "3b9ccd73cbb4",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "Yes",
+        "depth": "Deep",
+        "exudate": "High",
+        "tissue": [
+          "Necrosis"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "3b9ccd73cbb4"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Silver Antimicrobial Dressings",
+          "id": "PRM_009",
+          "emdn": [
+            {
+              "code": "M040408"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Superabsorbent Polymer Dressings",
+          "id": "SEC_001",
+          "emdn": [
+            {
+              "code": "M040299"
+            }
+          ]
+        },
+        "fixation": {
+          "name": "Silicone Adhesive Tapes",
+          "id": "FIX_002",
+          "emdn": [
+            {
+              "code": "M0501"
+            }
+          ]
+        },
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Immediate debridement (sharp, enzymatic, biological, mechanical, ultrasonic, or autolytic) to remove necrotic tissue. Implement a comprehensive repositioning schedule.",
+        "rationale": "Silver Antimicrobial Dressings are indicated to manage the local infection and reduce bacterial load in the wound bed. Superabsorbent Polymer Dressings are required to manage the high exudate, preventing maceration. Liquid Skin Barrier Films protect the periwound skin from corrosive exudate. Pressure Redistribution Support Surfaces are essential to offload the sacral pressure injury, and debridement is necessary to remove necrotic tissue."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "Comprehensive international clinical practice guideline directly addressing pressure injury prevention, support surfaces, and treatment.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "Recent, peer-reviewed official guideline directly addressing pressure ulcer treatment, infection, and debridement.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          }
+        ],
+        "contraindications": [
+          "Failure to debride necrotic tissue, which harbors bacteria and impedes healing.",
+          "Failure to offload the sacral area, as support surfaces alone are insufficient without a comprehensive management plan."
+        ],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:38:01.484Z"
+    },
+    {
+      "condition_id": "f2ebb001ecb1",
+      "criteria": {
+        "body_location": "Sacral / Pelvic Area",
+        "infection": "No",
+        "depth": "Superficial",
+        "exudate": "Light",
+        "tissue": [
+          "Granulation"
+        ],
+        "wound_type": "Pressure Injury",
+        "id": "f2ebb001ecb1"
+      },
+      "therapy": {
+        "primary": {
+          "name": "Hydrocolloid Dressings",
+          "id": "PRM_004",
+          "emdn": [
+            {
+              "code": "M040404"
+            }
+          ]
+        },
+        "secondary": {
+          "name": "Adhesive Island Dressings (Composites)",
+          "id": "SEC_002",
+          "emdn": [
+            {
+              "code": "M0401"
+            }
+          ]
+        },
+        "fixation": null,
+        "periwound": {
+          "name": "Liquid Skin Barrier Films",
+          "id": "PWC_001",
+          "emdn": [
+            {
+              "code": "M9002"
+            }
+          ]
+        },
+        "therapeutic": {
+          "name": "Pressure Redistribution Support Surfaces",
+          "id": "THS_023",
+          "emdn": [
+            {
+              "code": "V0807"
+            }
+          ]
+        },
+        "adjunctive_therapy": "Implement an individualized, regular repositioning schedule to offload the sacrum.",
+        "rationale": "A hydrocolloid dressing is specifically recommended by international guidelines (EPUAP/NPIAP/PPPIA) for non-infected Stage II pressure injuries to maintain a moist wound environment. An adhesive island dressing secures the hydrocolloid in the high-shear sacral area. A liquid skin barrier protects the periwound skin, and a pressure redistribution support surface combined with repositioning addresses the root cause of the injury."
+      },
+      "evidence": {
+        "sources": [
+          {
+            "url": "http://51.15.64.204/static/pdfs/Quick_Reference_Guide-10Mar2019.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Quick Reference Guide 2019",
+            "doi": "null",
+            "journal": "EPUAP/NPIAP/PPPIA",
+            "publication_date": "2019",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "An international clinical practice guideline summary providing direct recommendations for this wound type.",
+            "summary": "For deep, sloughy, and infected sacral pressure injuries, the guideline recommends cleansing and debridement of devitalized tissue and biofilm. It advises using topical antiseptics to control microbial burden and selecting dressings based on exudate levels, such as foam or super-absorbent dressings for moderate to heavy exudate. Additionally, it emphasizes the importance of pressure redistribution, nutritional support, and regular reassessment of healing progress."
+          },
+          {
+            "url": "https://gneaupp.info/wp-content/uploads/2024/02/cpg2019edition-digital-nov2023version.pdf",
+            "title": "Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline",
+            "doi": null,
+            "journal": "Clinical Practice Guideline",
+            "publication_date": "2019",
+            "source_type": "GUIDELINE",
+            "relevance_rating": null,
+            "relevance_reasoning": "The full international clinical practice guideline that source [3] is based on, providing the complete evidence base.",
+            "summary": "The guideline recommends a structured approach to pressure injury prevention, including regular skin assessment and risk screening. For deep pressure injuries with necrosis or slough, it emphasizes individualized care plans, including nutritional optimization with high-calorie, high-protein supplements. Prophylactic dressings and appropriate support surfaces are recommended to manage mechanical loads and protect skin integrity."
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11403384/",
+            "title": "WHS Guidelines for the Treatment of Pressure Ulcers – 2023 update",
+            "doi": "10.1111/wrr.13130",
+            "journal": "Wound Repair and Regeneration",
+            "publication_date": "2024-01",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": null,
+            "relevance_reasoning": "The most recent peer-reviewed clinical practice guideline directly addressing pressure injury treatment.",
+            "summary": "These guidelines provide evidence-based recommendations for pressure ulcer management, emphasizing the importance of repositioning, nutritional assessment, and wound bed preparation. Key recommendations include the use of reactive or active support surfaces based on patient risk, sharp debridement for necrotic tissue, and the selection of moist wound dressings to facilitate healing. The document also introduces specific protocols for palliative wound care, focusing on patient comfort and symptom management in seriously ill populations."
+          },
+          {
+            "url": "https://members.ecri.org/evidenceanalysis/wound-dressings-for-managing-pressure-injuries",
+            "title": "Wound Dressings for Managing Pressure Injuries",
+            "doi": null,
+            "journal": "Clinical Evidence Assessment",
+            "publication_date": "2023-02-14",
+            "source_type": "PEER_REVIEWED",
+            "relevance_rating": "HIGH",
+            "relevance_reasoning": "A recent, comprehensive clinical evidence assessment summarizing systematic reviews and guidelines on dressings for pressure injuries.",
+            "summary": "Advanced wound dressings, including foam, hydrocolloid, alginate, and hydrogel, are recommended over basic gauze to promote a moist wound environment and facilitate pressure injury healing. While evidence suggests advanced dressings are more effective than basic gauze, no single advanced dressing type has been proven superior to others. Clinicians should select dressings based on individual wound characteristics, such as exudate level, depth, and infection status, while prioritizing patient comfort and ease of use."
+          }
+        ],
+        "contraindications": [],
+        "validation_verdict": "PASS",
+        "validation_confidence": 95,
+        "is_expert_override": false
+      },
+      "approved_at": "2026-04-15T20:38:24.242Z"
+    }
+  ],
+  "decision_tree_version": "1.7.3+e8132cd",
+  "decision_tree_generated_at": "2026-04-16T11:24:53.374Z"
+}

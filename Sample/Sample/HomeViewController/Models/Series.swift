@@ -14,9 +14,12 @@ class Series: NSObject {
     
     /** Store the results of capturing */
     var captureResults: [CaptureResult]
+    
+    var formsModel: WGFModel?
         
-    init(captureResults: [CaptureResult]) {
+    init(captureResults: [CaptureResult], formsModel: WGFModel?) {
         self.captureResults = captureResults
+        self.formsModel = formsModel
         super.init()
     }
 }

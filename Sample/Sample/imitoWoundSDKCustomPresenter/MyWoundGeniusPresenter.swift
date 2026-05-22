@@ -17,7 +17,11 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     var isSingleAreaModeEnabled: Bool {
         return UserDefaults.standard.bool(forKey: SettingKey.isSingleAreaModeEnabled.rawValue)
     }
-        
+    
+    var availablePoseModes: [WoundGenius.PoseMode]?
+    
+    var defaultPoseMode: WoundGenius.PoseMode?
+    
     var isEmergencyModeEnabled: Bool = false
     
     var userId: String? = "user5"
@@ -33,6 +37,9 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         var modes = [ImitoCameraMode]()
         if UserDefaults.standard.bool(forKey: SettingKey.videoModeEnabled.rawValue) {
             modes.append(.video)
+        }
+        if UserDefaults.standard.bool(forKey: SettingKey.isAreaScanning3DEnabled.rawValue) {
+            modes.append(.areaScanning3D)
         }
         if UserDefaults.standard.bool(forKey: SettingKey.markerModeEnabled.rawValue) {
             modes.append(.markerMeasurement)
@@ -91,10 +98,14 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             icon(photo.preview)
         case .measurement(let measurement):
             icon(measurement.image)
+        case .mesh3D(let mesh3d):
+            icon(mesh3d.preview)
+        case .facialSurgery(let FacialSurgeryResult):
+            icon(FacialSurgeryResult.preview)
         }
     }
     
-    private var selectedBodyParts: [String]?
+    private var selectedBodyParts: [UBPPSection]?
     
     var autoDetectionMode: AutoDetectionMode {
         if UserDefaults.standard.bool(forKey: SettingKey.tissueTypesDetection.rawValue) && UserDefaults.standard.bool(forKey: SettingKey.woundDetection.rawValue) {
@@ -111,7 +122,11 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         
         return UserDefaults.standard.bool(forKey: SettingKey.liveWoundDetection.rawValue)
     }
-        
+    
+    var isFacialSurgeryEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: SettingKey.isFacialSurgeryEnabled.rawValue)
+    }
+    
     var enabledOutlineTypes: [WoundGenius.IMOutlineCluster] {
         var enabledTypes = [WoundGenius.IMOutlineCluster]()
         
@@ -146,8 +161,6 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         return enabledTypes
     }
     
-    let sizeForPopoverController = CGSize(width: 375, height: 580)
-    let topPaddingForPopoverController: CGFloat = 10
     
     func captured(sampleBuffer: CMSampleBuffer,
                   previewOrientation: UIInterfaceOrientation,
@@ -211,7 +224,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             case .markerMeasurement:
                 markerDetector.searchMarker(image: photoResult.preview) { result in
                     switch result {
-                    case .detected(let pointsPercentage, _):
+                    case .detectedIdeal(let pointsPercentage, _), .detected(let pointsPercentage, _):
                         DispatchQueue.main.async {
                             // Start Marker Measurement Flow, as the marker was detected.
                             let captureResultNew = MeasurementCaptureResult(photoName: photoResult.photoName,
@@ -233,7 +246,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             case .rulerMeasurement:
                 markerDetector.searchMarker(image: photoResult.preview) { result in
                     switch result {
-                    case .detected(let pointsPercentage, _):
+                    case .detectedIdeal(let pointsPercentage, _), .detected(let pointsPercentage, _):
                         DispatchQueue.main.async {
                             // Start Marker Measurement Flow, as the marker was detected.
                             let captureResultNew = MeasurementCaptureResult(photoName: photoResult.photoName,
@@ -253,74 +266,8 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             default:
                 addPickedPhoto()
             }
-        case .helpButtonClicked(let over, let mode, let sourceView, let isTopViewTapped):
-            /*
-             CALIBRATION_MARKER_HELP_JSON
-             CALIBRATION_MARKER_HOW_TO_USE_HTML
-             CALIBRATION_MARKER_HOW_TO_GET_MARKERS_HTML
-             CALIBRATION_MARKER_HOW_WOUND_SIZE_CALCULATED_HTML
-             
-             RULER_HELP_JSON
-             RULER_HOW_TO_USE_HTML
-             RULER_HOW_WOUND_SIZE_CALCULATED_HTML
-             */
-            
-            var vc = UIViewController()
-            switch mode {
-            case .markerMeasurement:
-                do {
-                    let jsonHelpConfig = (self.isLiveWoundDetectionEnabled) ? "CALIBRATION_MARKER_LIVE_WOUND_AUTODETECT_HELP_JSON" : "CALIBRATION_MARKER_HELP_JSON"
-                    guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
-                        break
-                    }
-                    let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
-                    for item in tutorialData {
-                        item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
-                    }
-                    vc = WebViewTutorialScreen(title: L.str("CALIBRATION_MARKER"), data: tutorialData, videoName: (self.autoDetectionMode == .none) ? TutorialVideoName.manualTracing.rawValue : TutorialVideoName.autocapture.rawValue, videoExtension: "mp4", config: self)
-                } catch {
-                    vc = showManualTutorialScreenViewController(type: .calibrationMarker, tutorialVideoName: "marker-mode-tutorial", videoExtension: "mp4", config: self)
-                }
-            case .rulerMeasurement:
-                do {
-                    let jsonHelpConfig = (self.isLiveWoundDetectionEnabled) ? "RULER_LIVE_WOUND_AUTODETECT_HELP_JSON" : "RULER_HELP_JSON"
-                    guard let data = L.str(jsonHelpConfig).data(using: .utf8) else {
-                        vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
-                        break
-                    }
-                    let tutorialData = try JSONDecoder().decode([TutorialData].self, from: data)
-                    for item in tutorialData {
-                        item.htmlBody = L.strWithPatterns(item.htmlBodyKey)
-                    }
-                    vc = WebViewTutorialScreen(title: L.str("RULER_MODE"), data: tutorialData, videoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
-                } catch {
-                    vc = showManualTutorialScreenViewController(type: .rulerMode, tutorialVideoName: "ruler-mode-tutorial", videoExtension: "mp4", config: self)
-                }
-            case .handyscope, .photo, .video, .scanner, .manualInput:
-                assertionFailure("Not supported")
-                return
-            }
-            if UIDevice.current.isPad {
-                vc.modalPresentationStyle = .popover
-                vc.preferredContentSize = self.sizeForPopoverController
-                
-                let topPaddingForPopoverController = isTopViewTapped ? self.topPaddingForPopoverController : -self.topPaddingForPopoverController
-                
-                if let popoverController = vc.popoverPresentationController {
-                    popoverController.delegate = over
-                    popoverController.sourceView = sourceView
-                    popoverController.sourceRect = CGRect(origin: CGPoint(x: sourceView.bounds.origin.x,
-                                                                          y: sourceView.bounds.origin.y + topPaddingForPopoverController),
-                                                          size: sourceView.bounds.size)
-                    popoverController.permittedArrowDirections = isTopViewTapped ? .up : .down
-                }
-                over.present(vc, animated: true)
-            } else {
-                let navVC = UINavigationController(rootViewController: vc)
-                navVC.modalPresentationStyle = .fullScreen // Full screen is needed. Otherwise the AVPlayerViewController is hanging on dismissal.
-                over.present(navVC, animated: true)
-            }
+        case .helpButtonClicked(let mode):
+            break
         case .viewWillAppear:
             break
         case .viewWillDisappear:
@@ -328,7 +275,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         case .launchBodyPartPickerClicked(let over):
             guard UserDefaults.standard.bool(forKey: SettingKey.bodyPartPickerOnCapturingEnabled.rawValue) else { return }
             
-            self.router?.startBodyPartPickerV2(over: over, preselect: self.selectedBodyParts, languageISO2Alpha: L.str("LANGUAGE_CODE"), gender: nil, language: BPPickerLanguage(rawValue: L.str("LANGUAGE_CODE")) ?? BPPickerLanguage.en, completion: { [weak self] newSelectedBodyParts in
+            self.router?.startBodyPartPickerV2(over: over, preselect: self.selectedBodyParts?.keys, languageISO2Alpha: L.str("LANGUAGE_CODE"), gender: nil, language: BPPickerLanguage(rawValue: L.str("LANGUAGE_CODE")) ?? BPPickerLanguage.en, completion: { [weak self] newSelectedBodyParts in
                 self?.selectedBodyParts = newSelectedBodyParts
             })
         case .woundAutoDetectionExecuted(let numberOfWoundOutlines):
