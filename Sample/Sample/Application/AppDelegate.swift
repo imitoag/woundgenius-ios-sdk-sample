@@ -8,10 +8,6 @@
 
 import UIKit
 
-#if SAMPLE3D
-import netfox
-#endif
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?

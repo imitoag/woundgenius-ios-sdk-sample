@@ -24,7 +24,17 @@ class HomeViewController: UIViewController {
             self.woundGeniusRouter?.stopCapturing()
         })
     }()
-        
+    
+    private lazy var woundGeniusFacilFlowPresenter = {
+        WoundGeniusPresenterFacialSurgery(completion: { [weak self] captureResults in
+            guard let self = self else { return }
+            self.series.append(Series(captureResults: captureResults))
+            (self.tableView.tableHeaderView as? ChartView)?.updateChartData(series: self.series, tableView: self.tableView)
+            self.tableView.reloadData()
+            self.woundGeniusRouter?.stopCapturing()
+        })
+    }()
+    
     // MARK: Properties
     
     /** Initiate the woundGeniusFlow instace with presenter. */
@@ -39,6 +49,17 @@ class HomeViewController: UIViewController {
     /** Core Module: A button to launch WoundGenius 3D Capturing */
     private let displayMeasuremntResults = UIButton(frame: .zero)
     
+    private lazy var startFacilCapturing: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(lanchFacilCapturing), for: .touchUpInside)
+        button.backgroundColor = UINavigationBar.appearance().tintColor
+        button.tintColor = .white
+        button.setTitle("Start Facial Capturing", for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
+        return button
+    }()
     /** Core Module: A button to show Body Part Picker */
     private let showBodyPartPicker = UIButton(frame: .zero)
     
@@ -50,10 +71,7 @@ class HomeViewController: UIViewController {
     
     /** Core Module: Store the Series - set of Capture Results captured by WoundGenius. */
     private var series = [Series]()
-    
-    /** Universal Body Part Picker Results */
-    private var pickedUBodyParts: [UBPPSection]?
-    
+        
     /** No need to integrate this in client apps. Integrated to handle the case when the license key is modified during single app session. Relevant only for Sample app. */
     private var lastUsedLicenseKey: String?
     
@@ -199,6 +217,10 @@ class HomeViewController: UIViewController {
         if self.woundGeniusRouter == nil {
             self.woundGeniusRouter = self.woundGeniusRouterInstance()
         }
+        
+        if !isSample3D {
+            configureFacialSurgeryLayout()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -210,6 +232,24 @@ class HomeViewController: UIViewController {
 #endif
         
         self.showWhatsNewIfNeeded()
+                
+        let bodyPartPickerView = WGBodyPartPickerFrontBackView(preselect: ["index-finger-right-palmar", "hand-left"],
+                                                               language: "en",
+                                                               gender: .male,
+                                                               backgroundColor: nil,
+                                                               bodyMapColor: nil,
+                                                               primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
+                                                               localization: self.woundGeniusFlowPresenter)
+        bodyPartPickerView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//        self.tableView.addSubview(bodyPartPickerView)
+        bodyPartPickerView.snapshot { result in
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
 }
 
@@ -228,20 +268,25 @@ extension HomeViewController {
             return
         }
         
-        let bpPickerVC = UBPPickerViewController(preselect: self.pickedUBodyParts?
-            .flatMap({ $0.items })
-            .map({ $0.itemId }),
-                                                 languageISO2Alpha: L.str("LANGUAGE_CODE"),
-                                                 gender: .female,
-                                                 primaryColor: self.woundGeniusFlowPresenter.primaryButtonColor,
-                                                 localization: self.woundGeniusFlowPresenter, devLogs: { log in
-            print(log)
-        }) { [weak self] result in
-            self?.pickedUBodyParts = result
-        }
-        self.present(bpPickerVC, animated: true)
+        let bodyPartPickerSampleVC = SampleBodyPartPickerViewController(woundGeniusPresenter: self.woundGeniusFlowPresenter)
+        self.navigationController?.pushViewController(bodyPartPickerSampleVC, animated: true)
     }
+    
+    /* WundGenius: To launch the Facil Capturing */
+    @objc func lanchFacilCapturing() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusFacilRouterInstance()
+        }
         
+        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
+            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
+            return
+        }
+        self.woundGeniusRouter?.startCapturing(over: self) { success in
+            
+        }
+    }
+    
     /* WundGenius: To launch the Camera */
     @objc func launchCamera() {
         if self.woundGeniusRouter == nil {
@@ -256,7 +301,42 @@ extension HomeViewController {
             
         }
     }
-            
+    
+    @available(iOS 18.0, *)
+    @objc func open3DCapturing() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusRouterInstance()
+        }
+        
+        guard let woundGeniusRouter = self.woundGeniusRouter else { return }
+        
+        if isDeviceSupported() {
+                let contentView = ContentView().environment(AppDataModel.instance)
+                
+                let hostingController = UIHostingController(rootView: contentView)
+                hostingController.modalPresentationStyle = .fullScreen
+                self.present(hostingController, animated: true)
+        } else {
+            // Show alert if device is not supported
+            let alert = UIAlertController(title: "Device Not Supported", message: "This device does not support 3D capturing.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @available(iOS 18.0, *)
+    @objc func display3DMeasurementResult() {
+        if self.woundGeniusRouter == nil {
+            self.woundGeniusRouter = self.woundGeniusRouterInstance()
+        }
+        
+        guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
+            UIUtils.showOKAlert("No License Key", message: "Please configure the license key in Settings, or contact imito AG support to get it.")
+            return
+        }
+        self.woundGeniusRouter?.display3DMeasurementResult(over: self)
+    }
+    
     /* Core Module: Settings */
     @objc func openSettings() {
         performSegue(withIdentifier: "showSettings", sender: nil)
@@ -273,6 +353,17 @@ extension HomeViewController {
         }
         
         let router = WGRouter(presenter: woundGeniusFlowPresenter)
+        woundGeniusFlowPresenter.router = router
+        
+        return router
+    }
+    
+    private func woundGeniusFacilRouterInstance() -> WGRouter {
+        if let key = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
+            WG.activate(licenseKey: key)
+        }
+        
+        let router = WGRouter(presenter: woundGeniusFacilFlowPresenter)
         woundGeniusFlowPresenter.router = router
         
         return router
@@ -346,6 +437,17 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     config.image = measurement.image.draw(outlines: measurement.outlines, drawFullAreaLabel: true, drawWidthLength: true, drawDiameter: false, config: MyWoundGeniusLokalizable(), displayedIndexes: nil)
                 }
                 config.text = "Measurement"
+                cell.contentConfiguration = config
+            } else {
+                // Fallback on earlier versions
+            }
+        case .mesh3D(_):
+            break
+        case .facialSurgery(let facialSurgeryPhoto):
+            if #available(iOS 14.0, *) {
+                var config = cell.defaultContentConfiguration()
+                config.image = facialSurgeryPhoto.preview
+                config.text = "Photo"
                 cell.contentConfiguration = config
             } else {
                 // Fallback on earlier versions
@@ -463,6 +565,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                            willDisappear: nil)
                 self.navigationController?.pushViewController(details, animated: true)
             }
+        case .mesh3D(let result):
+            fatalError(#function)
+        case .facialSurgery(let result):
+            let config = MyWoundGeniusPresenter(completion: {_ in })
+            
+            let details = MeasurementDetailsController(style: tableViewStyle,
+                                                       image: result.preview,
+                                                       isRightButtonShown: false,
+                                                       outlines: nil,
+                                                       isDepthOrHeightInputEnabled: false,
+                                                       title: "",
+                                                       subtitle: "",
+                                                       config: config,
+                                                       willDisappear: nil)
+            self.navigationController?.pushViewController(details, animated: true)
         }
     }
     
@@ -482,6 +599,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: Show What's New If Needed
 
 extension HomeViewController {
+    private func configureFacialSurgeryLayout() {
+        guard woundGeniusFlowPresenter.isFacialSurgeryEnabled else {
+            startFacilCapturing.removeFromSuperview()
+            return
+        }
+        
+        view.addSubview(startFacilCapturing)
+        NSLayoutConstraint.activate([
+            startFacilCapturing.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            startFacilCapturing.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            startFacilCapturing.bottomAnchor.constraint(equalTo: startCapturing.topAnchor, constant: -10),
+            startFacilCapturing.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
     func showWhatsNewIfNeeded() {
         guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return
