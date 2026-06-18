@@ -1,10 +1,10 @@
 #source 'git@bitbucket.org:imito/spec.git' #For Xcode Cloud should be commented out.
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '16'
+platform :ios, '17'
 
 def woundgenius
- # pod 'WoundGenius', :path => '..'
+ pod 'WoundGenius', :path => '..'
 end
 
 def devPods
@@ -15,14 +15,7 @@ target 'Sample' do
   use_frameworks!
   woundgenius
   devPods
-  pod 'TensorFlowLiteTaskVision', '0.4.1' # Latest versions doesn't support iOS 12. To support iOS 12 - 0.4.1 version should be used. 0.4.2, 0.4.3 are launchable on iOS 13+.
-end
-
-target 'Sample 3D' do
-  use_frameworks!
-  woundgenius
-  devPods
-  pod 'TensorFlowLiteTaskVision', '0.4.1' # Latest versions doesn't support iOS 12. To support iOS 12 - 0.4.1 version should be used. 0.4.2, 0.4.3 are launchable on iOS 13+.
+  pod 'TensorFlowLiteTaskVision', '0.4.3'
 end
 
 target 'SampleSimulator' do
@@ -39,7 +32,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17'
     end
   end
 end

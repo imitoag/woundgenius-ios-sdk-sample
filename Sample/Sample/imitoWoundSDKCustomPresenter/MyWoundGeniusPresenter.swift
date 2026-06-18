@@ -17,11 +17,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
     var isSingleAreaModeEnabled: Bool {
         return UserDefaults.standard.bool(forKey: SettingKey.isSingleAreaModeEnabled.rawValue)
     }
-    
-    var availablePoseModes: [WoundGenius.PoseMode]?
-    
-    var defaultPoseMode: WoundGenius.PoseMode?
-    
+        
     var isEmergencyModeEnabled: Bool = false
     
     var userId: String? = "user5"
@@ -37,9 +33,6 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         var modes = [ImitoCameraMode]()
         if UserDefaults.standard.bool(forKey: SettingKey.videoModeEnabled.rawValue) {
             modes.append(.video)
-        }
-        if UserDefaults.standard.bool(forKey: SettingKey.isAreaScanning3DEnabled.rawValue) {
-            modes.append(.areaScanning3D)
         }
         if UserDefaults.standard.bool(forKey: SettingKey.markerModeEnabled.rawValue) {
             modes.append(.markerMeasurement)
@@ -98,10 +91,6 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
             icon(photo.preview)
         case .measurement(let measurement):
             icon(measurement.image)
-        case .mesh3D(let mesh3d):
-            icon(mesh3d.preview)
-        case .facialSurgery(let FacialSurgeryResult):
-            icon(FacialSurgeryResult.preview)
         }
     }
     
@@ -122,11 +111,7 @@ class MyWoundGeniusPresenter: MyWoundGeniusLokalizable, WGPresenterProtocol {
         
         return UserDefaults.standard.bool(forKey: SettingKey.liveWoundDetection.rawValue)
     }
-    
-    var isFacialSurgeryEnabled: Bool {
-        return UserDefaults.standard.bool(forKey: SettingKey.isFacialSurgeryEnabled.rawValue)
-    }
-    
+        
     var enabledOutlineTypes: [WoundGenius.IMOutlineCluster] {
         var enabledTypes = [WoundGenius.IMOutlineCluster]()
         
@@ -474,7 +459,17 @@ extension MyWoundGeniusPresenter {
             print("NavigationController state: \(imNavController)")
             print("Current view controller: \(self)")
             
-            imNavController = IMNavigationController(image: captureResult.photo!,
+            var photo = captureResult.photo!
+            
+            if WG.isAvailable(feature: .debugMode) {
+                let markerPoints = captureResult.codeDetection.pointsPercentage.map({
+                    CGPoint(x: $0.x * photo.size.width, y: $0.y * photo.size.height)
+                })
+                let markerPointsTLOrigin = MeasuredOutline(id: 0, points: markerPoints, areaInCM: nil, circumferenceInCM: nil, lengthInCM: nil, lengthStartPointPixels: nil, lengthEndPointPixels: nil, widthInCM: nil, widthStartPointPixels: nil, widthEndPointPixels: nil, depthCM: nil, order: nil, cluster: .marker, excluding: nil, parentOutlineOrder: nil, parentOutlineCluster: nil)
+                photo = photo.draw(outlines: [markerPointsTLOrigin], drawFullAreaLabel: false, drawWidthLength: false, drawDiameter: false, config: self, displayedIndexes: nil)
+            }
+            
+            imNavController = IMNavigationController(image: photo,
                                                      qrSideSize: CGFloat(captureResult.codeDetection.codeSizeMM()),
                                                      resultScreenBottomView: nil,
                                                      markerPointsPercentage: captureResult.codeDetection.pointsPercentage,

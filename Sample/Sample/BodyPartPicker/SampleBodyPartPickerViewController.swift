@@ -38,6 +38,10 @@ class SampleBodyPartPickerViewController: UIViewController {
     private var snapshotFromPresentedFrontBackView: UIImageView?
     private var snapshotFromHiddenFrontBackView: UIImageView?
     
+    private var backgroundColor: UIColor {
+        UITraitCollection.current.userInterfaceStyle == .dark ? .secondarySystemGroupedBackground : .white
+    }
+    
     init(woundGeniusPresenter: MyWoundGeniusPresenter) {
         self.woundGeniusPresenter = woundGeniusPresenter
         super.init(nibName: nil, bundle: nil)
@@ -56,7 +60,7 @@ class SampleBodyPartPickerViewController: UIViewController {
     }
     
     private func setupSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = self.backgroundColor
         
         showBodyPartPicker.translatesAutoresizingMaskIntoConstraints = false
         showBodyPartPicker.addTarget(self, action: #selector(startBodyPartPicker), for: .touchUpInside)
@@ -103,7 +107,7 @@ extension SampleBodyPartPickerViewController {
     private func presentBodyPartViews(bodyParts: [UBPPSection]) {
         // Show Front/Back View + Scrollable Text.
         if self.bodyPartsFrontBackTextView == nil {
-            let bodyPartsFrontBackTextView = WGBodyPartPickerFrontBackTextView(preselect: bodyParts, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: .white, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
+            let bodyPartsFrontBackTextView = WGBodyPartPickerFrontBackTextView(preselect: bodyParts, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: self.backgroundColor, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
             bodyPartsFrontBackTextView.layer.cornerRadius = 8
             bodyPartsFrontBackTextView.layer.borderColor = UIColor.black.cgColor
             bodyPartsFrontBackTextView.layer.borderWidth = 1
@@ -123,7 +127,7 @@ extension SampleBodyPartPickerViewController {
         // Show only the Front/Back View.
         guard let bodyPartsFrontBackTextView = bodyPartsFrontBackTextView else { return }
         if self.bodyPartsFrontBackView == nil {
-            let bodyPartsFrontBackView = WGBodyPartPickerFrontBackView(preselect: bodyParts.keys, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: .white, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
+            let bodyPartsFrontBackView = WGBodyPartPickerFrontBackView(preselect: bodyParts.keys, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: self.backgroundColor, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
             bodyPartsFrontBackView.layer.cornerRadius = 8
             bodyPartsFrontBackView.layer.borderColor = UIColor.black.cgColor
             bodyPartsFrontBackView.layer.borderWidth = 1
@@ -171,7 +175,7 @@ extension SampleBodyPartPickerViewController {
         }
         
         // Generate an image with no WGBodyPartPickerFrontBackView shown in the UI.
-        let hiddenViewForSnapshot = WGBodyPartPickerFrontBackView(preselect: bodyParts.keys, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: .white, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
+        let hiddenViewForSnapshot = WGBodyPartPickerFrontBackView(preselect: bodyParts.keys, language: L.str("LANGUAGE_CODE"), gender: .female, backgroundColor: self.backgroundColor, bodyMapColor: nil, primaryColor: self.woundGeniusPresenter.primaryButtonColor, localization: self.woundGeniusPresenter)
         hiddenViewForSnapshot.snapshot { [weak self] result in
             guard let self = self else { return }
             switch result {

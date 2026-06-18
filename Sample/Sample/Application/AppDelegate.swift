@@ -10,7 +10,6 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
     /// Holds the currently allowed mask, defaulting to all but upside down.
     static var orientationLock: UIInterfaceOrientationMask = {
         if UIDevice.current.isPad {
@@ -41,6 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // MARK: UISceneSession Lifecycle
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return AppDelegate.orientationLock
     }
@@ -49,14 +54,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     @objc func portraitOnlyWoundGenius() {
         AppDelegate.orientationLock = .portrait
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-        UINavigationController.attemptRotationToDeviceOrientation()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+        windowScene.keyWindow?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
     }
     
     @objc func allOrientationWoundGenius() {
         // allow all except upside-down
         AppDelegate.orientationLock = .all
-        UIDevice.current.setValue(UIInterfaceOrientation.unknown.rawValue, forKey: "orientation")
-        UINavigationController.attemptRotationToDeviceOrientation()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .all))
+        windowScene.keyWindow?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
     }
 }
