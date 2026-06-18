@@ -3,30 +3,19 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '17'
 
-def woundgenius
- pod 'WoundGenius', :path => '..'
-end
-
 def devPods
   pod 'FileBrowser'
 end
 
 target 'Sample' do
   use_frameworks!
-  woundgenius
   devPods
   pod 'TensorFlowLiteTaskVision', '0.4.3'
 end
 
 target 'SampleSimulator' do
   use_frameworks!
-  woundgenius
   devPods
-end
-
-target 'SampleTests' do
-  use_frameworks!
-  woundgenius
 end
 
 post_install do |installer|
