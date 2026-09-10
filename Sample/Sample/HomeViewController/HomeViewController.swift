@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         })
     }()
     
-    private lazy var woundGeniusFacilFlowPresenter = {
+    private lazy var woundGeniusFacialFlowPresenter = {
         WoundGeniusPresenterFacialSurgery(completion: { [weak self] captureResults in
             guard let self = self else { return }
             self.series.append(Series(captureResults: captureResults))
@@ -49,10 +49,10 @@ class HomeViewController: UIViewController {
     /** Core Module: A button to launch WoundGenius 3D Capturing */
     private let displayMeasuremntResults = UIButton(frame: .zero)
     
-    private lazy var startFacilCapturing: UIButton = {
+    private lazy var startFacialCapturing: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(lanchFacilCapturing), for: .touchUpInside)
+        button.addTarget(self, action: #selector(launchFacialCapturing), for: .touchUpInside)
         button.backgroundColor = UINavigationBar.appearance().tintColor
         button.tintColor = .white
         button.setTitle("Start Facial Capturing", for: .normal)
@@ -272,10 +272,10 @@ extension HomeViewController {
         self.navigationController?.pushViewController(bodyPartPickerSampleVC, animated: true)
     }
     
-    /* WundGenius: To launch the Facil Capturing */
-    @objc func lanchFacilCapturing() {
+    /* WundGenius: To launch the Facial Capturing */
+    @objc func launchFacialCapturing() {
         if self.woundGeniusRouter == nil {
-            self.woundGeniusRouter = self.woundGeniusFacilRouterInstance()
+            self.woundGeniusRouter = self.woundGeniusFacialRouterInstance()
         }
         
         guard let licenseKey = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue), !licenseKey.isEmpty else {
@@ -358,12 +358,12 @@ extension HomeViewController {
         return router
     }
     
-    private func woundGeniusFacilRouterInstance() -> WGRouter {
+    private func woundGeniusFacialRouterInstance() -> WGRouter {
         if let key = UserDefaults.standard.string(forKey: SettingKey.licenseKey.rawValue) {
             WG.activate(licenseKey: key)
         }
         
-        let router = WGRouter(presenter: woundGeniusFacilFlowPresenter)
+        let router = WGRouter(presenter: woundGeniusFacialFlowPresenter)
         woundGeniusFlowPresenter.router = router
         
         return router
@@ -601,16 +601,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 extension HomeViewController {
     private func configureFacialSurgeryLayout() {
         guard woundGeniusFlowPresenter.isFacialSurgeryEnabled else {
-            startFacilCapturing.removeFromSuperview()
+            startFacialCapturing.removeFromSuperview()
             return
         }
         
-        view.addSubview(startFacilCapturing)
+        view.addSubview(startFacialCapturing)
         NSLayoutConstraint.activate([
-            startFacilCapturing.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            startFacilCapturing.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            startFacilCapturing.bottomAnchor.constraint(equalTo: startCapturing.topAnchor, constant: -10),
-            startFacilCapturing.heightAnchor.constraint(equalToConstant: 40)
+            startFacialCapturing.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            startFacialCapturing.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            startFacialCapturing.bottomAnchor.constraint(equalTo: startCapturing.topAnchor, constant: -10),
+            startFacialCapturing.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     

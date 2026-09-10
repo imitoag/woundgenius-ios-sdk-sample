@@ -10,7 +10,6 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
     /// Holds the currently allowed mask, defaulting to all but upside down.
     static var orientationLock: UIInterfaceOrientationMask = {
         if UIDevice.current.isPad {
