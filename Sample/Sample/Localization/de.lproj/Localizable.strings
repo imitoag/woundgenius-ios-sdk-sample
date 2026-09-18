@@ -298,7 +298,8 @@ As well supports the patterns inserting similar to tutorial: {$COMMON_CSS_PART1$
 "SELECT_ALL_DIALOG_title" = "Alles auswählen";
 "SELECT_ALL_DIALOG_description" = "Verwenden Sie dieses Menü, um einen gesamten Körperteil auszuwählen, der derzeit auf dem Bildschirm angezeigt wird.";
 "CAPTURE_STOMA_AND_RULER_STATUS" = "Stoma & Lineal erfassen";
-"WEEK" = "";
-"TWO_WEEKS" = "";
-"MONTH" = "";
-"YEAR" = "";
+"WEEK" = "Woche";
+"TWO_WEEKS" = "2 Wochen";
+"MONTH" = "Monat";
+"YEAR" = "Jahr";
+"ONBOARDING_DIALOG_watch_video" = "Video ansehen";

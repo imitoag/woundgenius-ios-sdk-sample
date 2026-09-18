@@ -24,6 +24,8 @@ enum SettingKey: String {
     /// Bool
     case rulerModeEnabled
 
+    case isAreaScanning3DEnabled
+
     /// Bool
     case handyscopeModeEnabled
     
@@ -38,6 +40,7 @@ enum SettingKey: String {
     
     /// Bool
     case frontalCameraEnabled
+    case isFacialSurgeryEnabled
     case isSingleAreaModeEnabled
 
     /// Bool
@@ -84,6 +87,8 @@ enum SettingKey: String {
                 .multipleOutlinesPerImageEnabled,
                 .stomaCapturing,
                 .localStorageLineMeasurementEnabled,
+                .isAreaScanning3DEnabled,
+                .isFacialSurgeryEnabled,
                 .isSingleAreaModeEnabled:
             return String(describing: SwitchTableViewCell.self)
         case .woundDetectionDescription,
@@ -131,6 +136,10 @@ enum SettingKey: String {
             return .stomaDocumentation
         case .localStorageLineMeasurementEnabled:
             return .lineMeasurement
+        case .isAreaScanning3DEnabled:
+            return .areaScanning3D
+        case .isFacialSurgeryEnabled:
+            return .facialSurgery
         case .isSingleAreaModeEnabled:
             return .singleAreaMode
         }
@@ -179,6 +188,13 @@ class SettingsTableViewControllerPresenter: NSObject {
                                 SettingsElement(labelText: "Video",
                                                 key: .videoModeEnabled,
                                                 isEnabled: WG.isAvailable(feature: .videoCapturing)),
+                                SettingsElement(labelText: "3D (iOS 18+)",
+                                                key: .isAreaScanning3DEnabled,
+                                                isEnabled: WG.isAvailable(feature: .areaScanning3D)),
+                                
+                                SettingsElement(labelText: Feature.facialSurgery.title,
+                                                key: .isFacialSurgeryEnabled,
+                                                isEnabled: WG.isAvailable(feature: .facialSurgery)),
                                 SettingsElement(labelText: "Marker Measurement",
                                                 key: .markerModeEnabled,
                                                 isEnabled: WG.isAvailable(feature: .markerMeasurementCapturing)),
